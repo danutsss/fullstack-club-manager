@@ -1,14 +1,22 @@
 {
-  "private": true,
-  "scripts": {
-    "build": "nuxt build",
-    "dev": "nuxt dev",
-    "generate": "nuxt generate",
-    "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
-  },
-  "devDependencies": {
-    "nuxt": "^3.1.0",
-    "prisma": "^4.9.0"
-  }
+	"private": true,
+	"scripts": {
+		"build": "nuxt build",
+		"dev": "nuxt dev",
+		"generate": "nuxt generate",
+		"preview": "nuxt preview",
+		"postinstall": "nuxt prepare",
+		"prisma:migrate-diff": "npx prisma migrate diff --from-empty --to-schema-datamodel prisma/schema.prisma --script > prisma/migrations/0_init/migration.sql",
+		"prisma:migrate-resolve": "npx prisma migrate resolve --applied 0_init",
+		"prisma:migrate-dev": "npx prisma migrate dev"
+	},
+	"devDependencies": {
+		"@nuxtjs/google-fonts": "^3.0.0-1",
+		"@nuxtjs/tailwindcss": "^6.3.0",
+		"nuxt": "^3.1.0",
+		"prisma": "^4.9.0"
+	},
+	"dependencies": {
+		"@prisma/client": "^4.9.0"
+	}
 }
