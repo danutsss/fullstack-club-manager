@@ -2,7 +2,11 @@
 import { defineNuxtConfig } from "nuxt/config";
 
 export default defineNuxtConfig({
-	modules: ["@nuxtjs/tailwindcss", "@nuxtjs/google-fonts"],
+	components: {
+		global: true,
+		dirs: ["~/components"],
+	},
+	modules: ["@nuxtjs/tailwindcss", "@nuxtjs/google-fonts", "nuxt-headlessui"],
 	tailwindcss: {
 		configPath: "~/config/tailwind.config.js",
 	},
