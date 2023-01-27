@@ -4,7 +4,7 @@ import { defineNuxtConfig } from "nuxt/config";
 export default defineNuxtConfig({
 	components: {
 		global: true,
-		dirs: ["~/components"],
+		dirs: ["~/components", "~/components/layout"],
 	},
 	modules: ["@nuxtjs/tailwindcss", "@nuxtjs/google-fonts", "nuxt-headlessui"],
 	tailwindcss: {

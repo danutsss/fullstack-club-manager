@@ -1,6 +1,6 @@
 <template>
-	<NavBar />
-	<Header />
+	<LayoutNavBar />
+	<LayoutHeader />
 
 	<section class="flex flex-row justify-center">
 		<SvgMap />
