@@ -1,5 +1,5 @@
 <template>
-	<nav class="w-full p-3 bg-transparent border">
+	<nav class="w-full p-3 bg-white border">
 		<div class="flex items-center justify-between">
 			<!-- Logo -->
 			<div class="navbar-brand">
