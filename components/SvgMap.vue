@@ -270,7 +270,7 @@
 	</svg>
 
 	<Modal v-show="isModalVisible" @close="closeModal">
-		<template v-slot:header></template>
+		<template v-slot:title></template>
 		<template v-slot:body> {{ title }}</template>
 		<template v-slot:footer></template
 	></Modal>
@@ -288,9 +288,13 @@ export default {
 		};
 	},
 	methods: {
-		getInfo(e) {
+		async getInfo(e) {
 			this.title = e.target.id;
 			this.isModalVisible = true;
+
+			await $fetch(`/api/club/${this.title}`).then((response) => {
+				console.log(response);
+			});
 		},
 		closeModal() {
 			this.isModalVisible = false;
