@@ -1,6 +1,4 @@
 <template>
-	<div>
-		<HomeHero />
-		<!-- <NuxtWelcome /> -->
-	</div>
+	<NavBar />
+	<Header />
 </template>
