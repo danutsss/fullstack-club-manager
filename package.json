@@ -19,6 +19,7 @@
 	},
 	"dependencies": {
 		"@heroicons/vue": "^2.0.14",
-		"@prisma/client": "^4.9.0"
+		"@prisma/client": "^4.9.0",
+		"@svg-maps/romania": "^1.0.0"
 	}
 }
