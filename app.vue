@@ -2,9 +2,9 @@
 	<LayoutNavBar />
 	<LayoutHeader />
 
-	<section class="container flex flex-row justify-between">
-		<SvgMap />
-	</section>
+	<SvgMap />
+
+	<LayoutFooter />
 </template>
 
 <script></script>
