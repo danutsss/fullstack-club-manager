@@ -20,6 +20,10 @@ export default {
 			body: ["Open Sans", "sans-serif"],
 		},
 		extend: {
+			container: {
+				center: true,
+				padding: "1rem",
+			},
 			colors: {
 				black: "#212529",
 				grey: "#f8f9fa",
