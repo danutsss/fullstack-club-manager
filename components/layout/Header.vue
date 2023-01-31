@@ -21,8 +21,15 @@
 				</p>
 			</div>
 
-			<div class="container flex justify-center flex-1">
-				<SvgMap />
+			<div class="flex justify-center flex-1 -z-10">
+				<img
+					class="sm:w-3/4 sm:h-3/4 mt-2 shadow-2xl aspect-square rotate-3 rounded-2xl bg-zinc-100 dark:bg-zinc-800"
+					src="~/assets/images/header.webp"
+					alt="Judo"
+					loading="lazy"
+					style="color: transparent"
+					decoding="async"
+				/>
 			</div>
 		</div>
 	</section>
