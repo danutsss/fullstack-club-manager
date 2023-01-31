@@ -1,5 +1,5 @@
 <template>
-	<footer class="bg-black py-8 mt-8">
+	<footer class="bg-black py-8 mt-auto">
 		<div class="container flex flex-col md:flex-row items-center">
 			<div
 				class="flex flex-1 flex-wrap items-center justify-center md:justify-between gap-12"
@@ -31,17 +31,17 @@
 				<div>
 					<ul class="flex text-white uppercase gap-12 text-xs">
 						<li class="cursor-pointer">
-							<a
+							<NuxtLink
 								class="text-white font-semibold font-display"
-								href="/sign-in"
-								>Logare</a
+								to="/sign-in"
+								>Logare</NuxtLink
 							>
 						</li>
 						<li class="cursor-pointer">
-							<a
+							<NuxtLink
 								class="text-white font-semibold font-display"
-								href="/sign-up"
-								>Inregistrare</a
+								to="/sign-up"
+								>Inregistrare</NuxtLink
 							>
 						</li>
 					</ul>

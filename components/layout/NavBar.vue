@@ -21,7 +21,7 @@
 							d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"
 						></path>
 					</svg>
-					<a href="/">
+					<a to="/">
 						<span class="font-display font-black"
 							>ZERO SAPTE SERVICES</span
 						>
@@ -59,45 +59,31 @@
 			<div class="hidden md:block">
 				<ul class="flex space-x-6 text-sm font-sans items-center">
 					<li>
-						<a
-							href="#"
+						<NuxtLink
+							to="/add-coach"
 							class="inline-block rounded-lg py-1 px-2 text-sm text-slate-700 hover:bg-slate-100 hover:text-slate-900 font-display font-medium"
-							>Acasa</a
+							>Antrenori</NuxtLink
 						>
 					</li>
 					<li>
-						<a
-							href="#"
+						<NuxtLink
+							to="/add-veteran"
 							class="inline-block rounded-lg py-1 px-2 text-sm text-slate-700 hover:bg-slate-100 hover:text-slate-900 font-display font-medium"
-							>Harta</a
+							>Veterani</NuxtLink
 						>
 					</li>
 					<li>
-						<a
-							href="#"
+						<NuxtLink
+							to="/add-club"
 							class="inline-block rounded-lg py-1 px-2 text-sm text-slate-700 hover:bg-slate-100 hover:text-slate-900 font-display font-medium"
-							>Antrenori</a
+							>Cluburi</NuxtLink
 						>
 					</li>
 					<li>
-						<a
-							href="#"
+						<NuxtLink
+							to="/sign-law"
 							class="inline-block rounded-lg py-1 px-2 text-sm text-slate-700 hover:bg-slate-100 hover:text-slate-900 font-display font-medium"
-							>Veterani</a
-						>
-					</li>
-					<li>
-						<a
-							href="#"
-							class="inline-block rounded-lg py-1 px-2 text-sm text-slate-700 hover:bg-slate-100 hover:text-slate-900 font-display font-medium"
-							>Cluburi</a
-						>
-					</li>
-					<li>
-						<a
-							href="#"
-							class="inline-block rounded-lg py-1 px-2 text-sm text-slate-700 hover:bg-slate-100 hover:text-slate-900 font-display font-medium"
-							>Legea 322</a
+							>Legea 322</NuxtLink
 						>
 					</li>
 					<li
@@ -156,57 +142,41 @@
 
 				<ul class="divide-y font-sans">
 					<li>
-						<a
-							href="#"
+						<NuxtLink
+							to="/add-coach"
 							@click="isOpen = false"
 							class="my-4 inline-block"
-							>Acasa</a
+							>Antrenori</NuxtLink
 						>
 					</li>
 					<li>
-						<a
-							href="#"
+						<NuxtLink
+							to="/add-veteran"
 							@click="isOpen = false"
 							class="my-4 inline-block"
-							>Harta</a
+							>Veterani</NuxtLink
 						>
 					</li>
 					<li>
-						<a
-							href="#"
+						<NuxtLink
+							to="/sign-law"
 							@click="isOpen = false"
 							class="my-4 inline-block"
-							>Antrenori</a
+							>Legea 322</NuxtLink
 						>
 					</li>
 					<li>
-						<a
-							href="#"
-							@click="isOpen = false"
-							class="my-4 inline-block"
-							>Veterani</a
-						>
-					</li>
-					<li>
-						<a
-							href="#"
-							@click="isOpen = false"
-							class="my-4 inline-block"
-							>Legea 322</a
-						>
-					</li>
-					<li>
-						<a
-							href="#"
+						<NuxtLink
+							to="/sign-up"
 							@click="isOpen = false"
 							class="mt-8 mb-4 w-full text-center font-semibold inline-block bg-blue-500 hover:bg-blue-600 px-3 py-2 rounded text-white"
-							>Inregistrare</a
+							>Inregistrare</NuxtLink
 						>
-						<a
-							href="#"
+						<NuxtLink
+							to="/sign-in"
 							@click="isOpen = false"
 							class="w-full text-center font-semibold inline-block bg-transparent border hover:bg-slate-100 px-3 py-2 rounded text-black"
-							>Logare</a
+							>Logare</NuxtLink
 						>
 					</li>
 				</ul>
