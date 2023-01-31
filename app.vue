@@ -1,10 +1,5 @@
 <template>
-	<LayoutNavBar />
-	<LayoutHeader />
-
-	<SvgMap />
-
-	<LayoutFooter />
+	<NuxtPage />
 </template>
 
 <script></script>
