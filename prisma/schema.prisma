@@ -84,7 +84,6 @@ model Coach {
   emailAddress              String @default("email@example.com") @db.VarChar(128)
   coachNationality          String @default("") @db.VarChar(64)
   dateOfBirth               String @default("") @db.VarChar(64)
-  coachGender               String @default("") @db.VarChar(24)
   placeOfWork               String @default("") @db.Text
   domainOfWork              String @default("") @db.Text
   workResponsabilities      String @default("") @db.Text
