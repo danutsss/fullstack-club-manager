@@ -46,6 +46,7 @@ onMounted(() => {
 	clubCounty = clubCounty.value = "";
 	clubCity = clubCity.value = "";
 	clubAddress = clubAddress.value = "";
+	zipCode = zipCode.value = "";
 	clubContactPerson = clubContactPerson.value = "";
 	clubEmail = clubEmail.value = "";
 	clubAfiliatFRJ = clubAfiliatFRJ.value = "";
@@ -81,12 +82,12 @@ onMounted(() => {
 });
 
 const addClub = async () => {
-	await $fetch("/api/club", {
+	return await $fetch("/api/club", {
 		method: "POST",
 		body: {
 			clubName: clubName,
 			clubCounty: clubCounty,
-			clubAddress: `${clubAddress}, ${clubCity}`,
+			clubAddress: `${clubAddress}, ${clubCity} - ${zipCode}`,
 			clubContactPerson: clubContactPerson,
 			clubEmail: clubEmail,
 			clubAfiliatFRJ: clubAfiliatFRJ,
@@ -114,7 +115,16 @@ const addClub = async () => {
 			dojoThreeAgeGroups: dojoThreeAgeGroups,
 			clubExtraInfo: clubExtraInfo,
 		},
-	});
+	})
+		.then((response) => {
+			console.log(response);
+			console.log(
+				`${clubName} has been added successfully into our database for verification.`
+			);
+		})
+		.catch((error) => {
+			console.log(`[error occured]: ${error}`);
+		});
 };
 </script>
 
@@ -486,7 +496,7 @@ const addClub = async () => {
 											name="dojoOneContactPerson"
 											type="text"
 											class="shadow-sm appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-san-marino-500 focus:border-san-marino-500 focus:z-10 sm:text-sm"
-											placeholder="Numar de telefon / persoana de contact / functie - Dojo 1"
+											placeholder="Numar de telefon / persoana de contact / functie "
 										/>
 									</div>
 								</div>
@@ -621,7 +631,7 @@ const addClub = async () => {
 											name="dojoTwoContactPerson"
 											type="text"
 											class="shadow-sm appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-san-marino-500 focus:border-san-marino-500 focus:z-10 sm:text-sm"
-											placeholder="Numar de telefon / persoana de contact / functie - Dojo 1"
+											placeholder="Numar de telefon / persoana de contact / functie "
 										/>
 									</div>
 								</div>
@@ -756,7 +766,7 @@ const addClub = async () => {
 											name="dojoThreeContactPerson"
 											type="text"
 											class="shadow-sm appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-san-marino-500 focus:border-san-marino-500 focus:z-10 sm:text-sm"
-											placeholder="Numar de telefon / persoana de contact / functie - Dojo 1"
+											placeholder="Numar de telefon / persoana de contact / functie "
 										/>
 									</div>
 								</div>
@@ -835,7 +845,7 @@ const addClub = async () => {
 											v-model="clubExtraInfo"
 											name="clubExtraInfo"
 											class="shadow-sm appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-san-marino-500 focus:border-san-marino-500 focus:z-10 sm:text-sm"
-											placeholder="Informatii suplimentare despre club / asociatie"
+											placeholder="Informatii suplimentare pentru promovarea clubului / asociatiei"
 										></textarea>
 									</div>
 								</div>
