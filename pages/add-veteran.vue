@@ -63,7 +63,7 @@ const addVeteran = () => {
 
 		<div id="addVeteranForm" class="mt-4">
 			<div class="container w-screen px-4 py-4">
-				<div class="mx-auto w-full rounded-2xl bg-white">
+				<div class="mx-auto w-full rounded-2xl bg-white shadow-md">
 					<Disclosure :default-open="true">
 						<DisclosurePanel
 							class="p-4 text-center font-body font-semibold text-sm text-gray-500"
