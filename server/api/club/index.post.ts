@@ -72,6 +72,26 @@ export default defineEventHandler(async (event) => {
 
 	try {
 		console.log("insert club into database.");
+
+		if (
+			!clubName ||
+			!clubAddress ||
+			!clubContactPerson ||
+			!clubEmail ||
+			!clubAfiliatAJJ ||
+			!clubAfiliatFRJ ||
+			!clubCoachOneName ||
+			!clubCounty
+		) {
+			console.log(
+				`[error occured]: when inserting club into database (missing fields).`
+			);
+			return (
+				(event.node.res.statusCode = 400) &&
+				(event.node.res.statusMessage = "Missing fields.")
+			);
+		}
+
 		const newClubData = await prisma.club.create({
 			data: {
 				clubName,
@@ -107,16 +127,18 @@ export default defineEventHandler(async (event) => {
 			},
 		});
 
+		console.log("club was successfully inserted in database.");
 		return {
 			id: newClubData.id,
 			name: newClubData.clubName,
 		};
 	} catch (error) {
-		console.dir(error);
-        event.node.res.statusCode = 500;
-        return {
-            code: "ERROR",
-            messages: "Something went wrong."
-        }
+		console.log(
+			`[error occured]: when inserting club into database. (${error}).`
+		);
+		return (
+			(event.node.res.statusCode = 500) &&
+			(event.node.res.statusMessage = "Something went wrong.")
+		);
 	}
 });

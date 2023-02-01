@@ -42,43 +42,43 @@ let dojoThreeAgeGroups = ref("");
 let clubExtraInfo = ref("");
 
 onMounted(() => {
-	clubName = clubName.value = "";
-	clubCounty = clubCounty.value = "";
-	clubCity = clubCity.value = "";
-	clubAddress = clubAddress.value = "";
-	zipCode = zipCode.value = "";
-	clubContactPerson = clubContactPerson.value = "";
-	clubEmail = clubEmail.value = "";
-	clubAfiliatFRJ = clubAfiliatFRJ.value = "";
-	clubAfiliatAJJ = clubAfiliatAJJ.value = "";
-	clubCoachOneName = clubCoachOneName.value = "";
-	clubCoachTwoName = clubCoachTwoName.value = "";
-	clubCoachThreeName = clubCoachThreeName.value = "";
-	clubWebAddress = clubWebAddress.value = "";
-	clubFbAddress = clubFbAddress.value = "";
-	clubSocialAccounts = clubSocialAccounts.value = "";
-	dojoOneAddress = dojoOneAddress.value = "";
-	dojoOneCity = dojoOneCity.value = "";
-	dojoOneCounty = dojoOneCounty.value = "";
-	dojoOneContactPerson = dojoOneContactPerson.value = "";
-	dojoOneEmailAddress = dojoOneEmailAddress.value = "";
-	dojoOneTatamiMP = dojoOneTatamiMP.value = "";
-	dojoOneAgeGroups = dojoOneAgeGroups.value = "";
-	dojoTwoAddress = dojoTwoAddress.value = "";
-	dojoTwoCity = dojoTwoCity.value = "";
-	dojoTwoCounty = dojoTwoCounty.value = "";
-	dojoTwoContactPerson = dojoTwoContactPerson.value = "";
-	dojoTwoEmailAddress = dojoTwoEmailAddress.value = "";
-	dojoTwoTatamiMP = dojoTwoTatamiMP.value = "";
-	dojoTwoAgeGroups = dojoTwoAgeGroups.value = "";
-	dojoThreeAddress = dojoThreeAddress.value = "";
-	dojoThreeCity = dojoThreeCity.value = "";
-	dojoThreeCounty = dojoThreeCounty.value = "";
-	dojoThreeContactPerson = dojoThreeContactPerson.value = "";
-	dojoThreeEmailAddress = dojoThreeEmailAddress.value = "";
-	dojoThreeTatamiMP = dojoThreeTatamiMP.value = "";
-	dojoThreeAgeGroups = dojoThreeAgeGroups.value = "";
-	clubExtraInfo = clubExtraInfo.value = "";
+	clubName = clubName.value;
+	clubCounty = clubCounty.value;
+	clubCity = clubCity.value;
+	clubAddress = clubAddress.value;
+	zipCode = zipCode.value;
+	clubContactPerson = clubContactPerson.value;
+	clubEmail = clubEmail.value;
+	clubAfiliatFRJ = clubAfiliatFRJ.value;
+	clubAfiliatAJJ = clubAfiliatAJJ.value;
+	clubCoachOneName = clubCoachOneName.value;
+	clubCoachTwoName = clubCoachTwoName.value;
+	clubCoachThreeName = clubCoachThreeName.value;
+	clubWebAddress = clubWebAddress.value;
+	clubFbAddress = clubFbAddress.value;
+	clubSocialAccounts = clubSocialAccounts.value;
+	dojoOneAddress = dojoOneAddress.value;
+	dojoOneCity = dojoOneCity.value;
+	dojoOneCounty = dojoOneCounty.value;
+	dojoOneContactPerson = dojoOneContactPerson.value;
+	dojoOneEmailAddress = dojoOneEmailAddress.value;
+	dojoOneTatamiMP = dojoOneTatamiMP.value;
+	dojoOneAgeGroups = dojoOneAgeGroups.value;
+	dojoTwoAddress = dojoTwoAddress.value;
+	dojoTwoCity = dojoTwoCity.value;
+	dojoTwoCounty = dojoTwoCounty.value;
+	dojoTwoContactPerson = dojoTwoContactPerson.value;
+	dojoTwoEmailAddress = dojoTwoEmailAddress.value;
+	dojoTwoTatamiMP = dojoTwoTatamiMP.value;
+	dojoTwoAgeGroups = dojoTwoAgeGroups.value;
+	dojoThreeAddress = dojoThreeAddress.value;
+	dojoThreeCity = dojoThreeCity.value;
+	dojoThreeCounty = dojoThreeCounty.value;
+	dojoThreeContactPerson = dojoThreeContactPerson.value;
+	dojoThreeEmailAddress = dojoThreeEmailAddress.value;
+	dojoThreeTatamiMP = dojoThreeTatamiMP.value;
+	dojoThreeAgeGroups = dojoThreeAgeGroups.value;
+	clubExtraInfo = clubExtraInfo.value;
 });
 
 const addClub = async () => {
@@ -118,12 +118,16 @@ const addClub = async () => {
 	})
 		.then((response) => {
 			console.log(response);
-			console.log(
-				`${clubName} has been added successfully into our database for verification.`
-			);
+
+			if (response.code === "[error]") {
+				console.log(response.message);
+			} else
+				return console.log(
+					`${clubName} has been added successfully into our database for verification.`
+				);
 		})
 		.catch((error) => {
-			console.log(`[error occured]: ${error}`);
+			console.log(`[error occured]: ${error.statusMessage}`);
 		});
 };
 </script>
