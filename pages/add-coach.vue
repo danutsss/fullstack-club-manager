@@ -118,7 +118,7 @@ const addCoach = () => {
 											type="text"
 											autocomplete="additional-name"
 											class="shadow-sm appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-san-marino-500 focus:border-san-marino-500 focus:z-10 sm:text-sm"
-											placeholder="Nume de familie"
+											placeholder="Prenume"
 										/>
 									</div>
 								</div>
