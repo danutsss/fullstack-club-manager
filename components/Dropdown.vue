@@ -25,27 +25,27 @@
 			>
 				<div class="py-1">
 					<MenuItem v-slot="{ active }">
-						<a
-							href="#"
+						<NuxtLink
+							to="/sign-up"
 							:class="[
 								active
 									? 'bg-gray-100 text-gray-900'
 									: 'text-gray-700',
 								'block px-4 py-2 text-sm font-display',
 							]"
-							>Inregistrare</a
+							>Inregistrare</NuxtLink
 						>
 					</MenuItem>
 					<MenuItem v-slot="{ active }">
-						<a
-							href="#"
+						<NuxtLink
+							to="/sign-in"
 							:class="[
 								active
 									? 'bg-gray-100 text-gray-900'
 									: 'text-gray-700',
 								'block px-4 py-2 text-sm font-display',
 							]"
-							>Logare</a
+							>Logare</NuxtLink
 						>
 					</MenuItem>
 				</div>

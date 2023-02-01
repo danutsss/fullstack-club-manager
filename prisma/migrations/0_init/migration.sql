@@ -88,7 +88,6 @@ CREATE TABLE "Coach" (
     "emailAddress" VARCHAR(128) NOT NULL DEFAULT 'email@example.com',
     "coachNationality" VARCHAR(64) NOT NULL DEFAULT '',
     "dateOfBirth" VARCHAR(64) NOT NULL DEFAULT '',
-    "coachGender" VARCHAR(24) NOT NULL DEFAULT '',
     "placeOfWork" TEXT NOT NULL DEFAULT '',
     "domainOfWork" TEXT NOT NULL DEFAULT '',
     "workResponsabilities" TEXT NOT NULL DEFAULT '',

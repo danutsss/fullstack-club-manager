@@ -1,10 +1,11 @@
 <template>
-	<LayoutNavBar />
-	<LayoutHeader />
-
-	<section class="flex flex-row justify-center">
-		<SvgMap />
-	</section>
+	<NuxtPage />
 </template>
 
 <script></script>
+
+<style>
+body {
+	background-color: #f8f9fa;
+}
+</style>

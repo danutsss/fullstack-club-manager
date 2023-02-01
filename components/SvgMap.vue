@@ -1,8 +1,6 @@
 <template>
 	<svg
-		baseprofile="tiny"
 		fill="#7c7c7c"
-		height="705"
 		stroke="#ffffff"
 		stroke-linecap="round"
 		stroke-linejoin="round"
@@ -10,6 +8,7 @@
 		version="1.2"
 		viewbox="0 0 1000 705"
 		width="1000"
+		height="705"
 		xmlns="http://www.w3.org/2000/svg"
 	>
 		<path
