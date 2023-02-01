@@ -44,6 +44,7 @@ let clubExtraInfo = ref("");
 onMounted(() => {
 	clubName = clubName.value = "";
 	clubCounty = clubCounty.value = "";
+	clubCity = clubCity.value = "";
 	clubAddress = clubAddress.value = "";
 	clubContactPerson = clubContactPerson.value = "";
 	clubEmail = clubEmail.value = "";
@@ -79,8 +80,41 @@ onMounted(() => {
 	clubExtraInfo = clubExtraInfo.value = "";
 });
 
-const addClub = () => {
-	console.log("sent with succes.");
+const addClub = async () => {
+	await $fetch("/api/club", {
+		method: "POST",
+		body: {
+			clubName: clubName,
+			clubCounty: clubCounty,
+			clubAddress: `${clubAddress}, ${clubCity}`,
+			clubContactPerson: clubContactPerson,
+			clubEmail: clubEmail,
+			clubAfiliatFRJ: clubAfiliatFRJ,
+			clubAfiliatAJJ: clubAfiliatAJJ,
+			clubCoachOneName: clubCoachOneName,
+			clubCoachTwoName: clubCoachTwoName,
+			clubCoachThreeName: clubCoachThreeName,
+			clubWebAddress: clubWebAddress,
+			clubFbAddress: clubFbAddress,
+			clubSocialAccounts: clubSocialAccounts,
+			dojoOneAddress: `${dojoOneAddress}, ${dojoOneCity}, ${dojoOneCounty}`,
+			dojoOneContactPerson: dojoOneContactPerson,
+			dojoOneEmailAddress: dojoOneEmailAddress,
+			dojoOneTatamiMP: dojoOneTatamiMP,
+			dojoOneAgeGroups: dojoOneAgeGroups,
+			dojoTwoAddress: `${dojoTwoAddress}, ${dojoTwoCity}, ${dojoTwoCounty}`,
+			dojoTwoContactPerson: dojoTwoContactPerson,
+			dojoTwoEmailAddress: dojoTwoEmailAddress,
+			dojoTwoTatamiMP: dojoTwoTatamiMP,
+			dojoTwoAgeGroups: dojoTwoAgeGroups,
+			dojoThreeAddress: `${dojoThreeAddress}, ${dojoThreeCity}, ${dojoThreeCounty}`,
+			dojoThreeContactPerson: dojoThreeContactPerson,
+			dojoThreeEmailAddress: dojoThreeEmailAddress,
+			dojoThreeTatamiMP: dojoThreeTatamiMP,
+			dojoThreeAgeGroups: dojoThreeAgeGroups,
+			clubExtraInfo: clubExtraInfo,
+		},
+	});
 };
 </script>
 
@@ -317,7 +351,7 @@ const addClub = () => {
 											id="clubCoachThreeName"
 											v-model="clubCoachThreeName"
 											name="clubCoachThreeName"
-											type="email"
+											type="text"
 											class="shadow-sm appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-san-marino-500 focus:border-san-marino-500 focus:z-10 sm:text-sm"
 											placeholder="Nume antrenor 3"
 										/>
@@ -400,7 +434,7 @@ const addClub = () => {
 											id="dojoOneAddress"
 											v-model="dojoOneAddress"
 											name="dojoOneAddress"
-											type="email"
+											type="text"
 											class="shadow-sm appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-san-marino-500 focus:border-san-marino-500 focus:z-10 sm:text-sm"
 											placeholder="Adresa"
 										/>
@@ -486,7 +520,7 @@ const addClub = () => {
 											id="dojoOneTatamiMP"
 											v-model="dojoOneTatamiMP"
 											name="dojoOneTatamiMP"
-											type="email"
+											type="text"
 											class="shadow-sm appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-san-marino-500 focus:border-san-marino-500 focus:z-10 sm:text-sm"
 											placeholder="MP de Tatami"
 										/>
@@ -535,7 +569,7 @@ const addClub = () => {
 											id="dojoTwoAddress"
 											v-model="dojoTwoAddress"
 											name="dojoTwoAddress"
-											type="email"
+											type="text"
 											class="shadow-sm appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-san-marino-500 focus:border-san-marino-500 focus:z-10 sm:text-sm"
 											placeholder="Adresa"
 										/>
@@ -621,7 +655,7 @@ const addClub = () => {
 											id="dojoTwoTatamiMP"
 											v-model="dojoTwoTatamiMP"
 											name="dojoTwoTatamiMP"
-											type="email"
+											type="text"
 											class="shadow-sm appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-san-marino-500 focus:border-san-marino-500 focus:z-10 sm:text-sm"
 											placeholder="MP de Tatami"
 										/>
@@ -670,7 +704,7 @@ const addClub = () => {
 											id="dojoThreeAddress"
 											v-model="dojoThreeAddress"
 											name="dojoThreeAddress"
-											type="email"
+											type="text"
 											class="shadow-sm appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-san-marino-500 focus:border-san-marino-500 focus:z-10 sm:text-sm"
 											placeholder="Adresa"
 										/>
@@ -756,7 +790,7 @@ const addClub = () => {
 											id="dojoThreeTatamiMP"
 											v-model="dojoThreeTatamiMP"
 											name="dojoThreeTatamiMP"
-											type="email"
+											type="text"
 											class="shadow-sm appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-san-marino-500 focus:border-san-marino-500 focus:z-10 sm:text-sm"
 											placeholder="MP de Tatami"
 										/>
