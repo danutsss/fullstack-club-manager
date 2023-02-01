@@ -244,7 +244,6 @@ const addCoach = () => {
 											id="workResponsabilities"
 											v-model="workResponsabilities"
 											name="workResponsabilities"
-											type="email"
 											class="shadow-sm appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-san-marino-500 focus:border-san-marino-500 focus:z-10 sm:text-sm"
 											placeholder="Responsabilitati la locul de munca"
 										></textarea>
@@ -307,7 +306,7 @@ const addCoach = () => {
 											id="workPeriod"
 											v-model="workPeriod"
 											name="workPeriod"
-											type="email"
+											type="text"
 											class="shadow-sm appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-san-marino-500 focus:border-san-marino-500 focus:z-10 sm:text-sm"
 											placeholder="Perioada de munca (pana in prezent)"
 										/>
@@ -326,7 +325,7 @@ const addCoach = () => {
 											id="obtainedDegree"
 											v-model="obtainedDegree"
 											name="obtainedDegree"
-											type="email"
+											type="text"
 											class="shadow-sm appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-san-marino-500 focus:border-san-marino-500 focus:z-10 sm:text-sm"
 											placeholder="Diploma"
 										/>
@@ -348,7 +347,6 @@ const addCoach = () => {
 											id="otherSkills"
 											v-model="otherSkills"
 											name="otherSkills"
-											type="email"
 											class="shadow-sm appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-san-marino-500 focus:border-san-marino-500 focus:z-10 sm:text-sm"
 											placeholder="Alte competente si aptitudini rezultate pe plan sportiv"
 										></textarea>
@@ -364,7 +362,7 @@ const addCoach = () => {
 											id="blackBelt"
 											v-model="blackBelt"
 											name="blackBelt"
-											type="email"
+											type="text"
 											class="shadow-sm appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-san-marino-500 focus:border-san-marino-500 focus:z-10 sm:text-sm"
 											placeholder="Purtator al centurii negre?"
 										/>
@@ -385,7 +383,6 @@ const addCoach = () => {
 											id="coachPublications"
 											v-model="coachPublications"
 											name="coachPublications"
-											type="email"
 											class="shadow-sm appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-san-marino-500 focus:border-san-marino-500 focus:z-10 sm:text-sm"
 											placeholder="Publicatii, activitate stiintifica"
 										></textarea>
@@ -407,7 +404,6 @@ const addCoach = () => {
 											id="coachProfessionalActivity"
 											v-model="coachProfessionalActivity"
 											name="coachProfessionalActivity"
-											type="email"
 											class="shadow-sm appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-san-marino-500 focus:border-san-marino-500 focus:z-10 sm:text-sm"
 											placeholder="Activitatea profesionala in cadrul Federatiei Romane de Judo"
 										></textarea>
@@ -430,7 +426,6 @@ const addCoach = () => {
 											id="coachResults"
 											v-model="coachResults"
 											name="coachResults"
-											type="email"
 											class="shadow-sm appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-san-marino-500 focus:border-san-marino-500 focus:z-10 sm:text-sm"
 											placeholder="Rezultate in activitatea de profesor / antrenor in cadrul clubului si lotului national"
 										></textarea>
@@ -452,7 +447,6 @@ const addCoach = () => {
 											id="coachExtraInfo"
 											v-model="coachExtraInfo"
 											name="coachExtraInfo"
-											type="email"
 											class="shadow-sm appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-san-marino-500 focus:border-san-marino-500 focus:z-10 sm:text-sm"
 											placeholder="Informatii suplimentare (premii, distinctii, decoratii)"
 										></textarea>

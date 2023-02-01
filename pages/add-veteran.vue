@@ -52,7 +52,7 @@ const addVeteran = () => {
 	</LayoutHeader>
 
 	<section class="container flex flex-col justify-center items-center">
-		<div id="addCoachText">
+		<div id="addVeteranText">
 			<h1
 				class="text-san-marino-600 uppercase font-display font-bold text-3xl md:text-4xl lg:text-[2.85rem] lg:leading-[2.95rem] text-center lg:text-left mb-3"
 			>
@@ -61,7 +61,7 @@ const addVeteran = () => {
 			<div class="heading__line"></div>
 		</div>
 
-		<div id="addCoachForm" class="mt-4">
+		<div id="addVeteranForm" class="mt-4">
 			<div class="container w-screen px-4 py-4">
 				<div class="mx-auto w-full rounded-2xl bg-white">
 					<Disclosure :default-open="true">
