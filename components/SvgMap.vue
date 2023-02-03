@@ -76,7 +76,9 @@
 			d="M902.5 552.5l-0.4 2.1 0.3 2.4 0.9 0.6 5.6-1 2.5-1.5 2.3-2.3 2.2-2.8-1.5-3.1 7.3 2.4 1.7 1.2 0.5 2.6-0.9 3-1.8 2.3-2.5 0.8 1.9-2.5 1.7-2.8 0.3-2.5-2.4-1.4 0 1.1 0.7 1-0.2 0.5-2 0.5-1.5-1-1.1 0.3-1 1.7-2 1.6-3.3 3.5-7 3.7-1.5 1.3 1.9-3.5 0.3-1.5-1.6-0.2-1.3 0.3-1 1-0.4 1.9 1.4 0-0.7 1.5 0.4 1.2 1.1 0.8 1.4 0.6-4.2 1.3-1.6 1.4 0 2.3 1.5-2 1.5 0.9 1.3 1.1-0.9 2-1.2 3.8-0.9 4 0.5 2.9 0.9 0.2 0.8-1.1 0.6-1.6 0.7-3.5 1-1.2 2.1-1.4 3.2-4.3 1.8-2 1.9-0.9 2-0.5 1.5-1.6 0.9-2 0.4 0-1 2.5-6.9 13.4-5 3.8-9.5 12.9-1.1 3.3-0.3 1.8-1.4-1-1.6 0.7-1.4 1.2-1.1 1.7-0.6 1.8-0.3 2.1-0.2 5.6 0.5 1.8 1.7 3.2 1.4 4.6 0.4 2.2-0.4 1.3-2 0.5-1 1.1-0.6 1.5 0.7 2.7 1.8 11.9 1.8 7.6-0.2 2.1-1 1.4-0.5 2.7-1.5 4.2-0.4 2-2.5 5.1-0.4 1.4-1.7 8-0.6 1.4-0.4 1.4 0.5 1.4-0.4 1.3-0.4 3 0.2 1.6-0.5 1.4-15.2 0.9-22.5-3.9-21.8-10-3.6-2.8-4.7-16.9-2.5-4.2-5.9 0.7-7.3 4.1-6.9 1.7-4.8-6.6-2.1-4.4-2.4-0.9-6.3 2-20.1 0.2-1.1-0.9-2.1-3.6-1.2-1.1-6-2.9-2.2-2.5 0.5-3.3-1.7-1.4 1.3-1.9 2.9-2.5 16.1 2.6 1.7-0.6 2.2-1.1 1.8-1.5 0.8-1.4 1-1.1 5.6-3.4 4.1-1.4 8.8 0.1 4.4-0.8 2.1-1.3 3.8-3.1 15.3-3.8 3.5-2.2 2.8-3.5 3-7.4 2.7-6.5 1-1.1 4.4-3.6 1.2-1.8-0.2-2.3-0.7-3-0.9-2.7-0.8-1.2-2-0.4-2.6-0.9-2.3-1.3-1.4-1.4-0.3-1.2 1.1-0.5 0.7-1.4 0-5.2 0.7-1.6 0.6-3.5 0.1-1.3-0.4-0.9-5.6-6.3-1.9-1-2.6-0.4-2-0.8-1.9-2.1-1.5-2.6-0.8-2.7 0.8-2.1 1.1-1.6 1.7-1 1.7-0.3 2-0.1 2.1 0.5 3.1 2.1 2 0.4 2.2-0.8 2.1-2 9.6-0.8 5.3 2.1 9.1 8.6 4.6-1.1 2.2-6.4 6.1 0 5.3 6.4 7.6 3.2 8.4 0 6.8-2.1 6.1 3.2 6 1.4z"
 			id="Constanta"
 			name="Constanta"
-		></path>
+		>
+			CT
+		</path>
 		<path
 			@click="getInfo"
 			d="M261 297.9l5.1 5.3-6.9 5.2-1.8 4-1 2.5-2.4 4-2.2 2-2 1.1-2.5 0.4-2-0.2-5.9-1.4-1.9 0.2-1.4 0.9-2.5 2.2-0.9 1.5-0.5 1.7 0.3 5-0.2 2.2-0.5 2.3-1.5 3.1-0.6 1.9-0.3 1.5 1.1 3.6 0.3 1.5-0.1 1.9-0.7 2.5-1.2 2.6-4.9 6.4-1.9 0.9-0.9 1.1-0.7 2.2-1.1 0.9-1.8 0.1-3.9 1-0.9 0.4-2.1 2-0.9 0-2.6-1.5-1.5-0.3-2.1 0.3-1.6 0-1.6-0.4-2.7-2.6-1.8-0.8-0.8-0.6-0.7-1.8-0.6-0.8-1.1-0.6-4.1-0.3-1.9-0.6-1.3-1.2-0.9-1.1-1.1-0.8-1.6-0.5-2.5 0-1.3 0.3-0.8 0.4-0.7 1.7-0.7 3.4-1 1.3-3.2 0.2-1-0.4-1.7-1.4-0.6 0-0.5 0.9-0.2 2.3 0.1 2.1-0.1 0.8-1.1-0.1-0.9-1.1-1.3-2.1-2.1-1.7-3.4-1.6-1.5 0-0.9 0.5-0.8 1-1.4 2.5-1.1 2.4-0.6 0.8-0.8 0.1-2-2.7-1.8-1.5-0.1-0.6 0.7-2.4-0.4-1.1-0.9-1.2-2.2-1.8-2.3-2.5-1.1-0.6-1.2-0.2-2.9 0.4-1-0.4-0.8-1.1-0.2-1.2-0.1-2.2-0.9-0.9-1.6-0.5-3.5-0.4-1.8 0.2-1.1 0.6-0.2 0.8-0.2 2.1-0.4 1-0.6 0.7-2.8 2.3-2.4 2.4-1.4 0.1-1.5-1.8-1.1-0.6-1.8 0-1.5 0.3-1.2 0.5-2.4 2.1-1.5 0-1.8-1-2.8-2.8-0.8-1.8-0.4-2-0.8-0.3-1.6 0.2-1 0.6-1 0.9-0.6 1.7-0.1 1.7-0.6 1.6-0.7 0.4-1.1 0.1-1.6-0.3-1.4-0.7-1.3-1.9-0.3-1 0.3-1.8-0.5-0.7-1.1-0.7-2.2-0.6-1.3 0.1-2 0.5-0.9 0-6.6-1.2-1.5-0.5-1.3-0.9-1.4-2.1-1.1-3-3.7-3.8-15-10.5-1.5-0.6 0.1-1.9 0.5-1.1 0.8-0.3 2 0.5 0.9-0.8 0-1.3-1-3.4-0.1-1.4 0.5-0.8 4.1-3.5 2.2-1.1 2.2-0.7 2.1 0.1 1 0.5 1.9 1.7 0.8 0.4 1.1-0.1 2.2-1.1 1.9 0.4 4 1.7 2.1-0.1 0.9-0.4 0.9 0 0.8 0.4 0.8 0.9 2 1.8 1.9-0.7 5.1-6.2 0.7-0.3 3 0 1.1-0.8 1.2-2.3 0.9-3 0.4-6.8 1.1-3.3 1.8-2.1 2-0.7 4.5-0.2 2.4-1.9-0.6-3.4-3.1-5.9 0.2-3.1 1.5-2.4 1.8-2.4 1.4-2.8 0.4-5.9 0.6-2.9 1.6-1.9 2.2-0.6 3.9 0.3 2.3-1.2 2.2-2.9 0.7-2 2.3 0.8 4.9 1.2 35.3-2 2.7 0.5 1.5 1.8 1.5 0.8 1.3 0.1 2 0 1.4 0.4 1.7 0.9 1.4 1.4 2.6 1 9.3 0.4 2.8 0.6 2 0.9 1.1 1.1 2.4 1.7 0.8 1 0.8 1.8 2.3 6.2 1.2 2.5 1.6 2 2.1 1.4 2.7 0.9 1.7 0.7 5 4.4 7.9 3 0.9 1 0.8 2.9 1.2 1.7 1.6 0.9 1.6 0.4 9.6 0.2 8 1.7 5 0.4 4.4-0.3z"
@@ -268,30 +270,138 @@
 		<circle cx="416.9" cy="151.6" id="2"></circle>
 	</svg>
 
-	<Modal v-open="isModalVisible" @close="closeModal">
-		<template v-slot:modal-header></template>
-		<template v-slot:modal-description></template>
-		<template v-slot:modal-content>{{ title }}</template>
-	</Modal>
+	<TransitionRoot appear :show="isOpen" as="template">
+		<Dialog as="div" @close="closeModal" class="relative z-10">
+			<TransitionChild
+				as="template"
+				enter="duration-300 ease-out"
+				enter-from="opacity-0"
+				enter-to="opacity-100"
+				leave="duration-200 ease-in"
+				leave-from="opacity-100"
+				leave-to="opacity-0"
+			>
+				<div class="fixed inset-0 bg-black bg-opacity-25" />
+			</TransitionChild>
+
+			<div class="fixed inset-0 overflow-y-auto">
+				<div
+					class="flex min-h-full items-center justify-center p-4 text-center"
+				>
+					<TransitionChild
+						as="template"
+						enter="duration-300 ease-out"
+						enter-from="opacity-0 scale-95"
+						enter-to="opacity-100 scale-100"
+						leave="duration-200 ease-in"
+						leave-from="opacity-100 scale-100"
+						leave-to="opacity-0 scale-95"
+					>
+						<DialogPanel
+							class="max-w-3xl transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all"
+						>
+							<DialogTitle
+								as="h3"
+								class="text-lg font-medium font-display leading-6 text-gray-900"
+							>
+								Cluburi & Asociatii din judetul
+								<span class="text-san-marino-500 font-bold">
+									{{ title }}
+								</span>
+							</DialogTitle>
+							<div class="mt-2">
+								<div class="col-span-12">
+									<div
+										class="overflow-y-auto lg:overflow-visible"
+									>
+										<table
+											class="table-auto text-black border-separate space-y-6 text-sm"
+										>
+											<thead
+												class="bg-gray-300 text-black"
+											>
+												<tr>
+													<th class="p-3">
+														Nume club
+													</th>
+													<th class="p-3">Adresa</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr
+													v-for="club in data"
+													class=""
+												>
+													<td class="p-3">
+														<div
+															class="flex align-items-center"
+														>
+															<div class="ml-3">
+																<div
+																	class="font-bold"
+																>
+																	{{
+																		club.clubName
+																	}}
+																</div>
+																<div
+																	class="text-gray-500"
+																>
+																	{{
+																		club.clubCounty
+																	}}
+																</div>
+															</div>
+														</div>
+													</td>
+													<td class="p-3">
+														{{ club.clubAddress }}
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+
+							<div class="mt-4">
+								<button
+									type="button"
+									class="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+									@click="closeModal"
+								>
+									Inchide
+								</button>
+							</div>
+						</DialogPanel>
+					</TransitionChild>
+				</div>
+			</div>
+		</Dialog>
+	</TransitionRoot>
 </template>
 
 <script setup>
 import { ref } from "vue";
+import {
+	TransitionRoot,
+	TransitionChild,
+	Dialog,
+	DialogPanel,
+	DialogTitle,
+} from "@headlessui/vue";
 
+const isOpen = ref(false);
 const title = ref("");
-const isModalVisible = ref(false);
+const { data } = await useFetch(() => `/api/club/${title.value}`);
 
 const getInfo = async (e) => {
-	this.title = e.target.id;
-	this.isModalVisible = true;
-
-	return await $fetch(`/api/club/${this.title}`).then((response) => {
-		console.log(response);
-	});
+	title.value = e.target.id;
+	isOpen.value = true;
 };
 
 const closeModal = () => {
-	return (isModalVisible.value = false);
+	return (isOpen.value = false);
 };
 </script>
 
@@ -312,5 +422,27 @@ path:hover {
 	stroke: white;
 	stroke-opacity: 1;
 	stroke-width: 0.5;
+}
+
+.table {
+	border-spacing: 0 5px;
+}
+
+i {
+	font-size: 1rem !important;
+}
+
+.table tr {
+	border-radius: 20px;
+}
+
+tr td:nth-child(n + 2),
+tr th:nth-child(n + 2) {
+	border-radius: 0 0.625rem 0.625rem 0;
+}
+
+tr td:nth-child(1),
+tr th:nth-child(1) {
+	border-radius: 0.625rem 0 0 0.625rem;
 }
 </style>
