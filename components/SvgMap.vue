@@ -268,40 +268,30 @@
 		<circle cx="416.9" cy="151.6" id="2"></circle>
 	</svg>
 
-	<Modal v-show="isModalVisible" @close="closeModal">
-		<template v-slot:title></template>
-		<template v-slot:body> {{ title }}</template>
-		<template v-slot:footer></template
-	></Modal>
+	<Modal v-open="isModalVisible" @close="closeModal">
+		<template v-slot:modal-header></template>
+		<template v-slot:modal-description></template>
+		<template v-slot:modal-content>{{ title }}</template>
+	</Modal>
 </template>
 
-<script>
-import Modal from "~/components/Modal.vue";
+<script setup>
+import { ref } from "vue";
 
-export default {
-	data() {
-		return {
-			title: "",
-			id: "",
-			isModalVisible: false,
-		};
-	},
-	methods: {
-		async getInfo(e) {
-			this.title = e.target.id;
-			this.isModalVisible = true;
+const title = ref("");
+const isModalVisible = ref(false);
 
-			await $fetch(`/api/club/${this.title}`).then((response) => {
-				console.log(response);
-			});
-		},
-		closeModal() {
-			this.isModalVisible = false;
-		},
-	},
-	components: {
-		Modal,
-	},
+const getInfo = async (e) => {
+	this.title = e.target.id;
+	this.isModalVisible = true;
+
+	return await $fetch(`/api/club/${this.title}`).then((response) => {
+		console.log(response);
+	});
+};
+
+const closeModal = () => {
+	return (isModalVisible.value = false);
 };
 </script>
 
