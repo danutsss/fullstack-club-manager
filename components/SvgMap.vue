@@ -315,7 +315,7 @@
 										class="overflow-y-auto lg:overflow-visible"
 									>
 										<table
-											class="table-auto text-black border-separate space-y-6 text-sm"
+											class="table-auto w-full text-black border-separate space-y-6 text-sm"
 										>
 											<thead
 												class="bg-gray-300 text-black"
@@ -327,11 +327,8 @@
 													<th class="p-3">Adresa</th>
 												</tr>
 											</thead>
-											<tbody>
-												<tr
-													v-for="club in data"
-													class=""
-												>
+											<tbody v-for="club in data">
+												<tr>
 													<td class="p-3">
 														<div
 															class="flex align-items-center"
@@ -393,7 +390,7 @@ import {
 
 const isOpen = ref(false);
 const title = ref("");
-const { data } = await useFetch(() => `/api/club/${title.value}`);
+const { data } = await useFetch(() => `/api/club/${title?.value}`);
 
 const getInfo = async (e) => {
 	title.value = e.target.id;
