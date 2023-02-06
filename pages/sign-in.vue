@@ -2,7 +2,7 @@
 	<LayoutNavBar />
 
 	<section
-		class="container flex flex-col justify-center items-center p-6 h-screen"
+		class="container flex flex-col justify-center items-center h-screen"
 	>
 		<div id="signLawText">
 			<h1
