@@ -1,17 +1,3 @@
--- CreateEnum
-CREATE TYPE "Role" AS ENUM ('USER', 'MODERATOR', 'ADMIN');
-
--- CreateTable
-CREATE TABLE "User" (
-    "id" SERIAL NOT NULL,
-    "name" VARCHAR(255) DEFAULT '',
-    "emailAddress" VARCHAR(255) NOT NULL DEFAULT 'email@example.com',
-    "password" TEXT NOT NULL,
-    "role" "Role" NOT NULL DEFAULT 'USER',
-
-    CONSTRAINT "User_pkey" PRIMARY KEY ("id")
-);
-
 -- CreateTable
 CREATE TABLE "Veteran" (
     "id" SERIAL NOT NULL,
@@ -104,7 +90,4 @@ CREATE TABLE "Coach" (
 
     CONSTRAINT "Coach_pkey" PRIMARY KEY ("id")
 );
-
--- CreateIndex
-CREATE UNIQUE INDEX "User_emailAddress_key" ON "User"("emailAddress");
 
