@@ -24,29 +24,64 @@ let coachResults = ref("");
 let coachExtraInfo = ref("");
 
 onMounted(() => {
-	firstName = firstName.value = "";
-	lastName = lastName.value = "";
-	phoneNo = phoneNo.value = "";
-	emailAddress = emailAddress.value = "";
-	coachNationality = coachNationality.value = "";
-	dateOfBirth = dateOfBirth.value = "";
-	placeOfWork = placeOfWork.value = "";
-	domainOfWork = domainOfWork.value = "";
-	workResponsabilities = workResponsabilities.value = "";
-	workPeriod = workPeriod.value = "";
-	occupiedFunction = occupiedFunction.value = "";
-	coachQualification = coachQualification.value = "";
-	obtainedDegree = obtainedDegree.value = "";
-	otherSkills = otherSkills.value = "";
-	blackBelt = blackBelt.value = "";
-	coachPublications = coachPublications.value = "";
-	coachProfessionalActivity = coachProfessionalActivity.value = "";
-	coachResults = coachResults.value = "";
-	coachExtraInfo = coachExtraInfo.value = "";
+	firstName = firstName.value;
+	lastName = lastName.value;
+	phoneNo = phoneNo.value;
+	emailAddress = emailAddress.value;
+	coachNationality = coachNationality.value;
+	dateOfBirth = dateOfBirth.value;
+	placeOfWork = placeOfWork.value;
+	domainOfWork = domainOfWork.value;
+	workResponsabilities = workResponsabilities.value;
+	workPeriod = workPeriod.value;
+	occupiedFunction = occupiedFunction.value;
+	coachQualification = coachQualification.value;
+	obtainedDegree = obtainedDegree.value;
+	otherSkills = otherSkills.value;
+	blackBelt = blackBelt.value;
+	coachPublications = coachPublications.value;
+	coachProfessionalActivity = coachProfessionalActivity.value;
+	coachResults = coachResults.value;
+	coachExtraInfo = coachExtraInfo.value;
 });
 
-const addCoach = () => {
-	console.log(firstName, lastName);
+const addCoach = async () => {
+	return await $fetch("/api/coach", {
+		method: "POST",
+		body: {
+			fullName: `${firstName} ${lastName}`,
+			phoneNo,
+			emailAddress,
+			coachNationality,
+			dateOfBirth,
+			placeOfWork,
+			domainOfWork,
+			workResponsabilities,
+			workPeriod,
+			occupiedFunction,
+			coachQualification,
+			obtainedDegree,
+			otherSkills,
+			blackBelt,
+			coachPublications,
+			coachProfessionalActivity,
+			coachResults,
+			coachExtraInfo,
+		},
+	})
+		.then((response) => {
+			console.log(response);
+
+			if (response.code === "[error]") {
+				console.log(response.messasge);
+			} else
+				return console.log(
+					`Coach [${firstName} ${lastName}] has been added successfully into our databse.`
+				);
+		})
+		.catch((error) => {
+			console.log(`[error occured]: ${error.statusMessage}`);
+		});
 };
 </script>
 
