@@ -97,7 +97,7 @@ CREATE TABLE "Coach" (
     "obtainedDegree" VARCHAR(256) NOT NULL DEFAULT '',
     "otherSkills" TEXT NOT NULL DEFAULT '',
     "blackBelt" VARCHAR(10) NOT NULL DEFAULT '',
-    "coachPublicatins" TEXT NOT NULL DEFAULT '',
+    "coachPublications" TEXT NOT NULL DEFAULT '',
     "coachProfessionalActivity" TEXT NOT NULL DEFAULT '',
     "coachResults" TEXT NOT NULL DEFAULT '',
     "coachExtraInfo" TEXT NOT NULL DEFAULT '',

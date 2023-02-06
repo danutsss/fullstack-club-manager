@@ -93,7 +93,7 @@ model Coach {
   obtainedDegree            String @default("") @db.VarChar(256)
   otherSkills               String @default("") @db.Text
   blackBelt                 String @default("") @db.VarChar(10)
-  coachPublicatins          String @default("") @db.Text
+  coachPublications         String @default("") @db.Text
   coachProfessionalActivity String @default("") @db.Text
   coachResults              String @default("") @db.Text
   coachExtraInfo            String @default("") @db.Text
