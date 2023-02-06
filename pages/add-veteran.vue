@@ -14,19 +14,45 @@ let gradation = ref("");
 let emailAddress = ref("");
 
 onMounted(() => {
-	firstName = firstName.value = "";
-	lastName = lastName.value = "";
-	phoneNo = phoneNo.value = "";
-	homeAddress = homeAddress.value = "";
-	dateOfBirth = dateOfBirth.value = "";
-	weightCat = weightCat.value = "";
-	ageCat = ageCat.value = "";
-	gradation = gradation.value = "";
-	emailAddress = emailAddress.value = "";
+	firstName = firstName.value;
+	lastName = lastName.value;
+	phoneNo = phoneNo.value;
+	homeAddress = homeAddress.value;
+	dateOfBirth = dateOfBirth.value;
+	weightCat = weightCat.value;
+	ageCat = ageCat.value;
+	gradation = gradation.value;
+	emailAddress = emailAddress.value;
 });
 
-const addVeteran = () => {
-	console.log("send with success.");
+const addVeteran = async () => {
+	return await $fetch("/api/veteran", {
+		method: "POST",
+		body: {
+			firstName,
+			lastName,
+			phoneNo,
+			homeAddress,
+			dateOfBirth,
+			weightCat,
+			ageCat,
+			gradation,
+			emailAddress,
+		},
+	})
+		.then((response) => {
+			console.log(response);
+
+			if (response.code === "[error]") {
+				console.log(response.message);
+			} else
+				return console.log(
+					`Veteran [${firstName} ${lastName}] has been addedd successfully in our database.`
+				);
+		})
+		.catch((error) => {
+			console.log(`[error occured]: ${error.statusMessage}`);
+		});
 };
 </script>
 
