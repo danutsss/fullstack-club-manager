@@ -14,9 +14,6 @@ export default defineNuxtConfig({
 	tailwindcss: {
 		configPath: "~/config/tailwind.config.js",
 	},
-	runtimeConfig: {
-		supabaseKey: process.env.SUPABASE_KEY,
-	},
 	googleFonts: {
 		families: {
 			Inter: [300, 400, 500, 600, 700, 800, 900],

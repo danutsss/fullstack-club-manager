@@ -20,14 +20,14 @@
 			</h3>
 		</div>
 
-		<div id="signInForm">
+		<div id="signUpForm">
 			<div class="container w-screen px-4 py-4">
 				<div class="mx-auto w-1/2 rounded-2xl bg-white shadow-md">
 					<Disclosure :default-open="true">
 						<DisclosurePanel
 							class="p-4 text-center font-body font-semibold text-sm text-gray-500"
 						>
-							<form @submit.prevent="signIn()" class="space-y-3">
+							<form @submit.prevent="signUp()" class="space-y-3">
 								<div class="flex flex-row rounded-md gap-2">
 									<div class="w-full">
 										<label
@@ -113,4 +113,36 @@
 <script setup>
 import { Disclosure, DisclosurePanel } from "@headlessui/vue";
 import { LockClosedIcon } from "@heroicons/vue/20/solid";
+import { createClient } from "@supabase/supabase-js";
+
+const emailAddress = ref("");
+const userPassword = ref("");
+const confirmUserPass = ref("");
+
+const supabaseUrl = "https://nkhpdpsosekugclzsydr.supabase.co";
+const supabaseKey =
+	"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5raHBkcHNvc2VrdWdjbHpzeWRyIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NzU2OTQzNTQsImV4cCI6MTk5MTI3MDM1NH0.Uu5DE59P1tvHmCXtTVca7UrOYQKMDEuEI5HLjHHLPIQ";
+const supabase = createClient(supabaseUrl, supabaseKey);
+
+const signUp = async () => {
+	let { data, error } = await supabase.auth.signUp({
+		email: emailAddress.value,
+		password: userPassword.value,
+	});
+
+	if (data) {
+		const { dbData, dbError } = await supabase.from("profiles").insert([
+			{
+				id: data.user.id,
+				role: "USER",
+			},
+		]);
+
+		if (dbData) console.log(dbData);
+		if (dbError) console.error(dbError);
+	}
+
+	if (data) console.log(data);
+	if (error) console.log(error);
+};
 </script>
