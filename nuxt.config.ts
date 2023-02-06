@@ -5,9 +5,17 @@ export default defineNuxtConfig({
 	components: {
 		dirs: ["~/components", "~/components/layout"],
 	},
-	modules: ["@nuxtjs/tailwindcss", "@nuxtjs/google-fonts", "nuxt-headlessui"],
+	modules: [
+		"@nuxtjs/tailwindcss",
+		"@nuxtjs/google-fonts",
+		"nuxt-headlessui",
+		"@nuxtjs/supabase",
+	],
 	tailwindcss: {
 		configPath: "~/config/tailwind.config.js",
+	},
+	runtimeConfig: {
+		supabaseKey: process.env.SUPABASE_KEY,
 	},
 	googleFonts: {
 		families: {
