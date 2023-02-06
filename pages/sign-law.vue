@@ -13,15 +13,44 @@ let noRegisteredJuniors = ref("");
 let noParticipatingJuniors = ref("");
 
 onMounted(() => {
-	clubName = clubName.value = "";
-	fullName = fullName.value = "";
-	emailAddress = emailAddress.value = "";
-	phoneNo = phoneNo.value = "";
-	noRegisteredAthletes = noRegisteredAthletes.value = "";
-	noParticipatingAthletes = noParticipatingAthletes.value = "";
-	noRegisteredJuniors = noRegisteredJuniors.value = "";
-	noParticipatingJuniors = noParticipatingJuniors.value = "";
+	clubName = clubName.value;
+	fullName = fullName.value;
+	emailAddress = emailAddress.value;
+	phoneNo = phoneNo.value;
+	noRegisteredAthletes = noRegisteredAthletes.value;
+	noParticipatingAthletes = noParticipatingAthletes.value;
+	noRegisteredJuniors = noRegisteredJuniors.value;
+	noParticipatingJuniors = noParticipatingJuniors.value;
 });
+
+const signLaw = async () => {
+	return await $fetch("/api/law", {
+		method: "POST",
+		body: {
+			clubName,
+			fullName,
+			emailAddress,
+			phoneNo,
+			noRegisteredAthletes,
+			noParticipatingAthletes,
+			noRegisteredJuniors,
+			noParticipatingJuniors,
+		},
+	})
+		.then((response) => {
+			console.log(response);
+
+			if (response.code === "[error]") {
+				console.log(response.message);
+			} else
+				return console.log(
+					`${fullName} has successfully signed the 322 law for club: ${clubName}`
+				);
+		})
+		.catch((error) => {
+			console.log(`[error occured]: ${error.statusMessage}`);
+		});
+};
 </script>
 
 <template>
@@ -148,7 +177,7 @@ onMounted(() => {
 											id="noRegisteredAthletes"
 											v-model="noRegisteredAthletes"
 											name="noRegisteredAthletes"
-											type="text"
+											type="number"
 											class="shadow-sm appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-san-marino-500 focus:border-san-marino-500 focus:z-10 sm:text-sm"
 											placeholder="Numar total de sportivi legitimati"
 										/>
@@ -169,7 +198,7 @@ onMounted(() => {
 											id="noParticipatingAthletes"
 											v-model="noParticipatingAthletes"
 											name="noParticipatingAthletes"
-											type="text"
+											type="number"
 											class="shadow-sm appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-san-marino-500 focus:border-san-marino-500 focus:z-10 sm:text-sm"
 											placeholder="Numar total sportivi participanti la pregatire, competitii sportive nationale si internationale oficiale"
 										/>
@@ -200,7 +229,7 @@ onMounted(() => {
 											id="noRegisteredJuniors"
 											v-model="noRegisteredJuniors"
 											name="noRegisteredJuniors"
-											type="text"
+											type="number"
 											class="shadow-sm appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-san-marino-500 focus:border-san-marino-500 focus:z-10 sm:text-sm"
 											placeholder="Numar total de sportivi legitimati"
 										/>
@@ -221,7 +250,7 @@ onMounted(() => {
 											id="noParticipatingJuniors"
 											v-model="noParticipatingJuniors"
 											name="noParticipatingJuniors"
-											type="text"
+											type="number"
 											class="shadow-sm appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-san-marino-500 focus:border-san-marino-500 focus:z-10 sm:text-sm"
 											placeholder="Numar total sportivi participanti la pregatire, competitii sportive nationale si internationale oficiale"
 										/>

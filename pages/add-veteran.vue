@@ -47,7 +47,7 @@ const addVeteran = async () => {
 				console.log(response.message);
 			} else
 				return console.log(
-					`Veteran [${firstName} ${lastName}] has been addedd successfully in our database.`
+					`Veteran [${firstName} ${lastName}] has been added successfully in our database.`
 				);
 		})
 		.catch((error) => {
