@@ -113,11 +113,12 @@ const signIn = async () => {
 	});
 
 	// const { data: profile } = await supabase.from("profiles").select("role");
-	// console.log(profile);
+	// console.log(profile);d
 
-	if (data) console.log(data);
-	if (error) console.log(error);
+	if (error) {
+		return console.log(error);
+	}
 
-	return;
+	return navigateTo("/dashboard");
 };
 </script>
