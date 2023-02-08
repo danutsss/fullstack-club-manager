@@ -86,10 +86,23 @@
 							>Legea 322</NuxtLink
 						>
 					</li>
+
 					<li
+						v-if="!user"
 						class="hidden md:ml-6 md:flex md:items-center md:border-l md:border-slate-900/15 md:pl-6"
 					>
 						<Dropdown />
+					</li>
+
+					<li
+						v-if="user"
+						class="hidden md:ml-6 md:flex md:items-center md:border-l md:border-slate-900/15 md:pl-6"
+					>
+						<NuxtLink
+							to="/dashboard"
+							class="inline-block rounded-lg py-1 px-2 text-sm text-slate-700 hover:bg-slate-100 hover:text-slate-900 font-display font-medium"
+							>Dashboard</NuxtLink
+						>
 					</li>
 				</ul>
 			</div>
@@ -185,36 +198,19 @@
 	</nav>
 </template>
 
-<script>
-export default {
-	data() {
-		return {
-			isOpen: false,
-		};
-	},
-	methods: {
-		drawer() {
-			this.isOpen = !this.isOpen;
-		},
-	},
-	watch: {
-		isOpen: {
-			immediate: true,
-			handler(isOpen) {
-				if (process.client) {
-					if (isOpen)
-						document.body.style.setProperty("overflow", "hidden");
-					else document.body.style.removeProperty("overflow");
-				}
-			},
-		},
-	},
-	mounted() {
-		document.addEventListener("keydown", (e) => {
-			if (e.keyCode == 27 && this.isOpen) this.isOpen = false;
-		});
-	},
+<script setup>
+const isOpen = ref(false);
+const user = useSupabaseUser();
+
+const drawer = () => {
+	return (isOpen.value = !isOpen.value);
 };
+
+onMounted(() => {
+	document.addEventListener("keydown", (e) => {
+		if (e.keyCode == 27 && isOpen.value) isOpen.value = false;
+	});
+});
 </script>
 
 <style>

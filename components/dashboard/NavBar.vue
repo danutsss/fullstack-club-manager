@@ -84,6 +84,7 @@
 					>
 						<button
 							class="inline-block rounded-lg py-1 px-2 text-sm text-slate-700 hover:bg-slate-100 hover:text-slate-900 font-display font-medium"
+							@click="logout"
 						>
 							Logout
 						</button>
@@ -164,8 +165,7 @@
 					</li>
 					<li>
 						<button
-							to="/sign-up"
-							@click="isOpen = false"
+							@click="logout"
 							class="mt-8 mb-4 w-full text-center font-semibold inline-block bg-blue-500 hover:bg-blue-600 px-3 py-2 rounded text-white"
 						>
 							Logout
@@ -177,36 +177,23 @@
 	</nav>
 </template>
 
-<script>
-export default {
-	data() {
-		return {
-			isOpen: false,
-		};
-	},
-	methods: {
-		drawer() {
-			this.isOpen = !this.isOpen;
-		},
-	},
-	watch: {
-		isOpen: {
-			immediate: true,
-			handler(isOpen) {
-				if (process.client) {
-					if (isOpen)
-						document.body.style.setProperty("overflow", "hidden");
-					else document.body.style.removeProperty("overflow");
-				}
-			},
-		},
-	},
-	mounted() {
-		document.addEventListener("keydown", (e) => {
-			if (e.keyCode == 27 && this.isOpen) this.isOpen = false;
-		});
-	},
+<script setup>
+const { auth } = useSupabaseAuthClient();
+const isOpen = ref(false);
+
+const drawer = () => {
+	return (isOpen.value = !isOpen.value);
 };
+
+const logout = async () => {
+	return await auth.signOut();
+};
+
+onMounted(() => {
+	document.addEventListener("keydown", (e) => {
+		if (e.keyCode == 27 && isOpen.value) isOpen.value = false;
+	});
+});
 </script>
 
 <style>
