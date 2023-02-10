@@ -1,1 +1,3 @@
-<template>hello from clubs</template>
+<template>
+	<DashboardNavBar />
+</template>

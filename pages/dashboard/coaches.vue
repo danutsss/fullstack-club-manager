@@ -1,1 +1,3 @@
-<template>hello from coaches</template>
+<template>
+	<DashboardNavBar />
+</template>

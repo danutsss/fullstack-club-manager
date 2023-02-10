@@ -1,1 +1,3 @@
-<template>hello from vet</template>
+<template>
+	<DashboardNavBar />
+</template>

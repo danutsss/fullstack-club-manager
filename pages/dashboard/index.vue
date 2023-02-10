@@ -1,6 +1,4 @@
 <script setup>
-import { createClient } from "@supabase/supabase-js";
-
 // const { data: profile } = await supabase.from("profiles").select("role");
 // console.log(profile);
 
