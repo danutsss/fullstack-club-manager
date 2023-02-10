@@ -10,14 +10,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id           Int     @id @default(autoincrement())
-  name         String? @default("") @db.VarChar(255)
-  emailAddress String  @unique @default("email@example.com") @db.VarChar(255)
-  password     String
-  role         Role    @default(USER)
-}
-
 model Veteran {
   id           Int    @id @default(autoincrement())
   firstName    String @default("") @db.VarChar(64)
@@ -93,14 +85,8 @@ model Coach {
   obtainedDegree            String @default("") @db.VarChar(256)
   otherSkills               String @default("") @db.Text
   blackBelt                 String @default("") @db.VarChar(10)
-  coachPublicatins          String @default("") @db.Text
+  coachPublications         String @default("") @db.Text
   coachProfessionalActivity String @default("") @db.Text
   coachResults              String @default("") @db.Text
   coachExtraInfo            String @default("") @db.Text
-}
-
-enum Role {
-  USER
-  MODERATOR
-  ADMIN
 }

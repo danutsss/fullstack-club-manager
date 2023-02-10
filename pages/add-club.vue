@@ -42,45 +42,93 @@ let dojoThreeAgeGroups = ref("");
 let clubExtraInfo = ref("");
 
 onMounted(() => {
-	clubName = clubName.value = "";
-	clubCounty = clubCounty.value = "";
-	clubAddress = clubAddress.value = "";
-	clubContactPerson = clubContactPerson.value = "";
-	clubEmail = clubEmail.value = "";
-	clubAfiliatFRJ = clubAfiliatFRJ.value = "";
-	clubAfiliatAJJ = clubAfiliatAJJ.value = "";
-	clubCoachOneName = clubCoachOneName.value = "";
-	clubCoachTwoName = clubCoachTwoName.value = "";
-	clubCoachThreeName = clubCoachThreeName.value = "";
-	clubWebAddress = clubWebAddress.value = "";
-	clubFbAddress = clubFbAddress.value = "";
-	clubSocialAccounts = clubSocialAccounts.value = "";
-	dojoOneAddress = dojoOneAddress.value = "";
-	dojoOneCity = dojoOneCity.value = "";
-	dojoOneCounty = dojoOneCounty.value = "";
-	dojoOneContactPerson = dojoOneContactPerson.value = "";
-	dojoOneEmailAddress = dojoOneEmailAddress.value = "";
-	dojoOneTatamiMP = dojoOneTatamiMP.value = "";
-	dojoOneAgeGroups = dojoOneAgeGroups.value = "";
-	dojoTwoAddress = dojoTwoAddress.value = "";
-	dojoTwoCity = dojoTwoCity.value = "";
-	dojoTwoCounty = dojoTwoCounty.value = "";
-	dojoTwoContactPerson = dojoTwoContactPerson.value = "";
-	dojoTwoEmailAddress = dojoTwoEmailAddress.value = "";
-	dojoTwoTatamiMP = dojoTwoTatamiMP.value = "";
-	dojoTwoAgeGroups = dojoTwoAgeGroups.value = "";
-	dojoThreeAddress = dojoThreeAddress.value = "";
-	dojoThreeCity = dojoThreeCity.value = "";
-	dojoThreeCounty = dojoThreeCounty.value = "";
-	dojoThreeContactPerson = dojoThreeContactPerson.value = "";
-	dojoThreeEmailAddress = dojoThreeEmailAddress.value = "";
-	dojoThreeTatamiMP = dojoThreeTatamiMP.value = "";
-	dojoThreeAgeGroups = dojoThreeAgeGroups.value = "";
-	clubExtraInfo = clubExtraInfo.value = "";
+	clubName = clubName.value;
+	clubCounty = clubCounty.value;
+	clubCity = clubCity.value;
+	clubAddress = clubAddress.value;
+	zipCode = zipCode.value;
+	clubContactPerson = clubContactPerson.value;
+	clubEmail = clubEmail.value;
+	clubAfiliatFRJ = clubAfiliatFRJ.value;
+	clubAfiliatAJJ = clubAfiliatAJJ.value;
+	clubCoachOneName = clubCoachOneName.value;
+	clubCoachTwoName = clubCoachTwoName.value;
+	clubCoachThreeName = clubCoachThreeName.value;
+	clubWebAddress = clubWebAddress.value;
+	clubFbAddress = clubFbAddress.value;
+	clubSocialAccounts = clubSocialAccounts.value;
+	dojoOneAddress = dojoOneAddress.value;
+	dojoOneCity = dojoOneCity.value;
+	dojoOneCounty = dojoOneCounty.value;
+	dojoOneContactPerson = dojoOneContactPerson.value;
+	dojoOneEmailAddress = dojoOneEmailAddress.value;
+	dojoOneTatamiMP = dojoOneTatamiMP.value;
+	dojoOneAgeGroups = dojoOneAgeGroups.value;
+	dojoTwoAddress = dojoTwoAddress.value;
+	dojoTwoCity = dojoTwoCity.value;
+	dojoTwoCounty = dojoTwoCounty.value;
+	dojoTwoContactPerson = dojoTwoContactPerson.value;
+	dojoTwoEmailAddress = dojoTwoEmailAddress.value;
+	dojoTwoTatamiMP = dojoTwoTatamiMP.value;
+	dojoTwoAgeGroups = dojoTwoAgeGroups.value;
+	dojoThreeAddress = dojoThreeAddress.value;
+	dojoThreeCity = dojoThreeCity.value;
+	dojoThreeCounty = dojoThreeCounty.value;
+	dojoThreeContactPerson = dojoThreeContactPerson.value;
+	dojoThreeEmailAddress = dojoThreeEmailAddress.value;
+	dojoThreeTatamiMP = dojoThreeTatamiMP.value;
+	dojoThreeAgeGroups = dojoThreeAgeGroups.value;
+	clubExtraInfo = clubExtraInfo.value;
 });
 
-const addClub = () => {
-	console.log("sent with succes.");
+const addClub = async () => {
+	return await $fetch("/api/club", {
+		method: "POST",
+		body: {
+			clubName: clubName,
+			clubCounty: clubCounty,
+			clubAddress: `${clubAddress}, ${clubCity} - ${zipCode}`,
+			clubContactPerson: clubContactPerson,
+			clubEmail: clubEmail,
+			clubAfiliatFRJ: clubAfiliatFRJ,
+			clubAfiliatAJJ: clubAfiliatAJJ,
+			clubCoachOneName: clubCoachOneName,
+			clubCoachTwoName: clubCoachTwoName,
+			clubCoachThreeName: clubCoachThreeName,
+			clubWebAddress: clubWebAddress,
+			clubFbAddress: clubFbAddress,
+			clubSocialAccounts: clubSocialAccounts,
+			dojoOneAddress: `${dojoOneAddress}, ${dojoOneCity}, ${dojoOneCounty}`,
+			dojoOneContactPerson: dojoOneContactPerson,
+			dojoOneEmailAddress: dojoOneEmailAddress,
+			dojoOneTatamiMP: dojoOneTatamiMP,
+			dojoOneAgeGroups: dojoOneAgeGroups,
+			dojoTwoAddress: `${dojoTwoAddress}, ${dojoTwoCity}, ${dojoTwoCounty}`,
+			dojoTwoContactPerson: dojoTwoContactPerson,
+			dojoTwoEmailAddress: dojoTwoEmailAddress,
+			dojoTwoTatamiMP: dojoTwoTatamiMP,
+			dojoTwoAgeGroups: dojoTwoAgeGroups,
+			dojoThreeAddress: `${dojoThreeAddress}, ${dojoThreeCity}, ${dojoThreeCounty}`,
+			dojoThreeContactPerson: dojoThreeContactPerson,
+			dojoThreeEmailAddress: dojoThreeEmailAddress,
+			dojoThreeTatamiMP: dojoThreeTatamiMP,
+			dojoThreeAgeGroups: dojoThreeAgeGroups,
+			clubExtraInfo: clubExtraInfo,
+		},
+	})
+		.then((response) => {
+			console.log(response);
+
+			if (response.code === "[error]") {
+				console.log(response.message);
+			} else
+				return console.log(
+					`${clubName} has been added successfully into our database for verification.`
+				);
+		})
+		.catch((error) => {
+			console.log(`[error occured]: ${error.statusMessage}`);
+		});
 };
 </script>
 
@@ -317,7 +365,7 @@ const addClub = () => {
 											id="clubCoachThreeName"
 											v-model="clubCoachThreeName"
 											name="clubCoachThreeName"
-											type="email"
+											type="text"
 											class="shadow-sm appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-san-marino-500 focus:border-san-marino-500 focus:z-10 sm:text-sm"
 											placeholder="Nume antrenor 3"
 										/>
@@ -400,7 +448,7 @@ const addClub = () => {
 											id="dojoOneAddress"
 											v-model="dojoOneAddress"
 											name="dojoOneAddress"
-											type="email"
+											type="text"
 											class="shadow-sm appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-san-marino-500 focus:border-san-marino-500 focus:z-10 sm:text-sm"
 											placeholder="Adresa"
 										/>
@@ -452,7 +500,7 @@ const addClub = () => {
 											name="dojoOneContactPerson"
 											type="text"
 											class="shadow-sm appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-san-marino-500 focus:border-san-marino-500 focus:z-10 sm:text-sm"
-											placeholder="Numar de telefon / persoana de contact / functie - Dojo 1"
+											placeholder="Numar de telefon / persoana de contact / functie "
 										/>
 									</div>
 								</div>
@@ -486,7 +534,7 @@ const addClub = () => {
 											id="dojoOneTatamiMP"
 											v-model="dojoOneTatamiMP"
 											name="dojoOneTatamiMP"
-											type="email"
+											type="text"
 											class="shadow-sm appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-san-marino-500 focus:border-san-marino-500 focus:z-10 sm:text-sm"
 											placeholder="MP de Tatami"
 										/>
@@ -535,7 +583,7 @@ const addClub = () => {
 											id="dojoTwoAddress"
 											v-model="dojoTwoAddress"
 											name="dojoTwoAddress"
-											type="email"
+											type="text"
 											class="shadow-sm appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-san-marino-500 focus:border-san-marino-500 focus:z-10 sm:text-sm"
 											placeholder="Adresa"
 										/>
@@ -587,7 +635,7 @@ const addClub = () => {
 											name="dojoTwoContactPerson"
 											type="text"
 											class="shadow-sm appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-san-marino-500 focus:border-san-marino-500 focus:z-10 sm:text-sm"
-											placeholder="Numar de telefon / persoana de contact / functie - Dojo 1"
+											placeholder="Numar de telefon / persoana de contact / functie "
 										/>
 									</div>
 								</div>
@@ -621,7 +669,7 @@ const addClub = () => {
 											id="dojoTwoTatamiMP"
 											v-model="dojoTwoTatamiMP"
 											name="dojoTwoTatamiMP"
-											type="email"
+											type="text"
 											class="shadow-sm appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-san-marino-500 focus:border-san-marino-500 focus:z-10 sm:text-sm"
 											placeholder="MP de Tatami"
 										/>
@@ -670,7 +718,7 @@ const addClub = () => {
 											id="dojoThreeAddress"
 											v-model="dojoThreeAddress"
 											name="dojoThreeAddress"
-											type="email"
+											type="text"
 											class="shadow-sm appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-san-marino-500 focus:border-san-marino-500 focus:z-10 sm:text-sm"
 											placeholder="Adresa"
 										/>
@@ -722,7 +770,7 @@ const addClub = () => {
 											name="dojoThreeContactPerson"
 											type="text"
 											class="shadow-sm appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-san-marino-500 focus:border-san-marino-500 focus:z-10 sm:text-sm"
-											placeholder="Numar de telefon / persoana de contact / functie - Dojo 1"
+											placeholder="Numar de telefon / persoana de contact / functie "
 										/>
 									</div>
 								</div>
@@ -756,7 +804,7 @@ const addClub = () => {
 											id="dojoThreeTatamiMP"
 											v-model="dojoThreeTatamiMP"
 											name="dojoThreeTatamiMP"
-											type="email"
+											type="text"
 											class="shadow-sm appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-san-marino-500 focus:border-san-marino-500 focus:z-10 sm:text-sm"
 											placeholder="MP de Tatami"
 										/>
@@ -801,7 +849,7 @@ const addClub = () => {
 											v-model="clubExtraInfo"
 											name="clubExtraInfo"
 											class="shadow-sm appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-san-marino-500 focus:border-san-marino-500 focus:z-10 sm:text-sm"
-											placeholder="Informatii suplimentare despre club / asociatie"
+											placeholder="Informatii suplimentare pentru promovarea clubului / asociatiei"
 										></textarea>
 									</div>
 								</div>

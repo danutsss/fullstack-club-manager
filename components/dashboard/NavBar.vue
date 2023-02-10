@@ -60,49 +60,34 @@
 				<ul class="flex space-x-6 text-sm font-sans items-center">
 					<li>
 						<NuxtLink
-							to="/add-coach"
+							to="/dashboard/coaches"
 							class="inline-block rounded-lg py-1 px-2 text-sm text-slate-700 hover:bg-slate-100 hover:text-slate-900 font-display font-medium"
 							>Antrenori</NuxtLink
 						>
 					</li>
 					<li>
 						<NuxtLink
-							to="/add-veteran"
+							to="/dashboard/veterans"
 							class="inline-block rounded-lg py-1 px-2 text-sm text-slate-700 hover:bg-slate-100 hover:text-slate-900 font-display font-medium"
 							>Veterani</NuxtLink
 						>
 					</li>
 					<li>
 						<NuxtLink
-							to="/add-club"
+							to="/dashboard/clubs"
 							class="inline-block rounded-lg py-1 px-2 text-sm text-slate-700 hover:bg-slate-100 hover:text-slate-900 font-display font-medium"
 							>Cluburi</NuxtLink
 						>
 					</li>
-					<li>
-						<NuxtLink
-							to="/sign-law"
-							class="inline-block rounded-lg py-1 px-2 text-sm text-slate-700 hover:bg-slate-100 hover:text-slate-900 font-display font-medium"
-							>Legea 322</NuxtLink
-						>
-					</li>
-
 					<li
-						v-if="!user"
 						class="hidden md:ml-6 md:flex md:items-center md:border-l md:border-slate-900/15 md:pl-6"
 					>
-						<Dropdown />
-					</li>
-
-					<li
-						v-if="user"
-						class="hidden md:ml-6 md:flex md:items-center md:border-l md:border-slate-900/15 md:pl-6"
-					>
-						<NuxtLink
-							to="/dashboard"
+						<button
 							class="inline-block rounded-lg py-1 px-2 text-sm text-slate-700 hover:bg-slate-100 hover:text-slate-900 font-display font-medium"
-							>Dashboard</NuxtLink
+							@click="logout"
 						>
+							Logout
+						</button>
 					</li>
 				</ul>
 			</div>
@@ -156,7 +141,7 @@
 				<ul class="divide-y font-sans">
 					<li>
 						<NuxtLink
-							to="/add-coach"
+							to="/dashboard/coaches"
 							@click="isOpen = false"
 							class="my-4 inline-block"
 							>Antrenori</NuxtLink
@@ -164,7 +149,7 @@
 					</li>
 					<li>
 						<NuxtLink
-							to="/add-veteran"
+							to="/dashboard/veterans"
 							@click="isOpen = false"
 							class="my-4 inline-block"
 							>Veterani</NuxtLink
@@ -172,25 +157,19 @@
 					</li>
 					<li>
 						<NuxtLink
-							to="/sign-law"
+							to="/dashboard/clubs"
 							@click="isOpen = false"
 							class="my-4 inline-block"
-							>Legea 322</NuxtLink
+							>Veterani</NuxtLink
 						>
 					</li>
 					<li>
-						<NuxtLink
-							to="/sign-up"
-							@click="isOpen = false"
+						<button
+							@click="logout"
 							class="mt-8 mb-4 w-full text-center font-semibold inline-block bg-blue-500 hover:bg-blue-600 px-3 py-2 rounded text-white"
-							>Inregistrare</NuxtLink
 						>
-						<NuxtLink
-							to="/sign-in"
-							@click="isOpen = false"
-							class="w-full text-center font-semibold inline-block bg-transparent border hover:bg-slate-100 px-3 py-2 rounded text-black"
-							>Logare</NuxtLink
-						>
+							Logout
+						</button>
 					</li>
 				</ul>
 			</aside>
@@ -199,11 +178,15 @@
 </template>
 
 <script setup>
+const { auth } = useSupabaseAuthClient();
 const isOpen = ref(false);
-const user = useSupabaseUser();
 
 const drawer = () => {
 	return (isOpen.value = !isOpen.value);
+};
+
+const logout = async () => {
+	return await auth.signOut();
 };
 
 onMounted(() => {
