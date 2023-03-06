@@ -11,6 +11,7 @@ export default defineNuxtConfig({
 		"nuxt-headlessui",
 		"@nuxtjs/supabase",
 	],
+
 	tailwindcss: {
 		configPath: "~/config/tailwind.config.js",
 	},
@@ -20,4 +21,6 @@ export default defineNuxtConfig({
 			"Open Sans": [300, 400, 600, 700, 800],
 		},
 	},
+
+	css: ["@fortawesome/fontawesome-svg-core/styles.css"],
 });
