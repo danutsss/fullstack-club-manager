@@ -72,7 +72,7 @@
 											{{ coach.coachNationality }}
 										</td>
 										<td
-											class="p-3 flex justify-center align-middle gap-2"
+											class="p-3 flex justify-center gap-2"
 										>
 											<ClientOnly>
 												<font-awesome-icon
