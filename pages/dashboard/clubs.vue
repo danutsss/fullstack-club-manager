@@ -34,7 +34,7 @@
 								class="table-auto w-full text-black border-separate space-y-6 text-sm"
 							>
 								<thead
-									class="bg-gray-300 text-black sticky top-0"
+									class="bg-gray-300 text-black font-display sticky top-0"
 								>
 									<tr>
 										<th class="p-3">Nume club</th>
@@ -42,7 +42,7 @@
 										<th class="p-3">Actiuni</th>
 									</tr>
 								</thead>
-								<tbody v-for="club in data">
+								<tbody v-for="club in data" class="font-body">
 									<tr :key="club.id">
 										<td class="p-3">
 											<div
