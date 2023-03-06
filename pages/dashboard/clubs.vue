@@ -62,25 +62,29 @@
 											{{ club.clubAddress }}
 										</td>
 										<td
-											class="p-3 flex justify-center align-middle gap-2"
+											class="p-3 flex justify-center gap-2"
 										>
 											<ClientOnly>
 												<font-awesome-icon
 													icon="fa-solid fa-pen-to-square"
+													class="cursor-pointer"
+													@click="editClub(club.id)"
 												/>
 											</ClientOnly>
 
 											<ClientOnly>
 												<font-awesome-icon
 													icon="fa-solid fa-eye"
-													class="text-nepal-700"
+													class="text-nepal-700 cursor-pointer"
+													@click="viewClub(club.id)"
 												/>
 											</ClientOnly>
 
 											<ClientOnly>
 												<font-awesome-icon
 													icon="fa-solid fa-trash"
-													class="text-red-500"
+													class="text-red-500 cursor-pointer"
+													@click="deleteClub(club.id)"
 												/>
 											</ClientOnly>
 										</td>
@@ -117,6 +121,22 @@ const searchClubs = () => {
 		}
 	}
 };
+
+const editClub = (id) => {
+	window.location.href = `/dashboard/club/edit/${id}`;
+};
+
+const deleteClub = (id) =>
+	useFetch(`/api/club/delete/${id}`, {
+		method: "DELETE",
+	})
+		.then((response) => {
+			// Refresh page.
+			window.location.href = "/dashboard/clubs";
+		})
+		.catch((error) => {
+			console.log(error);
+		});
 </script>
 
 <style scoped>
