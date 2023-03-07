@@ -2,7 +2,7 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 export default defineEventHandler(async (event) => {
-	const countyName = event.context.params.countyName as String;
+	const countyName = event.context.params?.countyName as String;
 	const fetchClub = await prisma.club
 		.findMany({
 			where: {
