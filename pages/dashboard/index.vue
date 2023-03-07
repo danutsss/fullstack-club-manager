@@ -30,7 +30,7 @@
 			<div class="col-span-2">
 				<div id="addathlete__form">
 					<div
-						v-if="userRole === 'ADMIN'"
+						v-if="userRole === 'ADMIN' || euroRegionMod != 0"
 						class="bg-white p-5 shadow-lg rounded-3xl"
 					>
 						<h1
@@ -128,10 +128,16 @@
 											Alege Euroregiune
 										</option>
 										<option
+											v-if="userRole === 'ADMIN'"
 											v-for="euroregion in data"
 											:value="euroregion.id"
 										>
 											{{ euroregion.name }}
+										</option>
+
+										<option v-else :value="euroRegionMod">
+											<!-- show the region that the user is moderator to -->
+											Euroregiunea {{ euroRegionMod }}
 										</option>
 									</select>
 								</div>
@@ -161,14 +167,13 @@ const {
 	data: { user },
 } = await supabase.auth.getUser();
 
-// Select user's role.
-const { data: role } = await supabase
-	.from("profiles")
-	.select("role")
-	.eq("id", user.id);
-
-// Save user's role into a new variable.
+// Retrieve user's role.
+const role = await getRole(user.id);
 const userRole = role[0].role;
+
+// Retrieve user's euroRegion number.
+const euroRegionNumber = await getEuroregion(user.id);
+const euroRegionMod = euroRegionNumber[0].euroRegionMod;
 
 let clubName = ref("");
 let athleteName = ref("");
