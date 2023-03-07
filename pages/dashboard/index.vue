@@ -1,6 +1,13 @@
 <template>
 	<DashboardNavBar />
-	<section class="relative mt-28 mb-28">
+	<section class="relative mt-7">
+		<div>
+			<h1
+				class="text-3xl md:text-4xl lg:text-[2.85rem] text-center font-display uppercase font-bold mb-3"
+			>
+				Panou de control
+			</h1>
+		</div>
 		<div class="container flex flex-col lg:grid lg:grid-cols-3 gap-4">
 			<div id="profile__container">
 				<div class="bg-white p-5 shadow-lg rounded-3xl">
@@ -156,11 +163,96 @@
 				</div>
 			</div>
 		</div>
+
+		<div class="container mt-4">
+			<div class="bg-white p-5 shadow-lg rounded-3xl">
+				<div class="overflow-y-auto overflow-visible">
+					<h1
+						class="font-display uppercase font-bold text-center mb-2"
+					>
+						Moderare sportivi
+					</h1>
+					<table
+						class="table-auto w-full text-black border-separate space-y-6 text-sm"
+					>
+						<thead
+							class="bg-gray-300 text-black font-display sticky top-0"
+						>
+							<tr>
+								<th class="p-3">Nume sportiv</th>
+								<th class="p-3">Centura</th>
+								<th class="p-3">Anul nasterii</th>
+								<th class="p-3">Admis</th>
+								<th class="p-3">Euroregiune</th>
+								<th class="p-3">Actiuni</th>
+							</tr>
+						</thead>
+						<tbody v-for="athlete in athletes" class="font-body">
+							<tr
+								:key="athlete.id"
+								v-if="athlete.euroRegion === euroRegionMod"
+							>
+								<td class="p-3">
+									<div class="flex align-items-center">
+										<div class="ml-3">
+											<div class="font-bold">
+												{{ athlete.fullName }}
+											</div>
+											<div class="text-gray-500">
+												{{ athlete.clubName }}
+											</div>
+										</div>
+									</div>
+								</td>
+								<td class="p-3">
+									{{ athlete.belt }}
+								</td>
+
+								<td class="p-3">
+									{{ athlete.yearOfBirth }}
+								</td>
+
+								<td class="p-3">
+									{{ athlete.passedExam }}
+								</td>
+
+								<td class="p-3">
+									Euroregiunea {{ athlete.euroRegion }}
+								</td>
+								<td class="p-3 flex justify-center gap-2">
+									<ClientOnly>
+										<font-awesome-icon
+											icon="fa-solid fa-pen-to-square"
+											class="cursor-pointer"
+											@click="editAthlete(athlete.id)"
+										/>
+									</ClientOnly>
+
+									<ClientOnly>
+										<font-awesome-icon
+											icon="fa-solid fa-trash"
+											class="text-red-500 cursor-pointer"
+											@click="deleteAthlete(athlete.id)"
+										/>
+									</ClientOnly>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
 	</section>
 </template>
 
 <script setup>
 const supabase = useSupabaseClient();
+
+// Get all euro regions from the database.
+const { data } = await useFetch("/api/euroregion/all");
+
+// Get all athletes from the database.
+const { data: athletes } = await useFetch("/api/athlete/all");
 
 // Get authenticated user.
 const {
@@ -181,8 +273,6 @@ let athleteBelt = ref("");
 let yearOfBirth = ref("");
 let passedExam = ref("");
 let euroRegiune = ref("");
-
-const { data } = await useFetch("/api/euroregion/all");
 
 onMounted(async () => {
 	clubName = clubName.value;
@@ -230,3 +320,27 @@ definePageMeta({
 	middleware: "auth",
 });
 </script>
+
+<style scoped>
+.table {
+	border-spacing: 0 5px;
+}
+
+i {
+	font-size: 1rem !important;
+}
+
+.table tr {
+	border-radius: 20px;
+}
+
+tr td:nth-child(n + 6),
+tr th:nth-child(n + 6) {
+	border-radius: 0 0.625rem 0.625rem 0;
+}
+
+tr td:nth-child(1),
+tr th:nth-child(1) {
+	border-radius: 0.625rem 0 0 0.625rem;
+}
+</style>
