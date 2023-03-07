@@ -98,4 +98,10 @@ model Athlete {
   yearOfBirth Int    @default(0)
   passedExam  String @default("") @db.VarChar(18)
   belt        String @default("") @db.VarChar(18)
+  euroRegion  Int    @default(0)
+}
+
+model Euroregion {
+  id   Int    @id @unique @default(autoincrement())
+  name String @default("") @db.VarChar(64)
 }
