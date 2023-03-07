@@ -90,3 +90,12 @@ model Coach {
   coachResults              String @default("") @db.Text
   coachExtraInfo            String @default("") @db.Text
 }
+
+model Athlete {
+  id          Int    @id @unique @default(autoincrement())
+  clubName    String @default("") @db.Text
+  fullName    String @default("") @db.Text
+  yearOfBirth Int    @default(0)
+  passedExam  String @default("") @db.VarChar(18)
+  belt        String @default("") @db.VarChar(18)
+}
