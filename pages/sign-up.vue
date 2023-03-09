@@ -113,7 +113,6 @@
 <script setup>
 import { Disclosure, DisclosurePanel } from "@headlessui/vue";
 import { LockClosedIcon } from "@heroicons/vue/20/solid";
-import { createClient } from "@supabase/supabase-js";
 
 const emailAddress = ref("");
 const userPassword = ref("");
@@ -134,6 +133,8 @@ const signUp = async () => {
 			{
 				id: data.user.id,
 				role: "USER",
+				email: emailAddress.value,
+				registrationDate: new Date(),
 			},
 		]);
 
