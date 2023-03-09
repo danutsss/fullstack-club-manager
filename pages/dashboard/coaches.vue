@@ -80,7 +80,7 @@
 												>
 													<font-awesome-icon
 														icon="fa-solid fa-eye"
-														class="text-nepal-700 cursor-pointer"
+														class="text-nepal-700"
 													/>
 												</NuxtLink>
 											</ClientOnly>
@@ -88,7 +88,10 @@
 											<ClientOnly>
 												<font-awesome-icon
 													icon="fa-solid fa-trash"
-													class="text-red-500"
+													class="text-red-500 cursor-pointer"
+													@click="
+														deleteCoach(coach.id)
+													"
 												/>
 											</ClientOnly>
 										</td>
@@ -125,6 +128,11 @@ const searchCoaches = () => {
 		}
 	}
 };
+
+const deleteCoach = async (id) =>
+	await useFetch(`/api/coach/delete/${id}`)
+		.then(() => location.reload())
+		.catch((error) => console.error(error));
 </script>
 
 <style scoped>
