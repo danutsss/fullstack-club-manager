@@ -75,16 +75,14 @@
 											class="p-3 flex justify-center gap-2"
 										>
 											<ClientOnly>
-												<font-awesome-icon
-													icon="fa-solid fa-pen-to-square"
-												/>
-											</ClientOnly>
-
-											<ClientOnly>
-												<font-awesome-icon
-													icon="fa-solid fa-eye"
-													class="text-nepal-700"
-												/>
+												<NuxtLink
+													:to="`/dashboard/coach/view/${coach.id}`"
+												>
+													<font-awesome-icon
+														icon="fa-solid fa-eye"
+														class="text-nepal-700 cursor-pointer"
+													/>
+												</NuxtLink>
 											</ClientOnly>
 
 											<ClientOnly>

@@ -225,9 +225,9 @@
 								<td class="p-3 flex justify-center gap-2">
 									<ClientOnly>
 										<font-awesome-icon
-											icon="fa-solid fa-pen-to-square"
-											class="cursor-pointer"
-											@click="editAthlete(athlete.id)"
+											icon="fa-solid fa-eye"
+											class="cursor-pointer text-nepal-700"
+											@click="viewAthlete(athlete.id)"
 										/>
 									</ClientOnly>
 

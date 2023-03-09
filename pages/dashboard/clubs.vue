@@ -65,19 +65,14 @@
 											class="p-3 flex justify-center gap-2"
 										>
 											<ClientOnly>
-												<font-awesome-icon
-													icon="fa-solid fa-pen-to-square"
-													class="cursor-pointer"
-													@click="editClub(club.id)"
-												/>
-											</ClientOnly>
-
-											<ClientOnly>
-												<font-awesome-icon
-													icon="fa-solid fa-eye"
-													class="text-nepal-700 cursor-pointer"
-													@click="viewClub(club.id)"
-												/>
+												<NuxtLink
+													:to="`/dashboard/club/view/${club.id}`"
+												>
+													<font-awesome-icon
+														icon="fa-solid fa-eye"
+														class="text-nepal-700 cursor-pointer"
+													/>
+												</NuxtLink>
 											</ClientOnly>
 
 											<ClientOnly>
@@ -120,10 +115,6 @@ const searchClubs = () => {
 			}
 		}
 	}
-};
-
-const editClub = (id) => {
-	window.location.href = `/dashboard/club/edit/${id}`;
 };
 
 const deleteClub = (id) =>
