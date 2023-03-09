@@ -11,7 +11,7 @@ datasource db {
 }
 
 model Veteran {
-  id           Int    @id @default(autoincrement())
+  id           Int    @id @unique @default(autoincrement())
   firstName    String @default("") @db.VarChar(64)
   lastName     String @default("") @db.VarChar(64)
   emailAddress String @default("email@example.com") @db.VarChar(128)
@@ -24,7 +24,7 @@ model Veteran {
 }
 
 model Law322 {
-  id                      Int    @id @default(autoincrement())
+  id                      Int    @id @unique @default(autoincrement())
   clubName                String @default("") @db.Text
   fullName                String @default("") @db.VarChar(64) // Persoana de contact club.
   emailAddress            String @default("email@example.com") @db.Text // Adresa de e-mail persoana de contact club.
@@ -36,7 +36,7 @@ model Law322 {
 }
 
 model Club {
-  id                     Int     @id @default(autoincrement())
+  id                     Int     @id @unique @default(autoincrement())
   clubName               String  @default("") @db.Text
   clubCounty             String  @default("") @db.VarChar(64)
   clubAddress            String  @default("") @db.Text
@@ -70,7 +70,7 @@ model Club {
 }
 
 model Coach {
-  id                        Int    @id @default(autoincrement())
+  id                        Int    @id @unique @default(autoincrement())
   fullName                  String @default("") @db.Text
   phoneNo                   String @default("") @db.Text
   emailAddress              String @default("email@example.com") @db.VarChar(128)
@@ -89,4 +89,19 @@ model Coach {
   coachProfessionalActivity String @default("") @db.Text
   coachResults              String @default("") @db.Text
   coachExtraInfo            String @default("") @db.Text
+}
+
+model Athlete {
+  id          Int    @id @unique @default(autoincrement())
+  clubName    String @default("") @db.Text
+  fullName    String @default("") @db.Text
+  yearOfBirth Int    @default(0)
+  passedExam  String @default("") @db.VarChar(18)
+  belt        String @default("") @db.VarChar(18)
+  euroRegion  Int    @default(0)
+}
+
+model Euroregion {
+  id   Int    @id @unique @default(autoincrement())
+  name String @default("") @db.VarChar(64)
 }

@@ -42,10 +42,12 @@ const signLaw = async () => {
 
 			if (response.code === "[error]") {
 				console.log(response.message);
-			} else
-				return console.log(
-					`${fullName} has successfully signed the 322 law for club: ${clubName}`
-				);
+				return;
+			}
+
+			return console.log(
+				`${fullName} has successfully signed the 322 law for club: ${clubName}`
+			);
 		})
 		.catch((error) => {
 			console.log(`[error occured]: ${error.statusMessage}`);

@@ -71,13 +71,14 @@ const addCoach = async () => {
 	})
 		.then((response) => {
 			console.log(response);
-
 			if (response.code === "[error]") {
 				console.log(response.messasge);
-			} else
-				return console.log(
-					`Coach [${firstName} ${lastName}] has been added successfully into our databse.`
-				);
+				return;
+			}
+
+			return console.log(
+				`Coach [${firstName} ${lastName}] has been added successfully into our database.`
+			);
 		})
 		.catch((error) => {
 			console.log(`[error occured]: ${error.statusMessage}`);

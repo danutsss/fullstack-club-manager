@@ -121,10 +121,12 @@ const addClub = async () => {
 
 			if (response.code === "[error]") {
 				console.log(response.message);
-			} else
-				return console.log(
-					`${clubName} has been added successfully into our database for verification.`
-				);
+				return;
+			}
+
+			return console.log(
+				`${clubName} has been added successfully into our database for verification.`
+			);
 		})
 		.catch((error) => {
 			console.log(`[error occured]: ${error.statusMessage}`);

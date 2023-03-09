@@ -96,12 +96,10 @@
 <script setup>
 import { Disclosure, DisclosurePanel } from "@headlessui/vue";
 import { LockClosedIcon } from "@heroicons/vue/20/solid";
-import { createClient } from "@supabase/supabase-js";
 
 const emailAddress = ref("");
 const userPassword = ref("");
 
-const supabase = useSupabaseClient();
 const { auth } = useSupabaseAuthClient();
 const user = useSupabaseUser();
 
@@ -110,9 +108,6 @@ const signIn = async () => {
 		email: emailAddress.value,
 		password: userPassword.value,
 	});
-
-	// const { data: profile } = await supabase.from("profiles").select("role");
-	// console.log(profile);d
 
 	if (error) {
 		return console.log(error);

@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient, Veteran } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
@@ -50,7 +50,7 @@ export default defineEventHandler(async (event) => {
 			);
 		}
 
-		const newVetData = await prisma.veteran.create({
+		const newVetData: Veteran | null = await prisma.veteran.create({
 			data: {
 				firstName,
 				lastName,

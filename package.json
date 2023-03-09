@@ -11,6 +11,8 @@
 		"prisma:migrate-dev": "npx prisma migrate dev"
 	},
 	"devDependencies": {
+		"@fortawesome/fontawesome-svg-core": "^6.3.0",
+		"@fortawesome/free-solid-svg-icons": "^6.3.0",
 		"@nuxtjs/google-fonts": "^3.0.0-1",
 		"@nuxtjs/supabase": "^0.3.0",
 		"@nuxtjs/tailwindcss": "^6.3.0",
@@ -19,6 +21,8 @@
 		"prisma": "^4.9.0"
 	},
 	"dependencies": {
+		"@fortawesome/free-brands-svg-icons": "^6.3.0",
+		"@fortawesome/vue-fontawesome": "^3.0.3",
 		"@heroicons/vue": "^2.0.14",
 		"@prisma/client": "^4.9.0",
 		"@svg-maps/romania": "^1.0.0"

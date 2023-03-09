@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import { Club, PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
@@ -93,7 +93,7 @@ export default defineEventHandler(async (event) => {
 			);
 		}
 
-		const newClubData = await prisma.club.create({
+		const newClubData: Club | null = await prisma.club.create({
 			data: {
 				clubName,
 				clubCounty,

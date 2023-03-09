@@ -1,4 +1,4 @@
-import { Prisma, PrismaClient } from "@prisma/client";
+import { Law322, Prisma, PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
@@ -50,7 +50,7 @@ export default defineEventHandler(async (event) => {
 			);
 		}
 
-		const newLawData = await prisma.law322.create({
+		const newLawData: Law322 | null = await prisma.law322.create({
 			data: {
 				clubName,
 				fullName,

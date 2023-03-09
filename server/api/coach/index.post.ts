@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import { Coach, PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
@@ -73,7 +73,7 @@ export default defineEventHandler(async (event) => {
 			);
 		}
 
-		const newCoachData = await prisma.coach.create({
+		const newCoachData: Coach | null = await prisma.coach.create({
 			data: {
 				fullName,
 				phoneNo,

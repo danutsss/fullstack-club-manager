@@ -45,10 +45,12 @@ const addVeteran = async () => {
 
 			if (response.code === "[error]") {
 				console.log(response.message);
-			} else
-				return console.log(
-					`Veteran [${firstName} ${lastName}] has been added successfully in our database.`
-				);
+				return;
+			}
+
+			return console.log(
+				`Veteran [${firstName} ${lastName}] has been added successfully in our database.`
+			);
 		})
 		.catch((error) => {
 			console.log(`[error occured]: ${error.statusMessage}`);
