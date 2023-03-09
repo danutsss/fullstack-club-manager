@@ -4,7 +4,7 @@ const prisma = new PrismaClient();
 
 export default defineEventHandler(async (event) => {
 	const id = event.context.params?.id as String;
-	console.log(`DELETE /api/club/${id}`);
+	console.log(`DELETE /api/club/delete/${id}`);
 
 	try {
 		console.log("delete club from database.");

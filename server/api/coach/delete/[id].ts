@@ -4,12 +4,12 @@ const prisma = new PrismaClient();
 
 export default defineEventHandler(async (event) => {
 	const id = event.context.params?.id as String;
-	console.log(`DELETE /api/athlete/delete/${id}`);
+	console.log(`DELETE /api/coach/delete/${id}`);
 
 	try {
-		console.log("delete athlete from database.");
+		console.log("delete coach from database.");
 
-		const deleteAthlete = await prisma.athlete
+		const deleteVet = await prisma.coach
 			.delete({
 				where: {
 					id: Number(id),
@@ -17,12 +17,12 @@ export default defineEventHandler(async (event) => {
 			})
 			.catch((error) => console.error(error));
 
-		console.log(`athlete was susccessfullly deleted from database.`);
+		console.log(`coach was susccessfullly deleted from database.`);
 
-		return deleteAthlete;
+		return deleteVet;
 	} catch (error) {
 		console.log(
-			`[error occured]: when deleting athlete from database. (${error}).`
+			`[error occured]: when deleting coach from database. (${error}).`
 		);
 		return (
 			(event.node.res.statusCode = 500) &&
