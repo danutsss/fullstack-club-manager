@@ -58,6 +58,13 @@
 			<!-- Navbar -->
 			<div class="hidden md:block">
 				<ul class="flex space-x-6 text-sm font-sans items-center">
+					<li v-if="userRole === 'ADMIN'">
+						<NuxtLink
+							to="/dashboard/users"
+							class="inline-block rounded-lg py-1 px-2 text-sm text-slate-700 hover:bg-slate-100 hover:text-slate-900 font-display font-medium"
+							>Utilizatori</NuxtLink
+						>
+					</li>
 					<li>
 						<NuxtLink
 							to="/dashboard/coaches"
@@ -179,7 +186,17 @@
 
 <script setup>
 const { auth } = useSupabaseAuthClient();
+const supabase = useSupabaseClient();
 const isOpen = ref(false);
+
+// Get authenticated user.
+const {
+	data: { user },
+} = await supabase.auth.getUser();
+
+// Retrieve user's role.
+const role = await getRole(user.id);
+const userRole = role[0].role;
 
 const drawer = () => {
 	return (isOpen.value = !isOpen.value);
