@@ -70,7 +70,7 @@
 												>
 													<font-awesome-icon
 														icon="fa-solid fa-eye"
-														class="text-nepal-700 cursor-pointer"
+														class="text-nepal-700"
 													/>
 												</NuxtLink>
 											</ClientOnly>
@@ -121,12 +121,9 @@ const deleteClub = (id) =>
 	useFetch(`/api/club/delete/${id}`, {
 		method: "DELETE",
 	})
-		.then((response) => {
-			// Refresh page.
-			window.location.href = "/dashboard/clubs";
-		})
+		.then(() => location.reload())
 		.catch((error) => {
-			console.log(error);
+			console.error(error);
 		});
 </script>
 

@@ -290,12 +290,12 @@ const deleteAthlete = (id) =>
 	useFetch(`/api/athlete/delete/${id}`, {
 		method: "DELETE",
 	})
-		.then((response) => {
+		.then(() => {
 			// Refresh page.
-			window.location.href = "/dashboard";
+			location.reload();
 		})
 		.catch((error) => {
-			console.log(error);
+			console.error(error);
 		});
 
 const addAthlete = async () => {

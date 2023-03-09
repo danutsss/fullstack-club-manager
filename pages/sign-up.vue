@@ -142,7 +142,7 @@ const signUp = async () => {
 	}
 
 	if (data) console.log(data);
-	if (error) console.log(error);
+	if (error) console.error(error);
 };
 
 watchEffect(() => {
