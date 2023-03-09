@@ -223,13 +223,16 @@
 									Euroregiunea {{ athlete.euroRegion }}
 								</td>
 								<td class="p-3 flex justify-center gap-2">
-									<ClientOnly>
-										<font-awesome-icon
-											icon="fa-solid fa-eye"
-											class="cursor-pointer text-nepal-700"
-											@click="viewAthlete(athlete.id)"
-										/>
-									</ClientOnly>
+									<NuxtLink
+										:to="`/dashboard/athlete/view/${athlete.id}`"
+									>
+										<ClientOnly>
+											<font-awesome-icon
+												icon="fa-solid fa-eye"
+												class="cursor-pointer text-nepal-700"
+											/>
+										</ClientOnly>
+									</NuxtLink>
 
 									<ClientOnly>
 										<font-awesome-icon
