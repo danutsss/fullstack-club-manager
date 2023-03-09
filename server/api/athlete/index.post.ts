@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import { Athlete, PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
@@ -36,7 +36,7 @@ export default defineEventHandler(async (event) => {
 			);
 		}
 
-		const newAthleteData = await prisma.athlete.create({
+		const newAthleteData: Athlete | null = await prisma.athlete.create({
 			data: {
 				clubName,
 				fullName,
