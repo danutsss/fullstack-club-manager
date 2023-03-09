@@ -34,10 +34,23 @@
 					</div>
 				</div>
 			</div>
+			<div class="col-span-2" v-if="userRole === 'USER'">
+				<div id="changepass__form">
+					<div class="bg-white p-5 shadow-lg rounded-3xl">
+						<h1
+							class="font-display text-center mb-4 uppercase font-bold"
+						>
+							Schimbare parola
+						</h1>
+
+						<form @submit.prevent="changePass()"></form>
+					</div>
+				</div>
+			</div>
 			<div class="col-span-2">
 				<div id="addathlete__form">
 					<div
-						v-if="userRole === 'ADMIN' || euroRegionMod != 0"
+						v-if="userRole !== 'USER' || euroRegionMod != 0"
 						class="bg-white p-5 shadow-lg rounded-3xl"
 					>
 						<h1
@@ -164,7 +177,7 @@
 			</div>
 		</div>
 
-		<div class="container mt-4">
+		<div class="container mt-4" v-if="userRole !== 'USER'">
 			<div class="bg-white p-5 shadow-lg rounded-3xl">
 				<div class="overflow-y-auto overflow-visible">
 					<h1
