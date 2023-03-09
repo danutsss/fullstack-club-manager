@@ -45,7 +45,7 @@
 						>
 							Adaugare sportiv in Euroregiuni
 						</h1>
-						<form @submit.prevent="addathlete()" class="space-y-6">
+						<form @submit.prevent="addAthlete()" class="space-y-6">
 							<div class="flex flex-row rounded-md gap-2">
 								<div class="w-1/2">
 									<label for="clubName" class="sr-only"
@@ -190,7 +190,10 @@
 						<tbody v-for="athlete in athletes" class="font-body">
 							<tr
 								:key="athlete.id"
-								v-if="athlete.euroRegion === euroRegionMod"
+								v-if="
+									athlete.euroRegion === euroRegionMod ||
+									userRole === 'ADMIN'
+								"
 							>
 								<td class="p-3">
 									<div class="flex align-items-center">
@@ -283,7 +286,19 @@ onMounted(async () => {
 	euroRegiune = euroRegiune.value;
 });
 
-const addathlete = async () => {
+const deleteAthlete = (id) =>
+	useFetch(`/api/athlete/delete/${id}`, {
+		method: "DELETE",
+	})
+		.then((response) => {
+			// Refresh page.
+			window.location.href = "/dashboard";
+		})
+		.catch((error) => {
+			console.log(error);
+		});
+
+const addAthlete = async () => {
 	return await $fetch("api/athlete", {
 		method: "POST",
 		body: {
