@@ -280,7 +280,7 @@ let yearOfBirth = ref("");
 let passedExam = ref("");
 let euroRegiune = ref("");
 
-onMounted(async () => {
+onMounted(() => {
 	clubName = clubName.value;
 	athleteName = athleteName.value;
 	athleteBelt = athleteBelt.value;
@@ -318,10 +318,15 @@ const addAthlete = async () => {
 
 			if (response.code === "[error]") {
 				console.log(response.message);
-			} else
-				return console.log(
-					`athlete [${athleteName}] added successfully in our database.`
-				);
+				return;
+			}
+
+			// Refresh page.
+			location.reload();
+
+			return console.log(
+				`athlete [${athleteName}] added successfully in our database.`
+			);
 		})
 		.catch((error) => {
 			console.log(`[error occured]: ${error.statusMessage}`);
