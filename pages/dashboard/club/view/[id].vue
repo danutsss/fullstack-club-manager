@@ -132,6 +132,15 @@ const editClub = async (id) =>
 		.catch((error) => {
 			console.log(`[error occured]: ${error.statusMessage}`);
 		});
+
+const deleteClub = async (id) =>
+	await useFetch(`/api/club/delete/${id}`, {
+		method: "DELETE",
+	})
+		.then(() => location.reload())
+		.catch((error) => {
+			console.error(error);
+		});
 </script>
 
 <template>
@@ -830,6 +839,14 @@ const editClub = async (id) =>
 						</button>
 					</div>
 				</form>
+				<div>
+					<button
+						@click="deleteClub(club.id)"
+						class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm rounded-md text-white bg-san-marino-600 hover:bg-san-marino-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-san-marino-500"
+					>
+						Sterge club
+					</button>
+				</div>
 			</div>
 		</div>
 	</div>
