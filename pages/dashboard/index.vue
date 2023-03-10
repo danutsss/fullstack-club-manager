@@ -81,14 +81,23 @@
 									<label for="clubName" class="sr-only"
 										>Nume club sportiv</label
 									>
-									<input
+
+									<select
 										id="clubName"
 										v-model="clubName"
 										name="clubName"
-										type="text"
 										class="shadow-sm appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-san-marino-500 focus:border-san-marino-500 focus:z-10 sm:text-sm"
-										placeholder="Nume club sportiv"
-									/>
+									>
+										<option value="" disabled selected>
+											Alege club
+										</option>
+										<option
+											v-for="club in clubs"
+											:value="club.clubName"
+										>
+											{{ club.clubName }}
+										</option>
+									</select>
 								</div>
 
 								<div class="w-1/2">
@@ -292,6 +301,9 @@ const { data } = await useFetch("/api/euroregion/all");
 
 // Get all athletes from the database.
 const { data: athletes } = await useFetch("/api/athlete/all");
+
+// Get all clubs from the database.
+const { data: clubs } = await useFetch("/api/club/all");
 
 // Get authenticated user.
 const {
