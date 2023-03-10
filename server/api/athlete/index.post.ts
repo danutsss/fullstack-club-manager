@@ -9,13 +9,23 @@ interface IRequestBody {
 	passedExam: string;
 	belt: string;
 	euroRegion: number;
+	examinationType: string;
+	coachName: string;
 }
 
 export default defineEventHandler(async (event) => {
 	console.log("POST /api/athlete");
 
-	const { clubName, fullName, yearOfBirth, passedExam, belt, euroRegion } =
-		await readBody<IRequestBody>(event);
+	const {
+		clubName,
+		fullName,
+		yearOfBirth,
+		passedExam,
+		belt,
+		euroRegion,
+		examinationType,
+		coachName,
+	} = await readBody<IRequestBody>(event);
 
 	try {
 		if (
@@ -24,7 +34,9 @@ export default defineEventHandler(async (event) => {
 			!yearOfBirth ||
 			!passedExam ||
 			!belt ||
-			!euroRegion
+			!euroRegion ||
+			!examinationType ||
+			!coachName
 		) {
 			console.log(
 				"[error occured]: when inserting athlete in our database (missing fields)."
@@ -44,6 +56,8 @@ export default defineEventHandler(async (event) => {
 				passedExam,
 				belt,
 				euroRegion,
+				examinationType,
+				coachName,
 			},
 		});
 

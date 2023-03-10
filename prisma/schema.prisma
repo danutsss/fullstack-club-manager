@@ -92,13 +92,15 @@ model Coach {
 }
 
 model Athlete {
-  id          Int    @id @unique @default(autoincrement())
-  clubName    String @default("") @db.Text
-  fullName    String @default("") @db.Text
-  yearOfBirth Int    @default(0)
-  passedExam  String @default("") @db.VarChar(18)
-  belt        String @default("") @db.VarChar(18)
-  euroRegion  Int    @default(0)
+  id              Int    @id @unique @default(autoincrement())
+  clubName        String @default("") @db.Text
+  fullName        String @default("") @db.Text
+  yearOfBirth     Int    @default(0)
+  passedExam      String @default("") @db.VarChar(18)
+  belt            String @default("") @db.VarChar(18)
+  euroRegion      Int    @default(0)
+  examinationType String @default("") @db.VarChar(18)
+  coachName       String @default("") @db.Text
 }
 
 model Euroregion {

@@ -145,6 +145,50 @@
 								</div>
 							</div>
 
+							<div class="flex flex-row rounded-md">
+								<div class="w-full">
+									<label
+										for="examinationType"
+										class="sr-only"
+									>
+										Tip examinare
+									</label>
+									<select
+										id="examinationType"
+										name="examinationType"
+										v-model="examinationType"
+										class="shadow-sm appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-san-marino-500 focus:border-san-marino-500 focus:z-10 sm:text-sm"
+									>
+										<option value="" disabled selected>
+											Alege tipul examinarii
+										</option>
+
+										<option
+											v-for="examType in examTypes"
+											:value="examType.name"
+										>
+											{{ examType.name }}
+										</option>
+									</select>
+								</div>
+							</div>
+
+							<div class="flex flex-row rounded-md">
+								<div class="w-full">
+									<label for="coachName" class="sr-only">
+										Nume antrenor
+									</label>
+									<input
+										id="coachName"
+										v-model="coachName"
+										name="coachName"
+										type="text"
+										class="shadow-sm appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-san-marino-500 focus:border-san-marino-500 focus:z-10 sm:text-sm"
+										placeholder="Nume antrenor"
+									/>
+								</div>
+							</div>
+
 							<div class="flex flex-row rounded-md gap-2">
 								<div class="w-1/2">
 									<label for="passedExam" class="sr-only"
@@ -226,6 +270,8 @@
 								<th class="p-3">Anul nasterii</th>
 								<th class="p-3">Admis</th>
 								<th class="p-3">Euroregiune</th>
+								<th class="p-3">Tipul examinarii</th>
+								<th class="p-3">Nume antrenor</th>
 								<th class="p-3">Actiuni</th>
 							</tr>
 						</thead>
@@ -264,6 +310,15 @@
 								<td class="p-3">
 									Euroregiunea {{ athlete.euroRegion }}
 								</td>
+
+								<td class="p-3">
+									{{ athlete.examinationType }}
+								</td>
+
+								<td class="p-3">
+									{{ athlete.coachName }}
+								</td>
+
 								<td class="p-3 flex justify-center gap-2">
 									<NuxtLink
 										:to="`/dashboard/athlete/view/${athlete.id}`"
@@ -318,12 +373,23 @@ const userRole = role[0].role;
 const euroRegionNumber = await getEuroregion(user.id);
 const euroRegionMod = euroRegionNumber[0].euroRegionMod;
 
+// Examination types for athletes.
+const examTypes = [
+	{ id: 1, name: "U-12" },
+	{ id: 2, name: "U-13" },
+	{ id: 3, name: "U-14" },
+	{ id: 4, name: "U-15" },
+	{ id: 5, name: "U-16" },
+];
+
 let clubName = ref("");
 let athleteName = ref("");
 let athleteBelt = ref("");
 let yearOfBirth = ref("");
 let passedExam = ref("");
 let euroRegiune = ref("");
+let examinationType = ref("");
+let coachName = ref("");
 
 onMounted(() => {
 	clubName = clubName.value;
@@ -332,6 +398,8 @@ onMounted(() => {
 	yearOfBirth = yearOfBirth.value;
 	passedExam = passedExam.value;
 	euroRegiune = euroRegiune.value;
+	examinationType = examinationType.value;
+	coachName = coachName.value;
 });
 
 const deleteAthlete = (id) =>
@@ -356,6 +424,8 @@ const addAthlete = async () => {
 			passedExam: passedExam,
 			belt: athleteBelt,
 			euroRegion: euroRegiune,
+			examinationType: examinationType,
+			coachName: coachName,
 		},
 	})
 		.then((response) => {
@@ -402,8 +472,8 @@ i {
 	border-radius: 20px;
 }
 
-tr td:nth-child(n + 6),
-tr th:nth-child(n + 6) {
+tr td:nth-child(n + 8),
+tr th:nth-child(n + 8) {
 	border-radius: 0 0.625rem 0.625rem 0;
 }
 
