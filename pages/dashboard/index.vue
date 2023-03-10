@@ -34,8 +34,15 @@
 
 						<span
 							v-if="euroRegionMod !== 0"
-							class="border-bondi-blue-500 border-2 text-bondi-blue-500 font-bold p-1 rounded w-auto text-center uppercase"
+							class="border-bondi-blue-500 border-2 text-bondi-blue-500 font-bold p-1 mb-1 rounded w-auto text-center uppercase"
 							>Moderator Euroregiunea {{ euroRegionMod }}</span
+						>
+
+						<span
+							v-if="categoriesMod !== ''"
+							v-for="categoryMod in categoriesMod"
+							class="border-pacific-blue-500 border-2 text-pacific-blue-500 font-bold mb-1 p-1 rounded w-auto text-center uppercase"
+							>Moderator {{ categoryMod }}</span
 						>
 					</div>
 				</div>
@@ -372,6 +379,10 @@ const userRole = role[0].role;
 // Retrieve user's euroRegion number.
 const euroRegionNumber = await getEuroregion(user.id);
 const euroRegionMod = euroRegionNumber[0].euroRegionMod;
+
+// Retrieve user's category moderator.
+const categories = await getCategory(user.id);
+const categoriesMod = categories[0].categoryMod;
 
 // Examination types for athletes.
 const examTypes = [
