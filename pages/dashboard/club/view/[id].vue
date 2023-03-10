@@ -833,20 +833,19 @@ const deleteClub = async (id) =>
 					<div>
 						<button
 							type="submit"
-							class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm rounded-md text-white bg-san-marino-600 hover:bg-san-marino-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-san-marino-500"
+							class="w-full flex justify-center py-2 px-4 border border-transparent text-sm rounded-md text-white bg-san-marino-600 hover:bg-san-marino-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-san-marino-500"
 						>
 							Actualizeaza club
 						</button>
 					</div>
 				</form>
-				<div>
-					<button
-						@click="deleteClub(club.id)"
-						class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm rounded-md text-white bg-san-marino-600 hover:bg-san-marino-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-san-marino-500"
-					>
-						Sterge club
-					</button>
-				</div>
+
+				<button
+					@click="deleteClub(club.id)"
+					class="mt-2 w-full flex justify-center py-2 px-4 border border-transparent text-sm rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+				>
+					Sterge club
+				</button>
 			</div>
 		</div>
 	</div>

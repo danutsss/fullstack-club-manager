@@ -146,7 +146,7 @@ const deleteUser = async (id) =>
 						<div>
 							<button
 								type="submit"
-								class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm rounded-md text-white bg-san-marino-600 hover:bg-san-marino-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-san-marino-500"
+								class="w-full flex justify-center py-2 px-4 border border-transparent text-sm rounded-md text-white bg-san-marino-600 hover:bg-san-marino-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-san-marino-500"
 							>
 								Actualizeaza user
 							</button>
@@ -155,7 +155,7 @@ const deleteUser = async (id) =>
 
 					<button
 						@click="deleteUser(user[0].id)"
-						class="group relative w-full mt-2 flex justify-center py-2 px-4 border border-transparent text-sm rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+						class="w-full mt-2 flex justify-center py-2 px-4 border border-transparent text-sm rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
 					>
 						Sterge user
 					</button>

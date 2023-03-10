@@ -1,6 +1,5 @@
 <script setup>
 import { Disclosure, DisclosurePanel } from "@headlessui/vue";
-import { LockClosedIcon } from "@heroicons/vue/20/solid";
 import { ref, onMounted } from "vue";
 
 let firstName = ref("");
@@ -251,16 +250,8 @@ const addVeteran = async () => {
 								<div>
 									<button
 										type="submit"
-										class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm rounded-md text-white bg-san-marino-600 hover:bg-san-marino-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-san-marino-500"
+										class="w-full flex justify-center py-2 px-4 border border-transparent text-sm rounded-md text-white bg-san-marino-600 hover:bg-san-marino-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-san-marino-500"
 									>
-										<span
-											class="absolute left-0 inset-y-0 flex items-center pl-3"
-										>
-											<LockClosedIcon
-												class="h-5 w-5 text-nepal-500 group-hover:text-nepal-400"
-												aria-hidden="true"
-											/>
-										</span>
 										Trimite veteran
 									</button>
 								</div>
