@@ -1,6 +1,6 @@
 <template>
 	<DashboardNavBar />
-	<section class="relative mt-7">
+	<section class="relative mt-7 mb-7">
 		<div>
 			<h1
 				class="text-3xl md:text-4xl lg:text-[2.85rem] text-center font-display uppercase font-bold mb-3"
@@ -34,7 +34,15 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-span-2" v-if="userRole === 'USER'">
+			<div
+				id="changePass"
+				v-if="userRole === 'USER'"
+				v-bind:class="
+					userRole === 'USER' && euroRegionMod === 0
+						? 'col-span-2'
+						: ''
+				"
+			>
 				<div id="changepass__form">
 					<div class="bg-white p-5 shadow-lg rounded-3xl">
 						<h1
@@ -47,7 +55,10 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-span-2">
+			<div
+				id="addAthlete"
+				v-bind:class="userRole !== 'USER' ? 'col-span-2' : ''"
+			>
 				<div id="addathlete__form">
 					<div
 						v-if="userRole !== 'USER' || euroRegionMod != 0"
@@ -62,7 +73,7 @@
 							<div class="flex flex-row rounded-md gap-2">
 								<div class="w-1/2">
 									<label for="clubName" class="sr-only"
-										>Nume asociatie / club sportiv</label
+										>Nume club sportiv</label
 									>
 									<input
 										id="clubName"
@@ -70,7 +81,7 @@
 										name="clubName"
 										type="text"
 										class="shadow-sm appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-san-marino-500 focus:border-san-marino-500 focus:z-10 sm:text-sm"
-										placeholder="Nume asociatie / club sportiv"
+										placeholder="Nume club sportiv"
 									/>
 								</div>
 
@@ -177,7 +188,10 @@
 			</div>
 		</div>
 
-		<div class="container mt-4" v-if="userRole !== 'USER'">
+		<div
+			class="container mt-4"
+			v-if="userRole !== 'USER' || euroRegionMod !== 0"
+		>
 			<div class="bg-white p-5 shadow-lg rounded-3xl">
 				<div class="overflow-y-auto overflow-visible">
 					<h1
