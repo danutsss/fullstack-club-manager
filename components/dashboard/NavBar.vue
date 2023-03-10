@@ -203,7 +203,9 @@ const drawer = () => {
 };
 
 const logout = async () => {
-	return await auth.signOut();
+	return await auth.signOut().then(() => {
+		location.href = "/";
+	});
 };
 
 onMounted(() => {
