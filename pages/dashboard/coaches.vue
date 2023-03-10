@@ -85,7 +85,14 @@
 												</NuxtLink>
 											</ClientOnly>
 
-											<ClientOnly>
+											<ClientOnly
+												v-if="
+													userRole === 'ADMIN' ||
+													userCategoryMod.indexOf(
+														'ANTRENORI'
+													) !== -1
+												"
+											>
 												<font-awesome-icon
 													icon="fa-solid fa-trash"
 													class="text-red-500 cursor-pointer"
@@ -108,7 +115,22 @@
 
 <script setup>
 import { Disclosure, DisclosurePanel } from "@headlessui/vue";
+
 const { data } = await useFetch("/api/coach/all");
+const supabase = useSupabaseClient();
+
+// Get authenticated user.
+const {
+	data: { user },
+} = await supabase.auth.getUser();
+
+// Retrieve user's role.
+const role = await getRole(user.id);
+const userRole = role[0].role;
+
+// Retrieve user's category moderator.
+const categories = await getCategory(user.id);
+const userCategoryMod = categories[0].categoryMod;
 
 const searchCoaches = () => {
 	const input = document.getElementById("coachName");

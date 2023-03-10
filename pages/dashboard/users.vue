@@ -40,6 +40,7 @@
 										<th class="p-3">Nume utilizator</th>
 										<th class="p-3">Rol</th>
 										<th class="p-3">Moderator</th>
+										<th class="p-3">Categorii moderate</th>
 										<th class="p-3">Actiuni</th>
 									</tr>
 								</thead>
@@ -71,6 +72,24 @@
 											Euroregiunea
 											{{ user.euroRegionMod }}
 										</td>
+
+										<td class="p-3">
+											<span
+												v-for="(
+													category, index
+												) in user.categoryMod"
+											>
+												<span>{{ category }}</span>
+												<span
+													v-if="
+														index + 1 <
+														user.categoryMod.length
+													"
+													>,
+												</span>
+											</span>
+										</td>
+
 										<td
 											class="p-3 flex justify-center gap-2"
 										>
@@ -85,7 +104,9 @@
 												</NuxtLink>
 											</ClientOnly>
 
-											<ClientOnly>
+											<ClientOnly
+												v-if="userRole === 'ADMIN'"
+											>
 												<font-awesome-icon
 													icon="fa-solid fa-trash"
 													class="text-red-500 cursor-pointer"
@@ -108,9 +129,18 @@
 import { Disclosure, DisclosurePanel } from "@headlessui/vue";
 const supabase = useSupabaseClient();
 
+// Get authenticated user.
+const {
+	data: { user },
+} = await supabase.auth.getUser();
+
+// Retrieve user's role.
+const role = await getRole(user.id);
+const userRole = role[0].role;
+
 const { data: users } = await supabase
 	.from("profiles")
-	.select("id, role, euroRegionMod, email, registrationDate");
+	.select("id, role, euroRegionMod, email, categoryMod, registrationDate");
 
 const deleteUser = async (id) => {
 	const { error } = await supabase.from("profiles").delete().match({ id });
@@ -155,8 +185,8 @@ i {
 	border-radius: 20px;
 }
 
-tr td:nth-child(n + 4),
-tr th:nth-child(n + 4) {
+tr td:nth-child(n + 5),
+tr th:nth-child(n + 5) {
 	border-radius: 0 0.625rem 0.625rem 0;
 }
 
