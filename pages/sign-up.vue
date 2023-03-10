@@ -135,6 +135,7 @@ const signUp = async () => {
 				role: "USER",
 				email: emailAddress.value,
 				registrationDate: new Date(),
+				categoryMod: [],
 			},
 		]);
 

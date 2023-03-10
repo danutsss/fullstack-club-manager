@@ -4,6 +4,26 @@ const { data: club } = await useFetch(
 	() => `/api/club/view/${route.params.id}`
 );
 
+const supabase = useSupabaseClient();
+
+// Get authenticated user.
+const {
+	data: { user },
+} = await supabase.auth.getUser();
+
+// Retrieve user's role.
+const role = await getRole(user.id);
+const userRole = role[0].role;
+
+// Retrieve user's category moderator.
+const categories = await getCategory(user.id);
+const userCategoryMod = categories[0].categoryMod;
+
+// Make inputs read-only if the user is not admin or moderator.
+const isReadOnly = () => {
+	return userRole !== "ADMIN" && userCategoryMod.indexOf("CLUBURI") === -1;
+};
+
 let clubName = ref("");
 let clubCity = ref("");
 let zipCode = ref("");
@@ -155,7 +175,7 @@ const deleteClub = async (id) =>
 		</h1>
 	</div>
 
-	<div class="container flex flex-col justify-center w-1/2">
+	<div class="container flex flex-col justify-center w-1/2 mb-6">
 		<div id="club__info">
 			<div class="bg-white p-5 shadow-lg rounded-lg font-body">
 				<form @submit.prevent="editClub(club.id)" class="space-y-6">
@@ -165,6 +185,7 @@ const deleteClub = async (id) =>
 								>Nume asociatie / club sportiv</label
 							>
 							<input
+								:disabled="isReadOnly() == true"
 								id="clubName"
 								v-model="clubName"
 								name="clubName"
@@ -181,6 +202,7 @@ const deleteClub = async (id) =>
 								>Adresa asociatie / club sportiv</label
 							>
 							<input
+								:disabled="isReadOnly() == true"
 								id="clubAddress"
 								v-model="clubAddress"
 								name="clubAddress"
@@ -197,6 +219,7 @@ const deleteClub = async (id) =>
 								>Localitate</label
 							>
 							<input
+								:disabled="isReadOnly() == true"
 								id="clubCity"
 								v-model="clubCity"
 								name="clubCity"
@@ -210,6 +233,7 @@ const deleteClub = async (id) =>
 								>Judet / sector</label
 							>
 							<input
+								:disabled="isReadOnly() == true"
 								id="clubCounty"
 								v-model="clubCounty"
 								name="clubCounty"
@@ -226,6 +250,7 @@ const deleteClub = async (id) =>
 								>Cod postal</label
 							>
 							<input
+								:disabled="isReadOnly() == true"
 								id="zipCode"
 								v-model="zipCode"
 								name="zipCode"
@@ -245,6 +270,7 @@ const deleteClub = async (id) =>
 								functie</label
 							>
 							<input
+								:disabled="isReadOnly() == true"
 								id="clubContactPerson"
 								v-model="clubContactPerson"
 								name="clubContactPerson"
@@ -261,6 +287,7 @@ const deleteClub = async (id) =>
 								>Adresa de e-mail club / asociatie</label
 							>
 							<input
+								:disabled="isReadOnly() == true"
 								id="clubEmail"
 								v-model="clubEmail"
 								name="clubEmail"
@@ -279,6 +306,7 @@ const deleteClub = async (id) =>
 								>Afiliat Federatia Romana de Judo?</label
 							>
 							<input
+								:disabled="isReadOnly() == true"
 								id="clubAfiliatFRJ"
 								v-model="clubAfiliatFRJ"
 								name="clubAfiliatFRJ"
@@ -294,6 +322,7 @@ const deleteClub = async (id) =>
 								>Afiliat Asociatia Judeteana de Judo?</label
 							>
 							<input
+								:disabled="isReadOnly() == true"
 								id="clubAfiliatAJJ"
 								v-model="clubAfiliatAJJ"
 								name="clubAfiliatAJJ"
@@ -312,6 +341,7 @@ const deleteClub = async (id) =>
 								>Nume antrenor 1</label
 							>
 							<input
+								:disabled="isReadOnly() == true"
 								id="clubCoachOneName"
 								v-model="clubCoachOneName"
 								name="clubCoachOneName"
@@ -327,6 +357,7 @@ const deleteClub = async (id) =>
 								>Nume antrenor 2</label
 							>
 							<input
+								:disabled="isReadOnly() == true"
 								id="clubCoachTwoName"
 								v-model="clubCoachTwoName"
 								name="clubCoachTwoName"
@@ -345,6 +376,7 @@ const deleteClub = async (id) =>
 								>Nume antrenor 3</label
 							>
 							<input
+								:disabled="isReadOnly() == true"
 								id="clubCoachThreeName"
 								v-model="clubCoachThreeName"
 								name="clubCoachThreeName"
@@ -363,6 +395,7 @@ const deleteClub = async (id) =>
 								>Adresa web</label
 							>
 							<input
+								:disabled="isReadOnly() == true"
 								id="clubWebAddress"
 								v-model="clubWebAddress"
 								name="clubWebAddress"
@@ -376,6 +409,7 @@ const deleteClub = async (id) =>
 								>Facebook</label
 							>
 							<input
+								:disabled="isReadOnly() == true"
 								id="clubFbAddress"
 								v-model="clubFbAddress"
 								name="clubFbAddress"
@@ -396,6 +430,7 @@ const deleteClub = async (id) =>
 								etc.)
 							</label>
 							<textarea
+								:disabled="isReadOnly() == true"
 								maxlength="750"
 								rows="5"
 								id="clubSocialAccounts"
@@ -426,6 +461,7 @@ const deleteClub = async (id) =>
 								>Adresa</label
 							>
 							<input
+								:disabled="isReadOnly() == true"
 								id="dojoOneAddress"
 								v-model="dojoOneAddress"
 								name="dojoOneAddress"
@@ -442,6 +478,7 @@ const deleteClub = async (id) =>
 								>Localitate</label
 							>
 							<input
+								:disabled="isReadOnly() == true"
 								id="dojoOneCity"
 								v-model="dojoOneCity"
 								name="dojoOneCity"
@@ -455,6 +492,7 @@ const deleteClub = async (id) =>
 								>Judet / sector</label
 							>
 							<input
+								:disabled="isReadOnly() == true"
 								id="dojoOneCounty"
 								v-model="dojoOneCounty"
 								name="dojoOneCounty"
@@ -474,6 +512,7 @@ const deleteClub = async (id) =>
 								functie</label
 							>
 							<input
+								:disabled="isReadOnly() == true"
 								id="dojoOneContactPerson"
 								v-model="dojoOneContactPerson"
 								name="dojoOneContactPerson"
@@ -492,6 +531,7 @@ const deleteClub = async (id) =>
 								>Adresa de e-mail</label
 							>
 							<input
+								:disabled="isReadOnly() == true"
 								id="dojoOneEmailAddress"
 								v-model="dojoOneEmailAddress"
 								name="dojoOneEmailAddress"
@@ -510,6 +550,7 @@ const deleteClub = async (id) =>
 								>MP de Tatami</label
 							>
 							<input
+								:disabled="isReadOnly() == true"
 								id="dojoOneTatamiMP"
 								v-model="dojoOneTatamiMP"
 								name="dojoOneTatamiMP"
@@ -529,6 +570,7 @@ const deleteClub = async (id) =>
 								Grupe de varsta / program
 							</label>
 							<textarea
+								:disabled="isReadOnly() == true"
 								maxlength="750"
 								rows="5"
 								id="dojoOneAgeGroups"
@@ -559,6 +601,7 @@ const deleteClub = async (id) =>
 								>Adresa</label
 							>
 							<input
+								:disabled="isReadOnly() == true"
 								id="dojoTwoAddress"
 								v-model="dojoTwoAddress"
 								name="dojoTwoAddress"
@@ -575,6 +618,7 @@ const deleteClub = async (id) =>
 								>Localitate</label
 							>
 							<input
+								:disabled="isReadOnly() == true"
 								id="dojoTwoCity"
 								v-model="dojoTwoCity"
 								name="dojoTwoCity"
@@ -588,6 +632,7 @@ const deleteClub = async (id) =>
 								>Judet / sector</label
 							>
 							<input
+								:disabled="isReadOnly() == true"
 								id="dojoTwoCounty"
 								v-model="dojoTwoCounty"
 								name="dojoTwoCounty"
@@ -607,6 +652,7 @@ const deleteClub = async (id) =>
 								functie</label
 							>
 							<input
+								:disabled="isReadOnly() == true"
 								id="dojoTwoContactPerson"
 								v-model="dojoTwoContactPerson"
 								name="dojoTwoContactPerson"
@@ -625,6 +671,7 @@ const deleteClub = async (id) =>
 								>Adresa de e-mail</label
 							>
 							<input
+								:disabled="isReadOnly() == true"
 								id="dojoTwoEmailAddress"
 								v-model="dojoTwoEmailAddress"
 								name="dojoTwoEmailAddress"
@@ -643,6 +690,7 @@ const deleteClub = async (id) =>
 								>MP de Tatami</label
 							>
 							<input
+								:disabled="isReadOnly() == true"
 								id="dojoTwoTatamiMP"
 								v-model="dojoTwoTatamiMP"
 								name="dojoTwoTatamiMP"
@@ -662,6 +710,7 @@ const deleteClub = async (id) =>
 								Grupe de varsta / program
 							</label>
 							<textarea
+								:disabled="isReadOnly() == true"
 								maxlength="750"
 								rows="5"
 								id="dojoTwoAgeGroups"
@@ -692,6 +741,7 @@ const deleteClub = async (id) =>
 								>Adresa</label
 							>
 							<input
+								:disabled="isReadOnly() == true"
 								id="dojoThreeAddress"
 								v-model="dojoThreeAddress"
 								name="dojoThreeAddress"
@@ -708,6 +758,7 @@ const deleteClub = async (id) =>
 								>Localitate</label
 							>
 							<input
+								:disabled="isReadOnly() == true"
 								id="dojoThreeCity"
 								v-model="dojoThreeCity"
 								name="dojoThreeCity"
@@ -723,6 +774,7 @@ const deleteClub = async (id) =>
 								>Judet / sector</label
 							>
 							<input
+								:disabled="isReadOnly() == true"
 								id="dojoThreeCounty"
 								v-model="dojoThreeCounty"
 								name="dojoThreeCounty"
@@ -742,6 +794,7 @@ const deleteClub = async (id) =>
 								functie</label
 							>
 							<input
+								:disabled="isReadOnly() == true"
 								id="dojoThreeContactPerson"
 								v-model="dojoThreeContactPerson"
 								name="dojoThreeContactPerson"
@@ -760,6 +813,7 @@ const deleteClub = async (id) =>
 								>Adresa de e-mail</label
 							>
 							<input
+								:disabled="isReadOnly() == true"
 								id="dojoThreeEmailAddress"
 								v-model="dojoThreeEmailAddress"
 								name="dojoThreeEmailAddress"
@@ -778,6 +832,7 @@ const deleteClub = async (id) =>
 								>MP de Tatami</label
 							>
 							<input
+								:disabled="isReadOnly() == true"
 								id="dojoThreeTatamiMP"
 								v-model="dojoThreeTatamiMP"
 								name="dojoThreeTatamiMP"
@@ -797,6 +852,7 @@ const deleteClub = async (id) =>
 								Grupe de varsta / program
 							</label>
 							<textarea
+								:disabled="isReadOnly() == true"
 								maxlength="750"
 								rows="5"
 								id="dojoThreeAgeGroups"
@@ -819,6 +875,7 @@ const deleteClub = async (id) =>
 								Informatii suplimentare despre club / asociatie
 							</label>
 							<textarea
+								:disabled="isReadOnly() == true"
 								maxlength="750"
 								rows="5"
 								id="clubExtraInfo"
@@ -833,6 +890,7 @@ const deleteClub = async (id) =>
 					<div>
 						<button
 							type="submit"
+							v-if="isReadOnly() == false"
 							class="w-full flex justify-center py-2 px-4 border border-transparent text-sm rounded-md text-white bg-san-marino-600 hover:bg-san-marino-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-san-marino-500"
 						>
 							Actualizeaza club
@@ -842,6 +900,7 @@ const deleteClub = async (id) =>
 
 				<button
 					@click="deleteClub(club.id)"
+					v-if="isReadOnly() == false"
 					class="mt-2 w-full flex justify-center py-2 px-4 border border-transparent text-sm rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
 				>
 					Sterge club

@@ -4,10 +4,17 @@ const supabase = useSupabaseClient();
 
 let role = ref("");
 let euroRegiune = ref("");
+let categoryModerator = ref([]);
+
+const categories = [
+	{ id: 1, name: "ANTRENORI" },
+	{ id: 2, name: "CLUBURI" },
+	{ id: 3, name: "VETERANI" },
+];
 
 const { data: user } = await supabase
 	.from("profiles")
-	.select("id, role, euroRegionMod, email, registrationDate")
+	.select("id, role, euroRegionMod, categoryMod, email, registrationDate")
 	.match({ id: route.params.id });
 
 // Get all euro regions from the database.
@@ -15,12 +22,18 @@ const { data } = await useFetch("/api/euroregion/all");
 
 const updateUser = async (id) => {
 	if (role.value === "" || euroRegiune.value === "") {
-		return alert("Selecteaza rolul si euroregiunea.");
+		return alert(
+			"Selecteaza rolul, euroregiunea si categoria pt. moderare."
+		);
 	}
 
 	return await supabase
 		.from("profiles")
-		.update({ role: role?.value, euroRegionMod: euroRegiune?.value })
+		.update({
+			role: role?.value,
+			euroRegionMod: euroRegiune?.value,
+			categoryMod: categoryModerator?.value,
+		})
 		.eq("id", id)
 		.then((response) => {
 			// Reload the page.
@@ -79,9 +92,15 @@ const deleteUser = async (id) =>
 
 						<span
 							v-if="user[0].euroRegionMod !== 0"
-							class="border-bondi-blue-500 border-2 text-bondi-blue-500 font-bold p-1 rounded w-auto text-center uppercase"
+							class="border-bondi-blue-500 border-2 text-bondi-blue-500 font-bold p-1 mb-1 rounded w-auto text-center uppercase"
 							>Moderator Euroregiunea
 							{{ user[0].euroRegionMod }}</span
+						>
+
+						<span
+							v-for="category in user[0].categoryMod"
+							class="border-pacific-blue-500 border-2 text-pacific-blue-500 font-bold p-1 mb-1 rounded w-auto text-center uppercase"
+							>Moderator: {{ category }}</span
 						>
 					</div>
 				</div>
@@ -138,6 +157,31 @@ const deleteUser = async (id) =>
 										:value="euroregion.id"
 									>
 										{{ euroregion.name }}
+									</option>
+								</select>
+							</div>
+						</div>
+
+						<div class="flex flex-row rounded-md gap-2">
+							<div class="w-full">
+								<label
+									for="categoryModerator"
+									class="font-body text-xs"
+									>Selecteaza una sau mai multe categorii
+									pentru moderare:</label
+								>
+								<select
+									id="categoryModerator"
+									name="categoryModerator"
+									multiple="true"
+									v-model="categoryModerator"
+									class="shadow-sm appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-san-marino-500 focus:border-san-marino-500 focus:z-10 sm:text-sm"
+								>
+									<option
+										v-for="category in categories"
+										:value="category.name"
+									>
+										{{ category.name }}
 									</option>
 								</select>
 							</div>
