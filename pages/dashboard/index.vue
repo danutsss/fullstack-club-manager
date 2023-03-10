@@ -265,90 +265,159 @@
 					>
 						Moderare sportivi
 					</h1>
-					<table
-						class="table-auto w-full text-black border-separate space-y-6 text-sm"
-					>
-						<thead
-							class="bg-gray-300 text-black font-display sticky top-0"
+					<form @submit.prevent="exportData()">
+						<table
+							class="table-auto w-full text-black border-separate space-y-6 text-sm"
 						>
-							<tr>
-								<th class="p-3">Nume sportiv</th>
-								<th class="p-3">Centura</th>
-								<th class="p-3">Anul nasterii</th>
-								<th class="p-3">Admis</th>
-								<th class="p-3">Euroregiune</th>
-								<th class="p-3">Tipul examinarii</th>
-								<th class="p-3">Nume antrenor</th>
-								<th class="p-3">Actiuni</th>
-							</tr>
-						</thead>
-						<tbody v-for="athlete in athletes" class="font-body">
-							<tr
-								:key="athlete.id"
-								v-if="
-									athlete.euroRegion === euroRegionMod ||
-									userRole === 'ADMIN'
-								"
+							<thead
+								class="bg-gray-300 text-black font-display sticky top-0"
 							>
-								<td class="p-3">
-									<div class="flex align-items-center">
-										<div class="ml-3">
-											<div class="font-bold">
-												{{ athlete.fullName }}
-											</div>
-											<div class="text-gray-500">
-												{{ athlete.clubName }}
+								<tr>
+									<th class="p-3">
+										<input
+											type="checkbox"
+											v-model="exportAthleteName"
+										/>
+										Nume sportiv
+									</th>
+									<th class="p-3">
+										<input
+											type="checkbox"
+											v-model="exportAthleteBelt"
+										/>
+										Centura
+									</th>
+									<th class="p-3">
+										<input
+											type="checkbox"
+											v-model="exportAthleteYOB"
+										/>
+										Anul nasterii
+									</th>
+									<th class="p-3">
+										<input
+											type="checkbox"
+											v-model="exportAthletePassed"
+										/>
+										Admis
+									</th>
+									<th class="p-3">
+										<input
+											type="checkbox"
+											v-model="exportAthleteEuroregion"
+										/>
+										Euroregiune
+									</th>
+									<th class="p-3">
+										<input
+											type="checkbox"
+											v-model="exportAthleteExamType"
+										/>
+										Tipul examinarii
+									</th>
+									<th class="p-3">
+										<input
+											type="checkbox"
+											v-model="exportAthleteCoachName"
+										/>
+										Nume antrenor
+									</th>
+									<th class="p-3">Actiuni</th>
+								</tr>
+							</thead>
+							<tbody
+								v-for="athlete in athletes"
+								class="font-body"
+							>
+								<tr
+									:key="athlete.id"
+									v-if="
+										athlete.euroRegion === euroRegionMod ||
+										userRole === 'ADMIN'
+									"
+								>
+									<td class="p-3">
+										<div class="flex align-items-center">
+											<input
+												type="checkbox"
+												v-model="exportAthleteID"
+												:value="athlete.id"
+											/>
+											<div class="ml-3">
+												<div
+													class="font-bold"
+													id="athlete__Name"
+												>
+													{{ athlete.fullName }}
+												</div>
+												<div
+													class="text-gray-500"
+													id="athlete__ClubName"
+												>
+													{{ athlete.clubName }}
+												</div>
 											</div>
 										</div>
-									</div>
-								</td>
-								<td class="p-3">
-									{{ athlete.belt }}
-								</td>
+									</td>
+									<td class="p-3" id="athlete__Belt">
+										{{ athlete.belt }}
+									</td>
 
-								<td class="p-3">
-									{{ athlete.yearOfBirth }}
-								</td>
+									<td class="p-3" id="athlete__YOB">
+										{{ athlete.yearOfBirth }}
+									</td>
 
-								<td class="p-3">
-									{{ athlete.passedExam }}
-								</td>
+									<td class="p-3" id="athlete__Passed">
+										{{ athlete.passedExam }}
+									</td>
 
-								<td class="p-3">
-									Euroregiunea {{ athlete.euroRegion }}
-								</td>
+									<td class="p-3" id="athlete__Euroregion">
+										Euroregiunea {{ athlete.euroRegion }}
+									</td>
 
-								<td class="p-3">
-									{{ athlete.examinationType }}
-								</td>
+									<td class="p-3" id="athlete__ExamType">
+										{{ athlete.examinationType }}
+									</td>
 
-								<td class="p-3">
-									{{ athlete.coachName }}
-								</td>
+									<td class="p-3" id="athlete__CoachName">
+										{{ athlete.coachName }}
+									</td>
 
-								<td class="p-3 flex justify-center gap-2">
-									<NuxtLink
-										:to="`/dashboard/athlete/view/${athlete.id}`"
-									>
+									<td class="p-3 flex justify-center gap-2">
+										<NuxtLink
+											:to="`/dashboard/athlete/view/${athlete.id}`"
+										>
+											<ClientOnly>
+												<font-awesome-icon
+													icon="fa-solid fa-eye"
+													class="cursor-pointer text-nepal-700"
+												/>
+											</ClientOnly>
+										</NuxtLink>
+
 										<ClientOnly>
 											<font-awesome-icon
-												icon="fa-solid fa-eye"
-												class="cursor-pointer text-nepal-700"
+												icon="fa-solid fa-trash"
+												class="text-red-500 cursor-pointer"
+												@click="
+													deleteAthlete(athlete.id)
+												"
 											/>
 										</ClientOnly>
-									</NuxtLink>
+									</td>
+								</tr>
+							</tbody>
+						</table>
 
-									<ClientOnly>
-										<font-awesome-icon
-											icon="fa-solid fa-trash"
-											class="text-red-500 cursor-pointer"
-											@click="deleteAthlete(athlete.id)"
-										/>
-									</ClientOnly>
-								</td>
-							</tr>
-						</tbody>
-					</table>
+						<div>
+							<button
+								type="submit"
+								class="w-full flex justify-center py-2 px-4 border border-transparent text-sm rounded-md text-white bg-san-marino-600 hover:bg-san-marino-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-san-marino-500"
+							>
+								Creeaza export
+							</button>
+						</div>
+					</form>
 				</div>
 			</div>
 		</div>
@@ -402,6 +471,15 @@ let euroRegiune = ref("");
 let examinationType = ref("");
 let coachName = ref("");
 
+let exportAthleteName = ref(false);
+let exportAthleteBelt = ref(false);
+let exportAthleteYOB = ref(false);
+let exportAthletePassed = ref(false);
+let exportAthleteEuroregion = ref(false);
+let exportAthleteExamType = ref(false);
+let exportAthleteCoachName = ref(false);
+let exportAthleteID = ref([]);
+
 onMounted(() => {
 	clubName = clubName.value;
 	athleteName = athleteName.value;
@@ -411,10 +489,25 @@ onMounted(() => {
 	euroRegiune = euroRegiune.value;
 	examinationType = examinationType.value;
 	coachName = coachName.value;
+	exportAthleteName = exportAthleteName.value;
+	exportAthleteBelt = exportAthleteBelt.value;
+	exportAthleteYOB = exportAthleteYOB.value;
+	exportAthletePassed = exportAthletePassed.value;
+	exportAthleteEuroregion = exportAthleteEuroregion.value;
+	exportAthleteExamType = exportAthleteExamType.value;
+	exportAthleteCoachName = exportAthleteCoachName.value;
 });
 
-const deleteAthlete = (id) =>
-	useFetch(`/api/athlete/delete/${id}`, {
+const exportData = () => {
+	exportAthleteID.value.forEach(async (id) => {
+		return await useFetch(() => `/api/athlete/export/${id}`, {})
+			.then(({ data: response }) => console.log(response.value))
+			.catch((error) => console.error(error));
+	});
+};
+
+const deleteAthlete = async (id) =>
+	await useFetch(`/api/athlete/delete/${id}`, {
 		method: "DELETE",
 	})
 		.then(() => {
