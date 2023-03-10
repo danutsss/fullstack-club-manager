@@ -146,7 +146,7 @@
 								</div>
 
 								<div class="w-1/2">
-									<label for="yearOfBirth" class="sr-only"
+									<label for="euroRegiune" class="sr-only"
 										>Euroregiune</label
 									>
 									<select

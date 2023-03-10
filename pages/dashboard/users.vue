@@ -105,6 +105,7 @@
 </template>
 
 <script setup>
+import { Disclosure, DisclosurePanel } from "@headlessui/vue";
 const supabase = useSupabaseClient();
 
 const { data: users } = await supabase
