@@ -65,21 +65,36 @@
 							>Utilizatori</NuxtLink
 						>
 					</li>
-					<li>
+					<li
+						v-if="
+							categoriesMod.indexOf('ANTRENORI') !== -1 ||
+							userRole === 'ADMIN'
+						"
+					>
 						<NuxtLink
 							to="/dashboard/coaches"
 							class="inline-block rounded-lg py-1 px-2 text-sm text-slate-700 hover:bg-slate-100 hover:text-slate-900 font-display font-medium"
 							>Antrenori</NuxtLink
 						>
 					</li>
-					<li>
+					<li
+						v-if="
+							categoriesMod.indexOf('VETERANI') !== -1 ||
+							userRole === 'ADMIN'
+						"
+					>
 						<NuxtLink
 							to="/dashboard/veterans"
 							class="inline-block rounded-lg py-1 px-2 text-sm text-slate-700 hover:bg-slate-100 hover:text-slate-900 font-display font-medium"
 							>Veterani</NuxtLink
 						>
 					</li>
-					<li>
+					<li
+						v-if="
+							categoriesMod.indexOf('CLUBURI') !== -1 ||
+							userRole === 'ADMIN'
+						"
+					>
 						<NuxtLink
 							to="/dashboard/clubs"
 							class="inline-block rounded-lg py-1 px-2 text-sm text-slate-700 hover:bg-slate-100 hover:text-slate-900 font-display font-medium"
@@ -146,7 +161,20 @@
 				</div>
 
 				<ul class="divide-y font-sans">
-					<li>
+					<li v-if="userRole === 'ADMIN'">
+						<NuxtLink
+							to="/dashboard/users"
+							@click="isOpen = false"
+							class="my-4 inline-block"
+							>Utilizatori</NuxtLink
+						>
+					</li>
+					<li
+						v-if="
+							categoriesMod.indexOf('ANTRENORI') !== -1 ||
+							userRole === 'ADMIN'
+						"
+					>
 						<NuxtLink
 							to="/dashboard/coaches"
 							@click="isOpen = false"
@@ -154,7 +182,12 @@
 							>Antrenori</NuxtLink
 						>
 					</li>
-					<li>
+					<li
+						v-if="
+							categoriesMod.indexOf('VETERANI') !== -1 ||
+							userRole === 'ADMIN'
+						"
+					>
 						<NuxtLink
 							to="/dashboard/veterans"
 							@click="isOpen = false"
@@ -162,7 +195,12 @@
 							>Veterani</NuxtLink
 						>
 					</li>
-					<li>
+					<li
+						v-if="
+							categoriesMod.indexOf('CLUBURI') !== -1 ||
+							userRole === 'ADMIN'
+						"
+					>
 						<NuxtLink
 							to="/dashboard/clubs"
 							@click="isOpen = false"
@@ -197,6 +235,10 @@ const {
 // Retrieve user's role.
 const role = await getRole(user.id);
 const userRole = role[0].role;
+
+// Retrieve user's category moderator.
+const categories = await getCategory(user.id);
+const categoriesMod = categories[0].categoryMod;
 
 const drawer = () => {
 	return (isOpen.value = !isOpen.value);
