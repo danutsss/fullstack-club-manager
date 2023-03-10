@@ -151,7 +151,7 @@ const deleteClub = async (id) =>
 			class="text-3xl md:text-4xl lg:text-[2.85rem] text-center font-display uppercase font-bold mb-3"
 		>
 			Modificari
-			<span class="text-nepal-600"></span>
+			<span class="text-nepal-600">{{ club.clubName }}</span>
 		</h1>
 	</div>
 
