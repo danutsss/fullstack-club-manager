@@ -53,7 +53,7 @@ const deleteUser = async (id) =>
 	<DashboardNavBar />
 
 	<section class="relative mt-7 mb-7">
-		<div class="container flex flex-col lg:grid lg:grid-cols-3 gap-4">
+		<div class="container flex flex-col lg:grid lg:grid-cols-3 gap-2">
 			<div id="profile__container">
 				<div class="bg-white p-5 shadow-lg rounded-3xl">
 					<div id="profile__image">
@@ -68,13 +68,20 @@ const deleteUser = async (id) =>
 						class="flex flex-col justify-center"
 					>
 						<span
-							class="text-gray-500 text-2xl font-bold mt-3 mb-3 text-center"
+							class="text-gray-500 text-2xl font-bold mt-3 mb-2 text-center"
 						>
 							{{ user[0].email }}</span
 						>
 						<span
-							class="border-san-marino-500 border-2 text-san-marino-500 font-bold p-3 rounded w-auto text-center"
+							class="border-san-marino-500 border-2 text-san-marino-500 mb-1 font-bold p-1 rounded w-auto text-center"
 							>{{ user[0].role }}</span
+						>
+
+						<span
+							v-if="user[0].euroRegionMod !== 0"
+							class="border-bondi-blue-500 border-2 text-bondi-blue-500 font-bold p-1 rounded w-auto text-center uppercase"
+							>Moderator Euroregiunea
+							{{ user[0].euroRegionMod }}</span
 						>
 					</div>
 				</div>

@@ -8,7 +8,7 @@
 				Panou de control
 			</h1>
 		</div>
-		<div class="container flex flex-col lg:grid lg:grid-cols-3 gap-4">
+		<div class="container flex flex-col lg:grid lg:grid-cols-3 gap-2">
 			<div id="profile__container">
 				<div class="bg-white p-5 shadow-lg rounded-3xl">
 					<div id="profile__image">
@@ -28,8 +28,14 @@
 							{{ user.email }}</span
 						>
 						<span
-							class="border-san-marino-500 border-2 text-san-marino-500 font-bold p-3 rounded w-auto text-center"
+							class="border-san-marino-500 border-2 text-san-marino-500 font-bold p-1 mb-1 rounded w-auto text-center"
 							>{{ userRole }}</span
+						>
+
+						<span
+							v-if="euroRegionMod !== 0"
+							class="border-bondi-blue-500 border-2 text-bondi-blue-500 font-bold p-1 rounded w-auto text-center uppercase"
+							>Moderator Euroregiunea {{ euroRegionMod }}</span
 						>
 					</div>
 				</div>
