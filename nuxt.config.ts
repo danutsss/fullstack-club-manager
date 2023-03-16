@@ -10,6 +10,7 @@ export default defineNuxtConfig({
 		"@nuxtjs/google-fonts",
 		"nuxt-headlessui",
 		"@nuxtjs/supabase",
+		"@sidebase/nuxt-pdf",
 	],
 
 	tailwindcss: {

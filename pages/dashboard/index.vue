@@ -259,12 +259,106 @@
 			v-if="userRole !== 'USER' || euroRegionMod !== 0"
 		>
 			<div class="bg-white p-5 shadow-lg rounded-3xl">
-				<div class="overflow-y-auto overflow-visible">
+				<div
+					class="overflow-y-auto overflow-visible"
+					id="athlete__list"
+				>
 					<h1
 						class="font-display uppercase font-bold text-center mb-2"
 					>
 						Moderare sportivi
 					</h1>
+					<Disclosure :default-open="true">
+						<DisclosurePanel
+							class="flex text-center font-body font-semibold text-sm mb-1 text-gray-500 space-x-2"
+						>
+							<div
+								class="flex flex-row justify-items-center rounded-md gap-2"
+							>
+								<div class="w-full">
+									<label
+										for="athleteSearchByBelt"
+										class="sr-only"
+									>
+										Cauta dupa curea sportiv
+									</label>
+									<input
+										id="athleteSearchByBelt"
+										name="athleteSearchByBelt"
+										type="text"
+										class="shadow-sm appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-san-marino-500 focus:border-san-marino-500 focus:z-10 sm:text-sm"
+										placeholder="Cauta dupa curea sportiv"
+										@keyup="searchByBelt()"
+									/>
+								</div>
+							</div>
+
+							<div
+								class="flex flex-row justify-items-center rounded-md gap-2"
+							>
+								<div class="w-full">
+									<label
+										for="athleteSearchByYOB"
+										class="sr-only"
+									>
+										Cauta dupa anul nasterii
+									</label>
+									<input
+										id="athleteSearchByYOB"
+										name="athleteSearchByYOB"
+										type="text"
+										class="shadow-sm appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-san-marino-500 focus:border-san-marino-500 focus:z-10 sm:text-sm"
+										placeholder="Cauta dupa anul nasterii"
+										@keyup="searchByYOB()"
+									/>
+								</div>
+							</div>
+
+							<div
+								class="flex flex-row justify-items-center rounded-md gap-2"
+							>
+								<div class="w-full">
+									<label
+										for="athleteSearchByEuroregion"
+										class="sr-only"
+									>
+										Cauta dupa euroregiune
+									</label>
+									<input
+										id="athleteSearchByEuroregion"
+										name="athleteSearchByEuroregion"
+										v-model="athleteSearchByEuroregion"
+										type="text"
+										class="shadow-sm appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-san-marino-500 focus:border-san-marino-500 focus:z-10 sm:text-sm"
+										placeholder="Cauta dupa euroregiune"
+										@keyup="searchByEuroregion()"
+									/>
+								</div>
+							</div>
+
+							<div
+								class="flex flex-row justify-items-center rounded-md gap-2"
+							>
+								<div class="w-full">
+									<label
+										for="athleteSearchByExamType"
+										class="sr-only"
+									>
+										Cauta dupa tipul examinarii
+									</label>
+									<input
+										id="athleteSearchByExamType"
+										name="athleteSearchByExamType"
+										v-model="athleteSearchByExamType"
+										type="text"
+										class="shadow-sm appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-san-marino-500 focus:border-san-marino-500 focus:z-10 sm:text-sm"
+										placeholder="Cauta dupa tip examinare"
+										@keyup="searchByExamType()"
+									/>
+								</div>
+							</div>
+						</DisclosurePanel>
+					</Disclosure>
 					<form @submit.prevent="exportData()">
 						<table
 							class="table-auto w-full text-black border-separate space-y-6 text-sm"
@@ -273,55 +367,13 @@
 								class="bg-gray-300 text-black font-display sticky top-0"
 							>
 								<tr>
-									<th class="p-3">
-										<input
-											type="checkbox"
-											v-model="exportAthleteName"
-										/>
-										Nume sportiv
-									</th>
-									<th class="p-3">
-										<input
-											type="checkbox"
-											v-model="exportAthleteBelt"
-										/>
-										Centura
-									</th>
-									<th class="p-3">
-										<input
-											type="checkbox"
-											v-model="exportAthleteYOB"
-										/>
-										Anul nasterii
-									</th>
-									<th class="p-3">
-										<input
-											type="checkbox"
-											v-model="exportAthletePassed"
-										/>
-										Admis
-									</th>
-									<th class="p-3">
-										<input
-											type="checkbox"
-											v-model="exportAthleteEuroregion"
-										/>
-										Euroregiune
-									</th>
-									<th class="p-3">
-										<input
-											type="checkbox"
-											v-model="exportAthleteExamType"
-										/>
-										Tipul examinarii
-									</th>
-									<th class="p-3">
-										<input
-											type="checkbox"
-											v-model="exportAthleteCoachName"
-										/>
-										Nume antrenor
-									</th>
+									<th class="p-3">Nume sportiv</th>
+									<th class="p-3">Centura</th>
+									<th class="p-3">Anul nasterii</th>
+									<th class="p-3">Admis</th>
+									<th class="p-3">Euroregiune</th>
+									<th class="p-3">Tipul examinarii</th>
+									<th class="p-3">Nume antrenor</th>
 									<th class="p-3">Actiuni</th>
 								</tr>
 							</thead>
@@ -344,42 +396,36 @@
 												:value="athlete.id"
 											/>
 											<div class="ml-3">
-												<div
-													class="font-bold"
-													id="athlete__Name"
-												>
+												<div class="font-bold">
 													{{ athlete.fullName }}
 												</div>
-												<div
-													class="text-gray-500"
-													id="athlete__ClubName"
-												>
+												<div class="text-gray-500">
 													{{ athlete.clubName }}
 												</div>
 											</div>
 										</div>
 									</td>
-									<td class="p-3" id="athlete__Belt">
+									<td class="p-3">
 										{{ athlete.belt }}
 									</td>
 
-									<td class="p-3" id="athlete__YOB">
+									<td class="p-3">
 										{{ athlete.yearOfBirth }}
 									</td>
 
-									<td class="p-3" id="athlete__Passed">
+									<td class="p-3">
 										{{ athlete.passedExam }}
 									</td>
 
-									<td class="p-3" id="athlete__Euroregion">
+									<td class="p-3">
 										Euroregiunea {{ athlete.euroRegion }}
 									</td>
 
-									<td class="p-3" id="athlete__ExamType">
+									<td class="p-3">
 										{{ athlete.examinationType }}
 									</td>
 
-									<td class="p-3" id="athlete__CoachName">
+									<td class="p-3">
 										{{ athlete.coachName }}
 									</td>
 
@@ -412,7 +458,7 @@
 						<div>
 							<button
 								type="submit"
-								class="w-full flex justify-center py-2 px-4 border border-transparent text-sm rounded-md text-white bg-san-marino-600 hover:bg-san-marino-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-san-marino-500"
+								class="mt-2 w-full flex justify-center py-2 px-4 border border-transparent text-sm rounded-md text-white bg-san-marino-600 hover:bg-san-marino-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-san-marino-500"
 							>
 								Creeaza export
 							</button>
@@ -422,9 +468,19 @@
 			</div>
 		</div>
 	</section>
+
+	{{ exportedAthlete }}
+
+	<div ref="pdfSection" class="container">
+		<div class="flex justify-start" id="pdfSection"></div>
+	</div>
 </template>
 
 <script setup>
+import { Disclosure, DisclosurePanel } from "@headlessui/vue";
+import { ref } from "vue";
+import { exportToPDF } from "#imports";
+
 const supabase = useSupabaseClient();
 
 // Get all euro regions from the database.
@@ -440,6 +496,8 @@ const { data: clubs } = await useFetch("/api/club/all");
 const {
 	data: { user },
 } = await supabase.auth.getUser();
+
+const pdfSection = ref(null);
 
 // Retrieve user's role.
 const role = await getRole(user.id);
@@ -471,13 +529,11 @@ let euroRegiune = ref("");
 let examinationType = ref("");
 let coachName = ref("");
 
-let exportAthleteName = ref(false);
-let exportAthleteBelt = ref(false);
-let exportAthleteYOB = ref(false);
-let exportAthletePassed = ref(false);
-let exportAthleteEuroregion = ref(false);
-let exportAthleteExamType = ref(false);
-let exportAthleteCoachName = ref(false);
+let athleteSearchByEuroregion = ref("");
+let athleteSearchByExamType = ref("");
+
+let exportedAthlete = ref([]);
+
 let exportAthleteID = ref([]);
 
 onMounted(() => {
@@ -489,20 +545,49 @@ onMounted(() => {
 	euroRegiune = euroRegiune.value;
 	examinationType = examinationType.value;
 	coachName = coachName.value;
-	exportAthleteName = exportAthleteName.value;
-	exportAthleteBelt = exportAthleteBelt.value;
-	exportAthleteYOB = exportAthleteYOB.value;
-	exportAthletePassed = exportAthletePassed.value;
-	exportAthleteEuroregion = exportAthleteEuroregion.value;
-	exportAthleteExamType = exportAthleteExamType.value;
-	exportAthleteCoachName = exportAthleteCoachName.value;
+	athleteSearchByEuroregion = athleteSearchByEuroregion.value;
+	athleteSearchByExamType = athleteSearchByExamType.value;
 });
 
 const exportData = () => {
-	exportAthleteID.value.forEach(async (id) => {
-		return await useFetch(() => `/api/athlete/export/${id}`, {})
-			.then(({ data: response }) => console.log(response.value))
-			.catch((error) => console.error(error));
+	exportAthleteID.value.map(async (id) => {
+		await useFetch(`/api/athlete/export/${id}`).then((response) => {
+			exportedAthlete = response.data.value;
+
+			const pdfContent = document.getElementById("pdfSection");
+
+			pdfContent.innerHTML = `
+				<p id="exampType" class="font-display text-xs">
+					Fisa examinare:
+					<span class="font-bold">
+						${athleteSearchByExamType}
+					</span>
+					<br />
+					Judoka:
+					<span class="font-bold">${exportedAthlete.fullName}</span>
+					<br />
+					Data nasterii:
+					<span class="font-bold">${exportedAthlete.yearOfBirth}</span>
+					<br />
+					Clubul:
+					<span class="font-bold">${exportedAthlete.clubName}</span>
+					<br />
+					Euroregiunea:
+					<span class="font-bold">${exportedAthlete.euroRegion}</span>
+					<br />
+					Profesor - antrenor:
+					<span class="font-bold">${exportedAthlete.coachName}</span>
+					<br />
+					Centura obtinuta pana la data examinarii:
+					<span class="font-bold">${exportedAthlete.belt}</span>
+				</p>
+			`;
+
+			return exportToPDF(
+				`${exportedAthlete.fullName}.pdf`,
+				pdfSection.value
+			);
+		});
 	});
 };
 
@@ -550,6 +635,82 @@ const addAthlete = async () => {
 		.catch((error) => {
 			console.log(`[error occured]: ${error.statusMessage}`);
 		});
+};
+
+const searchByBelt = () => {
+	const input = document.getElementById("athleteSearchByBelt");
+	const filter = input.value.toUpperCase();
+	const table = document.getElementById("athlete__list");
+	const tr = table.getElementsByTagName("tr");
+
+	for (let i = 0; i < tr.length; i++) {
+		const td = tr[i].getElementsByTagName("td")[1];
+		if (td) {
+			const txtValue = td.textContent || td.innerText;
+			if (txtValue.toUpperCase().indexOf(filter) > -1) {
+				tr[i].style.display = "";
+			} else {
+				tr[i].style.display = "none";
+			}
+		}
+	}
+};
+
+const searchByEuroregion = () => {
+	const input = document.getElementById("athleteSearchByEuroregion");
+	const filter = input.value.toUpperCase();
+	const table = document.getElementById("athlete__list");
+	const tr = table.getElementsByTagName("tr");
+
+	for (let i = 0; i < tr.length; i++) {
+		const td = tr[i].getElementsByTagName("td")[4];
+		if (td) {
+			const txtValue = td.textContent || td.innerText;
+			if (txtValue.toUpperCase().indexOf(filter) > -1) {
+				tr[i].style.display = "";
+			} else {
+				tr[i].style.display = "none";
+			}
+		}
+	}
+};
+
+const searchByYOB = () => {
+	const input = document.getElementById("athleteSearchByYOB");
+	const filter = input.value.toUpperCase();
+	const table = document.getElementById("athlete__list");
+	const tr = table.getElementsByTagName("tr");
+
+	for (let i = 0; i < tr.length; i++) {
+		const td = tr[i].getElementsByTagName("td")[2];
+		if (td) {
+			const txtValue = td.textContent || td.innerText;
+			if (txtValue.toUpperCase().indexOf(filter) > -1) {
+				tr[i].style.display = "";
+			} else {
+				tr[i].style.display = "none";
+			}
+		}
+	}
+};
+
+const searchByExamType = () => {
+	const input = document.getElementById("athleteSearchByExamType");
+	const filter = input.value.toUpperCase();
+	const table = document.getElementById("athlete__list");
+	const tr = table.getElementsByTagName("tr");
+
+	for (let i = 0; i < tr.length; i++) {
+		const td = tr[i].getElementsByTagName("td")[5];
+		if (td) {
+			const txtValue = td.textContent || td.innerText;
+			if (txtValue.toUpperCase().indexOf(filter) > -1) {
+				tr[i].style.display = "";
+			} else {
+				tr[i].style.display = "none";
+			}
+		}
+	}
 };
 
 watchEffect(() => {
