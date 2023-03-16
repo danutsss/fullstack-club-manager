@@ -28,20 +28,20 @@
 							{{ user.email }}</span
 						>
 						<span
-							class="border-san-marino-500 border-2 text-san-marino-500 font-bold p-1 mb-1 rounded w-auto text-center"
+							class="border-san-marino-500 border text-san-marino-500 font-bold p-1 mb-1 rounded w-auto text-center"
 							>{{ userRole }}</span
 						>
 
 						<span
 							v-if="euroRegionMod !== 0"
-							class="border-bondi-blue-500 border-2 text-bondi-blue-500 font-bold p-1 mb-1 rounded w-auto text-center uppercase"
+							class="border-bondi-blue-500 border text-bondi-blue-500 font-bold p-1 mb-1 rounded w-auto text-center uppercase"
 							>Moderator Euroregiunea {{ euroRegionMod }}</span
 						>
 
 						<span
 							v-if="categoriesMod !== ''"
 							v-for="categoryMod in categoriesMod"
-							class="border-pacific-blue-500 border-2 text-pacific-blue-500 font-bold mb-1 p-1 rounded w-auto text-center uppercase"
+							class="border-pacific-blue-500 border text-pacific-blue-500 font-bold mb-1 p-1 rounded w-auto text-center uppercase"
 							>Moderator {{ categoryMod }}</span
 						>
 					</div>
@@ -471,9 +471,7 @@
 
 	{{ exportedAthlete }}
 
-	<div ref="pdfSection" class="container">
-		<div class="flex justify-start" id="pdfSection"></div>
-	</div>
+	<div ref="pdfSection" id="pdfSection" class="container text-xs"></div>
 </template>
 
 <script setup>
@@ -557,30 +555,180 @@ const exportData = () => {
 			const pdfContent = document.getElementById("pdfSection");
 
 			pdfContent.innerHTML = `
-				<p id="exampType" class="font-display text-xs">
-					Fisa examinare:
-					<span class="font-bold">
-						${athleteSearchByExamType}
-					</span>
-					<br />
-					Judoka:
-					<span class="font-bold">${exportedAthlete.fullName}</span>
-					<br />
-					Data nasterii:
-					<span class="font-bold">${exportedAthlete.yearOfBirth}</span>
-					<br />
-					Clubul:
-					<span class="font-bold">${exportedAthlete.clubName}</span>
-					<br />
-					Euroregiunea:
-					<span class="font-bold">${exportedAthlete.euroRegion}</span>
-					<br />
-					Profesor - antrenor:
-					<span class="font-bold">${exportedAthlete.coachName}</span>
-					<br />
-					Centura obtinuta pana la data examinarii:
-					<span class="font-bold">${exportedAthlete.belt}</span>
-				</p>
+				<div id="athlete__info">
+					<p id="exampType" class="font-display">
+						Fisa examinare:
+						<span class="font-bold">
+							${exportedAthlete.examinationType}
+						</span>
+						<br />
+						Judoka:
+						<span class="font-bold">${exportedAthlete.fullName}</span>
+						<br />
+						Data nasterii:
+						<span class="font-bold">${exportedAthlete.yearOfBirth}</span>
+						<br />
+						Clubul:
+						<span class="font-bold">${exportedAthlete.clubName}</span>
+						<br />
+						Euroregiunea:
+						<span class="font-bold">${exportedAthlete.euroRegion}</span>
+						<br />
+						Profesor - antrenor:
+						<span class="font-bold">${exportedAthlete.coachName}</span>
+						<br />
+						Centura obtinuta pana la data examinarii:
+						<span class="font-bold">${exportedAthlete.belt}</span>
+					</p>
+				</div>
+
+				<br />
+				<br />
+				<br />
+				<br />
+
+
+				<div id="waza__tehnique">
+					<table class="table-auto border">
+						<thead class="border">
+							<tr>
+								<th class="p-2 border">Nr. crt.</th>
+								<th class="p-2 border">Tehnica "ne waza"</th>
+								<th class="p-2 border">Calificativ 1</th>
+								<th class="p-2 border">Calificativ 2</th>
+								<th class="p-2 border">Total</th>
+							</tr>
+						</thead>
+						<tbody class="border">
+							<tr class="border">
+								<td class="p-2 border">1</td>
+								<td class="p-2 border">Osae komi waza</td>
+								<td class="p-2 border"></td>
+								<td class="p-2 border"></td>
+								<td class="p-2 border"></td>
+							</tr>
+							<tr class="border">
+								<td class="p-2 border"></td>
+								<td class="p-2 border">Osae komi waza</td>
+								<td class="p-2 border"></td>
+								<td class="p-2 border"></td>
+								<td class="p-2 border"></td>
+							</tr>
+							<tr class="border">
+								<td class="p-2 border"></td>
+								<td class="p-2 border">Osae komi waza</td>
+								<td class="p-2 border"></td>
+								<td class="p-2 border"></td>
+								<td class="p-2 border"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+
+				<div id="multiple__techniques">
+					<table class="table-auto border">
+						<thead class="border">
+							<tr>
+								<th class="p-2 border">Nr. crt.</th>
+								<th class="p-2 border">Tehnica "Nage Waza"</th>
+								<th class="p-2 border">Calificativ 1</th>
+								<th class="p-2 border">Calificativ 2</th>
+								<th class="p-2 border">Total</th>
+							</tr>
+						</thead>
+						<tbody class="border">
+							<tr class="border">
+								<td class="p-2 border">1</td>
+								<td class="p-2 border">Te waza</td>
+								<td class="p-2 border"></td>
+								<td class="p-2 border"></td>
+								<td class="p-2 border"></td>
+							</tr>
+							<tr class="border">
+								<td class="p-2 border"></td>
+								<td class="p-2 border">Te waza</td>
+								<td class="p-2 border"></td>
+								<td class="p-2 border"></td>
+								<td class="p-2 border"></td>
+							</tr>
+							<tr class="border">
+								<td class="p-2 border"></td>
+								<td class="p-2 border">Te waza</td>
+								<td class="p-2 border"></td>
+								<td class="p-2 border"></td>
+								<td class="p-2 border"></td>
+							</tr>
+							<tr class="border">
+								<td class="p-2 border">2</td>
+								<td class="p-2 border">Koshi waza</td>
+								<td class="p-2 border"></td>
+								<td class="p-2 border"></td>
+								<td class="p-2 border"></td>
+							</tr>
+							<tr class="border">
+								<td class="p-2 border"></td>
+								<td class="p-2 border">Koshi waza</td>
+								<td class="p-2 border"></td>
+								<td class="p-2 border"></td>
+								<td class="p-2 border"></td>
+							</tr>
+							<tr class="border">
+								<td class="p-2 border"></td>
+								<td class="p-2 border">Koshi waza</td>
+								<td class="p-2 border"></td>
+								<td class="p-2 border"></td>
+								<td class="p-2 border"></td>
+							</tr>
+							<tr class="border">
+								<td class="p-2 border">3</td>
+								<td class="p-2 border">Ashi waza</td>
+								<td class="p-2 border"></td>
+								<td class="p-2 border"></td>
+								<td class="p-2 border"></td>
+							</tr>
+							<tr class="border">
+								<td class="p-2 border"></td>
+								<td class="p-2 border">Ashi waza</td>
+								<td class="p-2 border"></td>
+								<td class="p-2 border"></td>
+								<td class="p-2 border"></td>
+							</tr>
+							<tr class="border">
+								<td class="p-2 border"></td>
+								<td class="p-2 border">Ashi waza</td>
+								<td class="p-2 border"></td>
+								<td class="p-2 border"></td>
+								<td class="p-2 border"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+
+				<br />
+				<br />
+
+				<div id="signatures" class="flex">
+					<div id="euroregion__director" class="mr-10">
+						<p class="text-center">Director Euroregiune</p>
+						<p class="text-center">______________</p>
+					</div>
+
+					<div id="comission_presidents">
+						<p class="text-center">Presedinti comisie</p>
+						<p class="text-center">1. ________________________</p>
+						<p class="text-center">2. ________________________</p>
+					</div>
+				</div>
 			`;
 
 			return exportToPDF(

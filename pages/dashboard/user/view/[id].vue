@@ -86,20 +86,20 @@ const deleteUser = async (id) =>
 							{{ user[0].email }}</span
 						>
 						<span
-							class="border-san-marino-500 border-2 text-san-marino-500 mb-1 font-bold p-1 rounded w-auto text-center"
+							class="border-san-marino-500 border text-san-marino-500 mb-1 font-bold p-1 rounded w-auto text-center"
 							>{{ user[0].role }}</span
 						>
 
 						<span
 							v-if="user[0].euroRegionMod !== 0"
-							class="border-bondi-blue-500 border-2 text-bondi-blue-500 font-bold p-1 mb-1 rounded w-auto text-center uppercase"
+							class="border-bondi-blue-500 border text-bondi-blue-500 font-bold p-1 mb-1 rounded w-auto text-center uppercase"
 							>Moderator Euroregiunea
 							{{ user[0].euroRegionMod }}</span
 						>
 
 						<span
 							v-for="category in user[0].categoryMod"
-							class="border-pacific-blue-500 border-2 text-pacific-blue-500 font-bold p-1 mb-1 rounded w-auto text-center uppercase"
+							class="border-pacific-blue-500 border text-pacific-blue-500 font-bold p-1 mb-1 rounded w-auto text-center uppercase"
 							>Moderator: {{ category }}</span
 						>
 					</div>

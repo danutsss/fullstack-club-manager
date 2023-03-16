@@ -13,6 +13,20 @@ export default defineNuxtConfig({
 		"@sidebase/nuxt-pdf",
 	],
 
+	pdf: {
+		pdf: {
+			format: "A4",
+		},
+		i18n: false,
+		meta: {
+			title: "Export atlet",
+			titleTemplate: "Export - %s",
+			author: "ZERO SAPTE SERVICES",
+			subject: "Export atlet",
+			keywords: ["pdf", "atlet", "export", "judo"],
+		},
+	},
+
 	tailwindcss: {
 		configPath: "~/config/tailwind.config.js",
 	},
