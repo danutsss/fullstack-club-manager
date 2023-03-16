@@ -584,9 +584,6 @@ const exportData = () => {
 
 				<br />
 				<br />
-				<br />
-				<br />
-
 
 				<div id="waza__tehnique">
 					<table class="table-auto border">
@@ -625,13 +622,6 @@ const exportData = () => {
 					</table>
 				</div>
 
-				<br />
-				<br />
-				<br />
-				<br />
-				<br />
-				<br />
-				<br />
 				<br />
 				<br />
 
