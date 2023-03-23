@@ -91,3 +91,46 @@ CREATE TABLE "Coach" (
     CONSTRAINT "Coach_pkey" PRIMARY KEY ("id")
 );
 
+-- CreateTable
+CREATE TABLE "Athlete" (
+    "id" SERIAL NOT NULL,
+    "clubName" TEXT NOT NULL DEFAULT '',
+    "fullName" TEXT NOT NULL DEFAULT '',
+    "dateOfBirth" VARCHAR(64) NOT NULL DEFAULT '',
+    "athleteCNP" VARCHAR(64) NOT NULL DEFAULT '',
+    "weightCat" VARCHAR(64) NOT NULL DEFAULT '',
+    "passedExam" VARCHAR(18) NOT NULL DEFAULT '',
+    "belt" VARCHAR(18) NOT NULL DEFAULT '',
+    "euroRegion" INTEGER NOT NULL DEFAULT 0,
+    "examinationType" VARCHAR(18) NOT NULL DEFAULT '',
+    "coachName" TEXT NOT NULL DEFAULT '',
+
+    CONSTRAINT "Athlete_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "Euroregion" (
+    "id" SERIAL NOT NULL,
+    "name" VARCHAR(64) NOT NULL DEFAULT '',
+
+    CONSTRAINT "Euroregion_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Veteran_id_key" ON "Veteran"("id");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Law322_id_key" ON "Law322"("id");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Club_id_key" ON "Club"("id");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Coach_id_key" ON "Coach"("id");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Athlete_id_key" ON "Athlete"("id");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Euroregion_id_key" ON "Euroregion"("id");
+
