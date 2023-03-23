@@ -469,9 +469,11 @@
 		</div>
 	</section>
 
-	{{ exportedAthlete }}
-
-	<div ref="pdfSection" id="pdfSection" class="container text-xs"></div>
+	<div
+		ref="pdfSection"
+		id="pdfSection"
+		class="container text-xs hidden"
+	></div>
 </template>
 
 <script setup>
@@ -553,6 +555,7 @@ const exportData = () => {
 			exportedAthlete = response.data.value;
 
 			const pdfContent = document.getElementById("pdfSection");
+			pdfContent.classList.remove("hidden");
 
 			pdfContent.innerHTML = `
 				<div id="athlete__info">
@@ -724,7 +727,11 @@ const exportData = () => {
 			return exportToPDF(
 				`${exportedAthlete.fullName}.pdf`,
 				pdfSection.value
-			);
+			)
+				.then(() => {
+					pdfContent.classList.add("hidden");
+				})
+				.catch((error) => console.error(error));
 		});
 	});
 };
