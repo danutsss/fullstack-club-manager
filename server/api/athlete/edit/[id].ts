@@ -5,7 +5,7 @@ const prisma = new PrismaClient();
 interface IRequestBody {
 	clubName: string;
 	fullName: string;
-	yearOfBirth: number;
+	dateOfBirth: string;
 	passedExam: string;
 	belt: string;
 	euroRegion: number;
@@ -16,14 +16,14 @@ export default defineEventHandler(async (event) => {
 
 	console.log(`UPDATE /api/athlete/edit/${athleteID}`);
 
-	const { clubName, fullName, yearOfBirth, passedExam, belt, euroRegion } =
+	const { clubName, fullName, dateOfBirth, passedExam, belt, euroRegion } =
 		await readBody<IRequestBody>(event);
 
 	try {
 		if (
 			!clubName ||
 			!fullName ||
-			!yearOfBirth ||
+			!dateOfBirth ||
 			!passedExam ||
 			!belt ||
 			!euroRegion
@@ -45,7 +45,7 @@ export default defineEventHandler(async (event) => {
 			data: {
 				clubName,
 				fullName,
-				yearOfBirth,
+				dateOfBirth,
 				passedExam,
 				belt,
 				euroRegion,

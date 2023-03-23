@@ -27,11 +27,7 @@ export default defineEventHandler(async (event) => {
 				`[succes]: while retrieving data for athlete with id: ${athleteId}`
 			);
 
-			return (
-				(event.node.res.statusCode = 200) &&
-				(event.node.res.statusMessage = "OK") &&
-				athlete
-			);
+			return athlete;
 		}
 	} catch (error) {
 		console.log(

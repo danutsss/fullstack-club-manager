@@ -5,12 +5,14 @@ const prisma = new PrismaClient();
 interface IRequestBody {
 	clubName: string;
 	fullName: string;
-	yearOfBirth: number;
+	dateOfBirth: string;
 	passedExam: string;
 	belt: string;
 	euroRegion: number;
 	examinationType: string;
 	coachName: string;
+	athleteCNP: string;
+	weightCat: string;
 }
 
 export default defineEventHandler(async (event) => {
@@ -19,24 +21,28 @@ export default defineEventHandler(async (event) => {
 	const {
 		clubName,
 		fullName,
-		yearOfBirth,
+		dateOfBirth,
 		passedExam,
 		belt,
 		euroRegion,
 		examinationType,
 		coachName,
+		athleteCNP,
+		weightCat,
 	} = await readBody<IRequestBody>(event);
 
 	try {
 		if (
 			!clubName ||
 			!fullName ||
-			!yearOfBirth ||
+			!dateOfBirth ||
 			!passedExam ||
 			!belt ||
 			!euroRegion ||
 			!examinationType ||
-			!coachName
+			!coachName ||
+			!athleteCNP ||
+			!weightCat
 		) {
 			console.log(
 				"[error occured]: when inserting athlete in our database (missing fields)."
@@ -52,12 +58,14 @@ export default defineEventHandler(async (event) => {
 			data: {
 				clubName,
 				fullName,
-				yearOfBirth,
+				dateOfBirth,
 				passedExam,
 				belt,
 				euroRegion,
 				examinationType,
 				coachName,
+				athleteCNP,
+				weightCat,
 			},
 		});
 

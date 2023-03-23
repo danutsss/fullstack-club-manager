@@ -95,7 +95,9 @@ model Athlete {
   id              Int    @id @unique @default(autoincrement())
   clubName        String @default("") @db.Text
   fullName        String @default("") @db.Text
-  yearOfBirth     Int    @default(0)
+  dateOfBirth     String @default("") @db.VarChar(64)
+  athleteCNP      String @default("") @db.VarChar(64)
+  weightCat       String @default("") @db.VarChar(64)
   passedExam      String @default("") @db.VarChar(18)
   belt            String @default("") @db.VarChar(18)
   euroRegion      Int    @default(0)

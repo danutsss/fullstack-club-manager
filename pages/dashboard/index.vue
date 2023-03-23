@@ -138,16 +138,48 @@
 								</div>
 
 								<div class="w-1/2">
-									<label for="yearOfBirth" class="sr-only"
-										>An nastere</label
+									<label for="dateOfBirth" class="sr-only"
+										>Data nasterii</label
 									>
 									<input
-										id="yearOfBirth"
-										v-model="yearOfBirth"
-										name="yearOfBirth"
+										id="dateOfBirth"
+										v-model="dateOfBirth"
+										name="dateOfBirth"
 										type="text"
 										class="shadow-sm appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-san-marino-500 focus:border-san-marino-500 focus:z-10 sm:text-sm"
-										placeholder="An nastere"
+										placeholder="Data nasterii"
+									/>
+								</div>
+							</div>
+
+							<div class="flex flex-row rounded-md gap-2">
+								<div class="w-1/2">
+									<label
+										for="athleteWeightCat"
+										class="sr-only"
+										>Categoria de greutate</label
+									>
+									<input
+										id="athleteWeightCat"
+										v-model="athleteWeightCat"
+										name="athleteWeightCat"
+										type="text"
+										class="shadow-sm appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-san-marino-500 focus:border-san-marino-500 focus:z-10 sm:text-sm"
+										placeholder="Categoria de greutate"
+									/>
+								</div>
+
+								<div class="w-1/2">
+									<label for="athleteCNP" class="sr-only"
+										>Cod numeric personal</label
+									>
+									<input
+										id="athleteCNP"
+										v-model="athleteCNP"
+										name="athleteCNP"
+										type="text"
+										class="shadow-sm appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-san-marino-500 focus:border-san-marino-500 focus:z-10 sm:text-sm"
+										placeholder="Cod numeric personal"
 									/>
 								</div>
 							</div>
@@ -359,7 +391,7 @@
 							</div>
 						</DisclosurePanel>
 					</Disclosure>
-					<form @submit.prevent="exportData()">
+					<form @submit.prevent="">
 						<table
 							class="table-auto w-full text-black border-separate space-y-6 text-sm"
 						>
@@ -369,7 +401,9 @@
 								<tr>
 									<th class="p-3">Nume sportiv</th>
 									<th class="p-3">Centura</th>
-									<th class="p-3">Anul nasterii</th>
+									<th class="p-3">Data nasterii</th>
+									<th class="p-3">CNP</th>
+									<th class="p-3">Cat. de greutate</th>
 									<th class="p-3">Admis</th>
 									<th class="p-3">Euroregiune</th>
 									<th class="p-3">Tipul examinarii</th>
@@ -410,7 +444,15 @@
 									</td>
 
 									<td class="p-3">
-										{{ athlete.yearOfBirth }}
+										{{ athlete.dateOfBirth }}
+									</td>
+
+									<td class="p-3">
+										{{ athlete.CNP }}
+									</td>
+
+									<td class="p-3">
+										{{ athlete.weightCat }}
 									</td>
 
 									<td class="p-3">
@@ -455,12 +497,20 @@
 							</tbody>
 						</table>
 
-						<div>
+						<div class="flex gap-2">
 							<button
 								type="submit"
+								@click="exportData()"
 								class="mt-2 w-full flex justify-center py-2 px-4 border border-transparent text-sm rounded-md text-white bg-san-marino-600 hover:bg-san-marino-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-san-marino-500"
 							>
-								Creeaza export
+								Creeaza export individual
+							</button>
+							<button
+								type="submit"
+								@click="exportList()"
+								class="mt-2 w-full flex justify-center py-2 px-4 border border-transparent text-sm rounded-md text-white bg-san-marino-600 hover:bg-san-marino-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-san-marino-500"
+							>
+								Creeaza export lista
 							</button>
 						</div>
 					</form>
@@ -523,11 +573,16 @@ const examTypes = [
 let clubName = ref("");
 let athleteName = ref("");
 let athleteBelt = ref("");
-let yearOfBirth = ref("");
+let dateOfBirth = ref("");
 let passedExam = ref("");
 let euroRegiune = ref("");
 let examinationType = ref("");
 let coachName = ref("");
+let athleteCNP = ref("");
+let athleteWeightCat = ref("");
+let tableBody = ref("");
+let pdfHeader = ref("");
+let athleteData = ref([]);
 
 let athleteSearchByEuroregion = ref("");
 let athleteSearchByExamType = ref("");
@@ -540,24 +595,106 @@ onMounted(() => {
 	clubName = clubName.value;
 	athleteName = athleteName.value;
 	athleteBelt = athleteBelt.value;
-	yearOfBirth = yearOfBirth.value;
+	dateOfBirth = dateOfBirth.value;
 	passedExam = passedExam.value;
 	euroRegiune = euroRegiune.value;
 	examinationType = examinationType.value;
 	coachName = coachName.value;
+	athleteCNP = athleteCNP.value;
+	athleteWeightCat = athleteWeightCat.value;
+
+	athleteData = athleteData.value = [];
+	tableBody = tableBody.value;
+	pdfHeader = pdfHeader.value;
+
 	athleteSearchByEuroregion = athleteSearchByEuroregion.value;
 	athleteSearchByExamType = athleteSearchByExamType.value;
 });
 
-const exportData = () => {
-	exportAthleteID.value.map(async (id) => {
-		await useFetch(`/api/athlete/export/${id}`).then((response) => {
-			exportedAthlete = response.data.value;
+const exportList = async () => {
+	for (const exportAthId of exportAthleteID.value) {
+		const { data: athlete } = await useFetch(
+			`/api/athlete/export/${exportAthId}`
+		);
 
-			const pdfContent = document.getElementById("pdfSection");
-			pdfContent.classList.remove("hidden");
+		athleteData.push(athlete);
+	}
 
-			pdfContent.innerHTML = `
+	// loop through athlete data.
+	for (const athlete of athleteData) {
+		tableBody += `
+			<tr class="border">
+				<td class="p-2 border">${athlete.value.id}</td>
+				<td class="p-2 border">${athlete.value.fullName}</td>
+				<td class="p-2 border">${athlete.value.dateOfBirth}</td>
+				<td class="p-2 border">${athlete.value.athleteCNP}</td>
+				<td calss="p-2 border">${athlete.value.examinationType}</td>
+				<td class="p-2 border">${athlete.value.weightCat}</td>
+				<td class="p-2 border">${athlete.value.belt}</td>
+				<td class="p-2 border">${athlete.value.passedExam}</td>
+			</tr>
+		`;
+
+		pdfHeader += `Euroregiunea - ${athlete.value.euroRegion}, clubul - ${athlete.value.clubName}, antrenor - ${athlete.value.coachName}<br />`;
+	}
+
+	const pdfContent = document.getElementById("pdfSection");
+	pdfContent.classList.remove("hidden");
+	pdfContent.classList.remove("text-xs");
+	pdfContent.classList.add("text-xl");
+
+	pdfContent.innerHTML = `
+			<div id="export__info">
+				<p class="font-display">Fisa rezultate testare examinare tehnica</p>
+				<p class="font-body">${pdfHeader}</p>
+			</div>
+
+			<br />
+
+			<div id="athlete__table">
+				<table class="table-auto border">
+					<thead class="border">
+						<tr>
+							<th class="p-2 border">Nr. crt.</th>
+							<th class="p-2 border">Nume si prenume</th>
+							<th class="p-2 border">Data nasterii</th>
+							<th class="p-2 border">CNP</th>
+							<th class="p-2 border">Cat. de varsta</th>
+							<th class="p-2 border">Cat. de greutate</th>
+							<th class="p-2 border">Centura</th>
+							<th class="p-2 border">Rezultat</th>
+						</tr>
+					</thead>
+					<tbody class="border">${tableBody}</tbody>
+				</table>
+			</div>
+		`;
+
+	try {
+		await exportToPDF("Export atleti.pdf", pdfSection.value, {
+			orientation: "p",
+			format: "a1",
+		});
+	} catch (error) {
+		return console.error(error);
+	}
+	// pdfContent.classList.add("hidden");
+	// pdfContent.innerHTML = "";
+	// athleteData = [];
+};
+
+const exportData = async () => {
+	for (const exportAthId of exportAthleteID.value) {
+		await useFetch(`/api/athlete/export/${exportAthId}`).then(
+			async (response) => {
+				const {
+					data: { value: exportedAthlete },
+				} = response;
+
+				const pdfContent = document.getElementById("pdfSection");
+				pdfContent.classList.remove("hidden");
+
+				pdfContent.innerHTML = `
 				<div id="athlete__info">
 					<p id="exampType" class="font-display">
 						Fisa examinare:
@@ -569,7 +706,7 @@ const exportData = () => {
 						<span class="font-bold">${exportedAthlete.fullName}</span>
 						<br />
 						Data nasterii:
-						<span class="font-bold">${exportedAthlete.yearOfBirth}</span>
+						<span class="font-bold">${exportedAthlete.dateOfBirth}</span>
 						<br />
 						Clubul:
 						<span class="font-bold">${exportedAthlete.clubName}</span>
@@ -585,7 +722,6 @@ const exportData = () => {
 					</p>
 				</div>
 
-				<br />
 				<br />
 
 				<div id="waza__tehnique">
@@ -625,7 +761,6 @@ const exportData = () => {
 					</table>
 				</div>
 
-				<br />
 				<br />
 
 				<div id="multiple__techniques">
@@ -724,16 +859,23 @@ const exportData = () => {
 				</div>
 			`;
 
-			return exportToPDF(
-				`${exportedAthlete.fullName}.pdf`,
-				pdfSection.value
-			)
-				.then(() => {
+				try {
+					await exportToPDF(
+						`${exportedAthlete.fullName}.pdf`,
+						pdfSection.value,
+						{
+							orientation: "p",
+							format: "a4",
+						}
+					);
 					pdfContent.classList.add("hidden");
-				})
-				.catch((error) => console.error(error));
-		});
-	});
+					pdfContent.innerHTML = "";
+				} catch (error) {
+					return console.error(error);
+				}
+			}
+		);
+	}
 };
 
 const deleteAthlete = async (id) =>
@@ -754,12 +896,14 @@ const addAthlete = async () => {
 		body: {
 			clubName: clubName,
 			fullName: athleteName,
-			yearOfBirth: Number(yearOfBirth),
+			dateOfBirth: dateOfBirth,
 			passedExam: passedExam,
 			belt: athleteBelt,
 			euroRegion: euroRegiune,
 			examinationType: examinationType,
 			coachName: coachName,
+			athleteCNP: athleteCNP,
+			weightCat: athleteWeightCat,
 		},
 	})
 		.then((response) => {
@@ -808,7 +952,7 @@ const searchByEuroregion = () => {
 	const tr = table.getElementsByTagName("tr");
 
 	for (let i = 0; i < tr.length; i++) {
-		const td = tr[i].getElementsByTagName("td")[4];
+		const td = tr[i].getElementsByTagName("td")[6];
 		if (td) {
 			const txtValue = td.textContent || td.innerText;
 			if (txtValue.toUpperCase().indexOf(filter) > -1) {
@@ -846,7 +990,7 @@ const searchByExamType = () => {
 	const tr = table.getElementsByTagName("tr");
 
 	for (let i = 0; i < tr.length; i++) {
-		const td = tr[i].getElementsByTagName("td")[5];
+		const td = tr[i].getElementsByTagName("td")[7];
 		if (td) {
 			const txtValue = td.textContent || td.innerText;
 			if (txtValue.toUpperCase().indexOf(filter) > -1) {
@@ -882,8 +1026,8 @@ i {
 	border-radius: 20px;
 }
 
-tr td:nth-child(n + 8),
-tr th:nth-child(n + 8) {
+tr td:nth-child(n + 10),
+tr th:nth-child(n + 10) {
 	border-radius: 0 0.625rem 0.625rem 0;
 }
 

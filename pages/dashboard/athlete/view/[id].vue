@@ -23,7 +23,7 @@ const euroRegionMod = euroRegionNumber[0].euroRegionMod;
 const clubName = ref("");
 const athleteName = ref("");
 const athleteBelt = ref("");
-const yearOfBirth = ref("");
+const dateOfBirth = ref("");
 const passedExam = ref("");
 const euroRegiune = ref("");
 
@@ -33,7 +33,7 @@ const editAthlete = async (id) =>
 		body: {
 			clubName: clubName.value,
 			fullName: athleteName.value,
-			yearOfBirth: Number(yearOfBirth.value),
+			dateOfBirth: dateOfBirth.value,
 			passedExam: passedExam.value,
 			belt: athleteBelt.value,
 			euroRegion: euroRegiune.value,
@@ -133,16 +133,16 @@ const deleteAthlete = async (id) =>
 						</div>
 
 						<div class="w-1/2">
-							<label for="yearOfBirth" class="sr-only"
+							<label for="dateOfBirth" class="sr-only"
 								>An nastere</label
 							>
 							<input
-								id="yearOfBirth"
-								v-model="yearOfBirth"
-								name="yearOfBirth"
+								id="dateOfBirth"
+								v-model="dateOfBirth"
+								name="dateOfBirth"
 								type="text"
 								class="shadow-sm appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-san-marino-500 focus:border-san-marino-500 focus:z-10 sm:text-sm"
-								:placeholder="athlete.yearOfBirth"
+								:placeholder="athlete.dateOfBirth"
 							/>
 						</div>
 					</div>
@@ -163,7 +163,7 @@ const deleteAthlete = async (id) =>
 						</div>
 
 						<div class="w-1/2">
-							<label for="yearOfBirth" class="sr-only"
+							<label for="dateOfBirth" class="sr-only"
 								>Euroregiune</label
 							>
 							<select
