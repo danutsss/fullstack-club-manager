@@ -56,6 +56,11 @@
 													</div>
 													<div class="text-gray-500">
 														{{ coach.dateOfBirth }}
+														|
+														{{
+															coach.coachClub ||
+															"Fara club"
+														}}
 													</div>
 												</div>
 											</div>
