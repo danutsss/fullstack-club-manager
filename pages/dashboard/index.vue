@@ -312,14 +312,14 @@
 										for="athleteSearchByBelt"
 										class="sr-only"
 									>
-										Cauta dupa curea
+										Cauta dupa centura
 									</label>
 									<input
 										id="athleteSearchByBelt"
 										name="athleteSearchByBelt"
 										type="text"
 										class="shadow-sm appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-san-marino-500 focus:border-san-marino-500 focus:z-10 sm:text-sm"
-										placeholder="Cauta dupa curea"
+										placeholder="Cauta dupa centura"
 										@keyup="searchByBelt()"
 									/>
 								</div>
@@ -539,6 +539,14 @@
 							</tbody>
 						</table>
 
+						<!-- Select all -->
+						<div class="flex gap-2">
+							<label for="selectAll">
+								Selecteaza toti atletii:
+							</label>
+							<input type="checkbox" @click="selectAll()" />
+						</div>
+
 						<div class="flex gap-2">
 							<button
 								type="submit"
@@ -651,6 +659,15 @@ onMounted(() => {
 	athleteSearchByExamType = athleteSearchByExamType.value;
 });
 
+const selectAll = () => {
+	console.log(athletes);
+	if (exportAthleteID.value.length === athletes.length) {
+		exportAthleteID.value = [];
+	} else {
+		exportAthleteID.value = athletes.value.map((athlete) => athlete.id);
+	}
+};
+
 const exportList = async () => {
 	if (exportAthleteID.value.length === 0) {
 		alert("Selecteaza cel putin un atlet pentru a crea exportul.");
@@ -666,10 +683,10 @@ const exportList = async () => {
 	}
 
 	// loop through athlete data.
-	for (const athlete of athleteData) {
+	athleteData.map((athlete, index) => {
 		tableBody += `
 			<tr class="border">
-				<td class="p-2 border">${athlete.value.id}</td>
+				<td class="p-2 border">${index + 1}</td>
 				<td class="p-2 border">${athlete.value.fullName}</td>
 				<td class="p-2 border">${athlete.value.clubName}</td>
 				<td class="p-2 border">${athlete.value.coachName}</td>
@@ -684,7 +701,7 @@ const exportList = async () => {
 		`;
 
 		pdfHeader += `Euroregiunea - ${athlete.value.euroRegion}, clubul - ${athlete.value.clubName}, antrenor - ${athlete.value.coachName}<br />`;
-	}
+	});
 
 	const pdfContent = document.getElementById("pdfSection");
 	pdfContent.classList.remove("hidden");
@@ -716,6 +733,14 @@ const exportList = async () => {
 					</thead>
 					<tbody class="border">${tableBody}</tbody>
 				</table>
+			</div>
+
+			<div id="export__footer">
+				<h3 class="font-display text-lg uppercase font-bold text-center">Director euroregiune,</h3>
+
+				<p>&middot; Rezultatul testarii: ADMIS / RESPINS</p>
+
+				<p>Pentru cei "ADMISI" se va specifica pondrea calificativelor</p>
 			</div>
 		`;
 
