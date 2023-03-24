@@ -643,8 +643,6 @@ const exportList = async () => {
 
 	const pdfContent = document.getElementById("pdfSection");
 	pdfContent.classList.remove("hidden");
-	pdfContent.classList.remove("text-xs");
-	pdfContent.classList.add("text-xl");
 
 	pdfContent.innerHTML = `
 			<div id="export__info">
@@ -680,11 +678,14 @@ const exportList = async () => {
 		await exportToPDF("Export atleti.pdf", pdfSection.value, {
 			orientation: "p",
 			format: "a1",
-		});
+		}).then(() => {
+			pdfContent.classList.add("hidden");
+			pdfContent.innerHTML = "";
+			athleteData = [];
 
-		pdfContent.classList.add("hidden");
-		pdfContent.innerHTML = "";
-		athleteData = [];
+			// Reload the page.
+			location.reload();
+		});
 	} catch (error) {
 		return console.error(error);
 	}
@@ -874,9 +875,13 @@ const exportData = async () => {
 							orientation: "p",
 							format: "a4",
 						}
-					);
-					pdfContent.classList.add("hidden");
-					pdfContent.innerHTML = "";
+					).then(() => {
+						pdfContent.classList.add("hidden");
+						pdfContent.innerHTML = "";
+
+						// Reload the page.
+						location.reload();
+					});
 				} catch (error) {
 					return console.error(error);
 				}
