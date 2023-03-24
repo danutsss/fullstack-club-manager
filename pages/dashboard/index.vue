@@ -312,15 +312,57 @@
 										for="athleteSearchByBelt"
 										class="sr-only"
 									>
-										Cauta dupa curea sportiv
+										Cauta dupa curea
 									</label>
 									<input
 										id="athleteSearchByBelt"
 										name="athleteSearchByBelt"
 										type="text"
 										class="shadow-sm appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-san-marino-500 focus:border-san-marino-500 focus:z-10 sm:text-sm"
-										placeholder="Cauta dupa curea sportiv"
+										placeholder="Cauta dupa curea"
 										@keyup="searchByBelt()"
+									/>
+								</div>
+							</div>
+
+							<div
+								class="flex flex-row justify-items-center rounded-md gap-2"
+							>
+								<div class="w-full">
+									<label
+										for="athleteSearchByWeight"
+										class="sr-only"
+									>
+										Cauta dupa greutate
+									</label>
+									<input
+										id="athleteSearchByWeight"
+										name="athleteSearchByWeight"
+										type="text"
+										class="shadow-sm appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-san-marino-500 focus:border-san-marino-500 focus:z-10 sm:text-sm"
+										placeholder="Cauta dupa greutate"
+										@keyup="searchByWeight()"
+									/>
+								</div>
+							</div>
+
+							<div
+								class="flex flex-row justify-items-center rounded-md gap-2"
+							>
+								<div class="w-full">
+									<label
+										for="athleteSearchByCoach"
+										class="sr-only"
+									>
+										Cauta dupa antrenor
+									</label>
+									<input
+										id="athleteSearchByCoach"
+										name="athleteSearchByCoach"
+										type="text"
+										class="shadow-sm appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-san-marino-500 focus:border-san-marino-500 focus:z-10 sm:text-sm"
+										placeholder="Cauta dupa antrenor"
+										@keyup="searchByCoach()"
 									/>
 								</div>
 							</div>
@@ -586,8 +628,6 @@ let athleteData = ref([]);
 
 let athleteSearchByEuroregion = ref("");
 let athleteSearchByExamType = ref("");
-
-let exportedAthlete = ref([]);
 
 let exportAthleteID = ref([]);
 
@@ -1003,6 +1043,44 @@ const searchByExamType = () => {
 
 	for (let i = 0; i < tr.length; i++) {
 		const td = tr[i].getElementsByTagName("td")[7];
+		if (td) {
+			const txtValue = td.textContent || td.innerText;
+			if (txtValue.toUpperCase().indexOf(filter) > -1) {
+				tr[i].style.display = "";
+			} else {
+				tr[i].style.display = "none";
+			}
+		}
+	}
+};
+
+const searchByWeight = () => {
+	const input = document.getElementById("athleteSearchByWeight");
+	const filter = input.value.toUpperCase();
+	const table = document.getElementById("athlete__list");
+	const tr = table.getElementsByTagName("tr");
+
+	for (let i = 0; i < tr.length; i++) {
+		const td = tr[i].getElementsByTagName("td")[4];
+		if (td) {
+			const txtValue = td.textContent || td.innerText;
+			if (txtValue.toUpperCase().indexOf(filter) > -1) {
+				tr[i].style.display = "";
+			} else {
+				tr[i].style.display = "none";
+			}
+		}
+	}
+};
+
+const searchByCoach = () => {
+	const input = document.getElementById("athleteSearchByCoach");
+	const filter = input.value.toUpperCase();
+	const table = document.getElementById("athlete__list");
+	const tr = table.getElementsByTagName("tr");
+
+	for (let i = 0; i < tr.length; i++) {
+		const td = tr[i].getElementsByTagName("td")[8];
 		if (td) {
 			const txtValue = td.textContent || td.innerText;
 			if (txtValue.toUpperCase().indexOf(filter) > -1) {
