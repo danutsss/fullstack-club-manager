@@ -184,8 +184,30 @@
 								</div>
 							</div>
 
-							<div class="flex flex-row rounded-md">
-								<div class="w-full">
+							<div class="flex flex-row rounded-md gap-2">
+								<div class="w-1/2">
+									<label for="coachName" class="sr-only">
+										Nume antrenor
+									</label>
+									<select
+										id="coachName"
+										v-model="coachName"
+										name="coachName"
+										class="shadow-sm appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-san-marino-500 focus:border-san-marino-500 focus:z-10 sm:text-sm"
+									>
+										<option value="" disabled selected>
+											Alege antrenor
+										</option>
+										<option
+											v-for="coach in coaches"
+											:value="coach.fullName"
+										>
+											{{ coach.fullName }}
+										</option>
+									</select>
+								</div>
+
+								<div class="w-1/2">
 									<label
 										for="examinationType"
 										class="sr-only"
@@ -211,31 +233,6 @@
 									</select>
 								</div>
 							</div>
-
-							<div class="flex flex-row rounded-md">
-								<div class="w-full">
-									<label for="coachName" class="sr-only">
-										Nume antrenor
-									</label>
-									<select
-										id="coachName"
-										v-model="coachName"
-										name="coachName"
-										class="shadow-sm appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-san-marino-500 focus:border-san-marino-500 focus:z-10 sm:text-sm"
-									>
-										<option value="" disabled selected>
-											Alege antrenor
-										</option>
-										<option
-											v-for="coach in coaches"
-											:value="coach.fullName"
-										>
-											{{ coach.fullName }}
-										</option>
-									</select>
-								</div>
-							</div>
-
 							<div class="flex flex-row rounded-md gap-2">
 								<div class="w-1/2">
 									<label for="passedExam" class="sr-only"
