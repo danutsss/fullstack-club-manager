@@ -73,6 +73,7 @@ CREATE TABLE "Coach" (
     "phoneNo" TEXT NOT NULL DEFAULT '',
     "emailAddress" VARCHAR(128) NOT NULL DEFAULT 'email@example.com',
     "coachNationality" VARCHAR(64) NOT NULL DEFAULT '',
+    "coachClub" TEXT NOT NULL DEFAULT '',
     "dateOfBirth" VARCHAR(64) NOT NULL DEFAULT '',
     "placeOfWork" TEXT NOT NULL DEFAULT '',
     "domainOfWork" TEXT NOT NULL DEFAULT '',

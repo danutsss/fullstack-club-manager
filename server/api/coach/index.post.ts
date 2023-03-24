@@ -7,6 +7,7 @@ interface IRequestBody {
 	phoneNo: string;
 	emailAddress: string;
 	coachNationality: string;
+	coachClub: string;
 	dateOfBirth: string;
 	placeOfWork: string;
 	domainOfWork: string;
@@ -31,6 +32,7 @@ export default defineEventHandler(async (event) => {
 		phoneNo,
 		emailAddress,
 		coachNationality,
+		coachClub,
 		dateOfBirth,
 		placeOfWork,
 		domainOfWork,
@@ -62,7 +64,8 @@ export default defineEventHandler(async (event) => {
 			!occupiedFunction ||
 			!coachQualification ||
 			!obtainedDegree ||
-			!blackBelt
+			!blackBelt ||
+			!coachClub
 		) {
 			console.log(
 				"[error occured]: when inserting coach into database (missing fields)."
@@ -79,6 +82,7 @@ export default defineEventHandler(async (event) => {
 				phoneNo,
 				emailAddress,
 				coachNationality,
+				coachClub,
 				dateOfBirth,
 				placeOfWork,
 				domainOfWork,

@@ -75,6 +75,7 @@ model Coach {
   phoneNo                   String @default("") @db.Text
   emailAddress              String @default("email@example.com") @db.VarChar(128)
   coachNationality          String @default("") @db.VarChar(64)
+  coachClub                 String @default("") @db.Text
   dateOfBirth               String @default("") @db.VarChar(64)
   placeOfWork               String @default("") @db.Text
   domainOfWork              String @default("") @db.Text

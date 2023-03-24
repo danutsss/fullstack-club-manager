@@ -2,6 +2,9 @@
 import { Disclosure, DisclosurePanel } from "@headlessui/vue";
 import { ref, onMounted } from "vue";
 
+// Get all clubs from the database.
+const { data: clubs } = await useFetch("/api/club/all");
+
 let firstName = ref("");
 let lastName = ref("");
 let phoneNo = ref("");
@@ -21,6 +24,7 @@ let coachPublications = ref("");
 let coachProfessionalActivity = ref("");
 let coachResults = ref("");
 let coachExtraInfo = ref("");
+let coachClub = ref("");
 
 onMounted(() => {
 	firstName = firstName.value;
@@ -28,6 +32,7 @@ onMounted(() => {
 	phoneNo = phoneNo.value;
 	emailAddress = emailAddress.value;
 	coachNationality = coachNationality.value;
+	coachClub = coachClub.value;
 	dateOfBirth = dateOfBirth.value;
 	placeOfWork = placeOfWork.value;
 	domainOfWork = domainOfWork.value;
@@ -52,6 +57,7 @@ const addCoach = async () => {
 			phoneNo,
 			emailAddress,
 			coachNationality,
+			coachClub,
 			dateOfBirth,
 			placeOfWork,
 			domainOfWork,
@@ -190,6 +196,30 @@ const addCoach = async () => {
 											class="shadow-sm appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-san-marino-500 focus:border-san-marino-500 focus:z-10 sm:text-sm"
 											placeholder="Adresa de e-mail"
 										/>
+									</div>
+								</div>
+
+								<div class="rounded-md shadow-sm -space-y-px">
+									<div class="w-full">
+										<label for="coachClub" class="sr-only"
+											>Club</label
+										>
+										<select
+											id="coachClub"
+											v-model="coachClub"
+											name="coachClub"
+											class="shadow-sm appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-san-marino-500 focus:border-san-marino-500 focus:z-10 sm:text-sm"
+										>
+											<option value="" disabled selected>
+												Alege club
+											</option>
+											<option
+												v-for="club in clubs"
+												:value="club.clubName"
+											>
+												{{ club.clubName }}
+											</option>
+										</select>
 									</div>
 								</div>
 
