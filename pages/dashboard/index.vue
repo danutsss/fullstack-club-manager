@@ -626,6 +626,9 @@ const exportList = async () => {
 			<tr class="border">
 				<td class="p-2 border">${athlete.value.id}</td>
 				<td class="p-2 border">${athlete.value.fullName}</td>
+				<td class="p-2 border">${athlete.value.clubName}</td>
+				<td class="p-2 border">${athlete.value.coachName}</td>
+				<td class="p-2 border">${athlete.value.euroRegion}</td>
 				<td class="p-2 border">${athlete.value.dateOfBirth}</td>
 				<td class="p-2 border">${athlete.value.athleteCNP}</td>
 				<td calss="p-2 border">${athlete.value.examinationType}</td>
@@ -657,6 +660,9 @@ const exportList = async () => {
 						<tr>
 							<th class="p-2 border">Nr. crt.</th>
 							<th class="p-2 border">Nume si prenume</th>
+							<th class="p-2 border">Club</th>
+							<th class="p-2 border">Antrenor</th>
+							<th class="p-2 border">Euroregiune</th>
 							<th class="p-2 border">Data nasterii</th>
 							<th class="p-2 border">CNP</th>
 							<th class="p-2 border">Cat. de varsta</th>
@@ -675,12 +681,13 @@ const exportList = async () => {
 			orientation: "p",
 			format: "a1",
 		});
+
+		pdfContent.classList.add("hidden");
+		pdfContent.innerHTML = "";
+		athleteData = [];
 	} catch (error) {
 		return console.error(error);
 	}
-	// pdfContent.classList.add("hidden");
-	// pdfContent.innerHTML = "";
-	// athleteData = [];
 };
 
 const exportData = async () => {
