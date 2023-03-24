@@ -58,6 +58,13 @@
 			<!-- Navbar -->
 			<div class="hidden md:block">
 				<ul class="flex space-x-6 text-sm font-sans items-center">
+					<li>
+						<NuxtLink
+							to="/dashboard"
+							class="inline-block rounded-lg py-1 px-2 text-sm text-slate-700 hover:bg-slate-100 hover:text-slate-900 font-display font-medium"
+							>Prima pagina</NuxtLink
+						>
+					</li>
 					<li v-if="userRole === 'ADMIN'">
 						<NuxtLink
 							to="/dashboard/users"
@@ -161,6 +168,14 @@
 				</div>
 
 				<ul class="divide-y font-sans">
+					<li>
+						<NuxtLink
+							to="/dashboard"
+							@click="isOpen = false"
+							class="my-4 inline-block"
+							>Prima pagina</NuxtLink
+						>
+					</li>
 					<li v-if="userRole === 'ADMIN'">
 						<NuxtLink
 							to="/dashboard/users"
