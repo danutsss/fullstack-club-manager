@@ -10,7 +10,7 @@
 							class="text-center font-body font-semibold text-sm text-gray-500"
 						>
 							<div
-								class="flex flex-row justify-items-center rounded-md gap-2"
+								class="flex flex-row justify-items-center justify-between rounded-md gap-2"
 							>
 								<div class="w-1/4">
 									<label for="coachName" class="sr-only">
@@ -25,6 +25,15 @@
 										@keyup="searchCoaches()"
 									/>
 								</div>
+
+								<NuxtLink to="/add-coach">
+									<button
+										type="button"
+										class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-nepal-700 hover:bg-nepal-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-nepal-500"
+									>
+										Adauga antrenor
+									</button>
+								</NuxtLink>
 							</div>
 						</DisclosurePanel>
 					</Disclosure>
