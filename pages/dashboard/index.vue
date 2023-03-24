@@ -550,7 +550,7 @@
 							<button
 								type="submit"
 								@click="exportList()"
-								class="mt-2 w-full flex justify-center py-2 px-4 border border-transparent text-sm rounded-md text-white bg-san-marino-600 hover:bg-san-marino-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-san-marino-500"
+								class="mt-2 w-full flex justify-center py-2 px-4 border border-transparent text-sm rounded-md text-white bg-nepal-600 hover:bg-nepal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-nepal-500"
 							>
 								Creeaza export lista
 							</button>
@@ -652,6 +652,11 @@ onMounted(() => {
 });
 
 const exportList = async () => {
+	if (exportAthleteID.value.length === 0) {
+		alert("Selecteaza cel putin un atlet pentru a crea exportul.");
+		return;
+	}
+
 	for (const exportAthId of exportAthleteID.value) {
 		const { data: athlete } = await useFetch(
 			`/api/athlete/export/${exportAthId}`
@@ -732,6 +737,11 @@ const exportList = async () => {
 };
 
 const exportData = async () => {
+	if (exportAthleteID.value.length === 0) {
+		alert("Selecteaza cel putin un atlet pentru a crea exportul.");
+		return;
+	}
+
 	for (const exportAthId of exportAthleteID.value) {
 		await useFetch(`/api/athlete/export/${exportAthId}`).then(
 			async (response) => {
