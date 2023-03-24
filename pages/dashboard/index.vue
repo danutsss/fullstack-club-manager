@@ -217,14 +217,22 @@
 									<label for="coachName" class="sr-only">
 										Nume antrenor
 									</label>
-									<input
+									<select
 										id="coachName"
 										v-model="coachName"
 										name="coachName"
-										type="text"
 										class="shadow-sm appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-san-marino-500 focus:border-san-marino-500 focus:z-10 sm:text-sm"
-										placeholder="Nume antrenor"
-									/>
+									>
+										<option value="" disabled selected>
+											Alege antrenor
+										</option>
+										<option
+											v-for="coach in coaches"
+											:value="coach.fullName"
+										>
+											{{ coach.fullName }}
+										</option>
+									</select>
 								</div>
 							</div>
 
@@ -592,6 +600,9 @@ const { data: athletes } = await useFetch("/api/athlete/all");
 // Get all clubs from the database.
 const { data: clubs } = await useFetch("/api/club/all");
 
+// Get all coaches from the database.
+const { data: coaches } = await useFetch("/api/coach/all");
+
 // Get authenticated user.
 const {
 	data: { user },
@@ -632,6 +643,7 @@ let athleteCNP = ref("");
 let athleteWeightCat = ref("");
 let tableBody = ref("");
 let pdfHeader = ref("");
+
 let athleteData = ref([]);
 
 let athleteSearchByEuroregion = ref("");
@@ -652,6 +664,7 @@ onMounted(() => {
 	athleteWeightCat = athleteWeightCat.value;
 
 	athleteData = athleteData.value = [];
+
 	tableBody = tableBody.value;
 	pdfHeader = pdfHeader.value;
 
