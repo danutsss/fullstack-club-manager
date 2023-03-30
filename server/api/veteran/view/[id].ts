@@ -19,7 +19,8 @@ export default defineEventHandler(async (event) => {
 			console.log(`[veteran not found]: ${veteranID}`);
 			return (
 				(event.node.res.statusCode = 404) &&
-				(event.node.res.statusMessage = "Veteran not found.")
+				(event.node.res.statusMessage =
+					"Veteranul nu a fost gasit! (404)")
 			);
 		}
 

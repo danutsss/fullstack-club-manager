@@ -69,7 +69,7 @@ export default defineEventHandler(async (event) => {
 			id: newLawData.id,
 			clubName: newLawData.clubName,
 			fullName: newLawData.fullName,
-			message: "Legea 322 a fost semnata cu succes.",
+			message: `Legea 322 [ID: ${newLawData.id}] pentru clubul ${newLawData.clubName} a fost semnata cu succes de catre ${newLawData.fullName}.`,
 		};
 	} catch (error) {
 		console.log(

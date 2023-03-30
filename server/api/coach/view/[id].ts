@@ -19,7 +19,8 @@ export default defineEventHandler(async (event) => {
 			console.log(`[coach not found]: ${coachID}`);
 			return (
 				(event.node.res.statusCode = 404) &&
-				(event.node.res.statusMessage = "Coach not found.")
+				(event.node.res.statusMessage =
+					"Antrenorul nu a fost gasit! (404)")
 			);
 		}
 

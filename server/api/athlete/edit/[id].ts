@@ -60,6 +60,7 @@ export default defineEventHandler(async (event) => {
 		return {
 			id: athlete.id,
 			name: athlete.fullName,
+			message: `Atletul ${athlete.fullName} [ID: ${athlete.id}] a fost actualizat cu succes.`,
 		};
 	} catch (error) {
 		console.error(

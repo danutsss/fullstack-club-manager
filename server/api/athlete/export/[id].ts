@@ -19,7 +19,8 @@ export default defineEventHandler(async (event) => {
 
 				return (
 					(event.node.res.statusCode = 404) &&
-					(event.node.res.statusMessage = "Athlete not found.")
+					(event.node.res.statusMessage =
+						"Sportivul nu a fost gasit! (404)")
 				);
 			}
 
@@ -36,7 +37,7 @@ export default defineEventHandler(async (event) => {
 
 		return (
 			(event.node.res.statusCode = 500) &&
-			(event.node.res.statusMessage = "Internal server error.")
+			(event.node.res.statusMessage = "Eroare server! (500).")
 		);
 	}
 });

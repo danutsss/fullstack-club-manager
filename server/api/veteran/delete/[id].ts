@@ -15,7 +15,15 @@ export default defineEventHandler(async (event) => {
 					id: Number(id),
 				},
 			})
-			.catch((error) => console.error(error));
+			.catch((error) => {
+				console.error(
+					`[error occured]: while deleting veteran from database. \n[error]: ${error}`
+				);
+				return (
+					(event.node.res.statusCode = 500) &&
+					(event.node.res.statusMessage = "Eroare server! (500).")
+				);
+			});
 
 		console.log(`veteran was susccessfullly deleted from database.`);
 

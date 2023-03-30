@@ -137,6 +137,7 @@ export default defineEventHandler(async (event) => {
 		return {
 			id: club.id,
 			name: club.clubName,
+			message: `Clubul ${club.clubName} [ID: ${club.id}] a fost actualizat cu succes!`,
 		};
 	} catch (error) {
 		console.error(

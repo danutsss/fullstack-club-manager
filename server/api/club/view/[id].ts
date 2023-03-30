@@ -19,7 +19,7 @@ export default defineEventHandler(async (event) => {
 			console.log(`[club not found]: ${clubID}`);
 			return (
 				(event.node.res.statusCode = 404) &&
-				(event.node.res.statusMessage = "Club not found.")
+				(event.node.res.statusMessage = "Clubul nu a fost gasit! (404)")
 			);
 		}
 
