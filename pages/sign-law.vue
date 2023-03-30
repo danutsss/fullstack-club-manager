@@ -17,6 +17,42 @@ let successMessage = ref("");
 let hasError = ref(false);
 let errorMessage = ref("");
 
+useHead({
+	title: "Semneaza Legea nr. 322/2022 @ AJJ.RO",
+	meta: [
+		{
+			name: "description",
+			content:
+				"Semneaza Legea nr. 322/2022 pentru completarea Legii educaţiei fizice şi sportului nr. 69/2000",
+		},
+		{
+			name: "keywords",
+			content:
+				"asociatii judetene de judo, Romania, legea nr. 322/2022, AJJ.RO, educatie fizica si sport, semnare lege, semnare legea nr. 322/2022",
+		},
+		{
+			name: "author",
+			content: "Matei Nicolae - Daniel @ AJJ.RO",
+		},
+		{
+			name: "robots",
+			content: "index, follow",
+		},
+		{
+			name: "googlebot",
+			content: "index, follow",
+		},
+		{
+			name: "google",
+			content: "nositelinkssearchbox",
+		},
+		{
+			name: "google",
+			content: "notranslate",
+		},
+	],
+});
+
 onMounted(() => {
 	clubName = clubName.value;
 	fullName = fullName.value;

@@ -64,6 +64,41 @@ const deleteAthlete = async (id) =>
 		.catch((error) => {
 			console.error(error);
 		});
+
+useHead({
+	title: `Modificare sportiv: ${athlete.value.fullName} [ID: ${athlete.value.id}] @ AJJ.RO`,
+	meta: [
+		{
+			name: "description",
+			content: `Modificare informatii pentru sportivul ${athlete.value.fullName} [ID: ${athlete.value.id}].`,
+		},
+		{
+			name: "keywords",
+			content:
+				"panou de control, administratori, utilizatori, moderatori, antrenori, veterani, asociații, AJJ.RO, AJJ, judoka",
+		},
+		{
+			name: "author",
+			content: "Matei Nicolae - Daniel @ AJJ.RO",
+		},
+		{
+			name: "robots",
+			content: "index, follow",
+		},
+		{
+			name: "googlebot",
+			content: "index, follow",
+		},
+		{
+			name: "google",
+			content: "nositelinkssearchbox",
+		},
+		{
+			name: "google",
+			content: "notranslate",
+		},
+	],
+});
 </script>
 
 <template>

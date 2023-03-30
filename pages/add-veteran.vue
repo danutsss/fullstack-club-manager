@@ -30,6 +30,42 @@ onMounted(() => {
 	emailAddress = emailAddress.value;
 });
 
+useHead({
+	title: "Adauga veteran @ AJJ.RO",
+	meta: [
+		{
+			name: "description",
+			content:
+				"Adauga un veteran in baza de date a Asociatiilor Judetene de Judo din Romania.",
+		},
+		{
+			name: "keywords",
+			content:
+				"asociatii judetene de judo, Romania, veteran judo, adauga veteran, AJJ.RO, judo, veterani judo, antrenori judo, cluburi judo, judoka, sportivi judo",
+		},
+		{
+			name: "author",
+			content: "Matei Nicolae - Daniel @ AJJ.RO",
+		},
+		{
+			name: "robots",
+			content: "index, follow",
+		},
+		{
+			name: "googlebot",
+			content: "index, follow",
+		},
+		{
+			name: "google",
+			content: "nositelinkssearchbox",
+		},
+		{
+			name: "google",
+			content: "notranslate",
+		},
+	],
+});
+
 const addVeteran = async () => {
 	return await $fetch("/api/veteran", {
 		method: "POST",

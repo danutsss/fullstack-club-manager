@@ -138,6 +138,42 @@ const {
 const role = await getRole(user.id);
 const userRole = role[0].role;
 
+useHead({
+	title: "Lista utilizatori (admin) @ AJJ.RO",
+	meta: [
+		{
+			name: "description",
+			content:
+				"Panou de control pentru administratorii, moderatorii si utilizatorii platformei Asociatiilor Judetene de Judo din Romania.",
+		},
+		{
+			name: "keywords",
+			content:
+				"panou de control, administratori, utilizatori, moderatori, antrenori, veterani, asociații, AJJ.RO, AJJ, judoka",
+		},
+		{
+			name: "author",
+			content: "Matei Nicolae - Daniel @ AJJ.RO",
+		},
+		{
+			name: "robots",
+			content: "index, follow",
+		},
+		{
+			name: "googlebot",
+			content: "index, follow",
+		},
+		{
+			name: "google",
+			content: "nositelinkssearchbox",
+		},
+		{
+			name: "google",
+			content: "notranslate",
+		},
+	],
+});
+
 const { data: users } = await supabase
 	.from("profiles")
 	.select("id, role, euroRegionMod, email, categoryMod, registrationDate");

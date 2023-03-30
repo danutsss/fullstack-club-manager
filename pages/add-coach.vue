@@ -55,6 +55,42 @@ onMounted(() => {
 	coachExtraInfo = coachExtraInfo.value;
 });
 
+useHead({
+	title: "Adauga antrenor @ AJJ.RO",
+	meta: [
+		{
+			name: "description",
+			content:
+				"Adauga un antrenor in baza de date a Asociatiilor Judetene de Judo din Romania.",
+		},
+		{
+			name: "keywords",
+			content:
+				"asociatii judetene de judo, Romania, antrenor judo, adauga antrenor, AJJ.RO, judo, veterani judo, antrenori judo, cluburi judo, judoka, sportivi judo",
+		},
+		{
+			name: "author",
+			content: "Matei Nicolae - Daniel @ AJJ.RO",
+		},
+		{
+			name: "robots",
+			content: "index, follow",
+		},
+		{
+			name: "googlebot",
+			content: "index, follow",
+		},
+		{
+			name: "google",
+			content: "nositelinkssearchbox",
+		},
+		{
+			name: "google",
+			content: "notranslate",
+		},
+	],
+});
+
 const addCoach = async () => {
 	return await $fetch("/api/coach", {
 		method: "POST",

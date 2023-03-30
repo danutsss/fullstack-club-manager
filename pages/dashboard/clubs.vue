@@ -130,6 +130,42 @@ const userRole = role[0].role;
 const categories = await getCategory(user.id);
 const userCategoryMod = categories[0].categoryMod;
 
+useHead({
+	title: "Lista cluburi @ AJJ.RO",
+	meta: [
+		{
+			name: "description",
+			content:
+				"Panou de control pentru administratorii, moderatorii si utilizatorii platformei Asociatiilor Judetene de Judo din Romania.",
+		},
+		{
+			name: "keywords",
+			content:
+				"panou de control, administratori, utilizatori, moderatori, antrenori, veterani, asociații, AJJ.RO, AJJ, judoka",
+		},
+		{
+			name: "author",
+			content: "Matei Nicolae - Daniel @ AJJ.RO",
+		},
+		{
+			name: "robots",
+			content: "index, follow",
+		},
+		{
+			name: "googlebot",
+			content: "index, follow",
+		},
+		{
+			name: "google",
+			content: "nositelinkssearchbox",
+		},
+		{
+			name: "google",
+			content: "notranslate",
+		},
+	],
+});
+
 const searchClubs = () => {
 	const input = document.getElementById("clubName");
 	const filter = input.value.toUpperCase();

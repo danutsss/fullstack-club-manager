@@ -117,6 +117,42 @@ let successMessage = ref("");
 const { auth } = useSupabaseAuthClient();
 const user = useSupabaseUser();
 
+useHead({
+	title: "Autentificare in cont @ AJJ.RO",
+	meta: [
+		{
+			name: "description",
+			content:
+				"Autentificare in cont pe site-ul Asociatiilor Judetene de Judo din Romania pentru a avea acces la toate facilitatile oferite de platforma.",
+		},
+		{
+			name: "keywords",
+			content:
+				"autentificare, cont, judo, judo Romania, ajj.ro, asociatii judetene de judo",
+		},
+		{
+			name: "author",
+			content: "Matei Nicolae - Daniel @ AJJ.RO",
+		},
+		{
+			name: "robots",
+			content: "index, follow",
+		},
+		{
+			name: "googlebot",
+			content: "index, follow",
+		},
+		{
+			name: "google",
+			content: "nositelinkssearchbox",
+		},
+		{
+			name: "google",
+			content: "notranslate",
+		},
+	],
+});
+
 const signIn = async () => {
 	let { data, error } = await auth.signInWithPassword({
 		email: emailAddress.value,

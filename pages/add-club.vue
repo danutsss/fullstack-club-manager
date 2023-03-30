@@ -86,6 +86,42 @@ onMounted(() => {
 	clubExtraInfo = clubExtraInfo.value;
 });
 
+useHead({
+	title: "Adauga club @ AJJ.RO",
+	meta: [
+		{
+			name: "description",
+			content:
+				"Adauga un club in baza de date a Asociatiilor Judetene de Judo din Romania.",
+		},
+		{
+			name: "keywords",
+			content:
+				"asociatii judetene de judo, Romania, club judo, adauga club, AJJ.RO, judo, veterani judo, antrenori judo, cluburi judo, judoka, sportivi judo",
+		},
+		{
+			name: "author",
+			content: "Matei Nicolae - Daniel @ AJJ.RO",
+		},
+		{
+			name: "robots",
+			content: "index, follow",
+		},
+		{
+			name: "googlebot",
+			content: "index, follow",
+		},
+		{
+			name: "google",
+			content: "nositelinkssearchbox",
+		},
+		{
+			name: "google",
+			content: "notranslate",
+		},
+	],
+});
+
 const addClub = async () => {
 	return await $fetch("/api/club", {
 		method: "POST",

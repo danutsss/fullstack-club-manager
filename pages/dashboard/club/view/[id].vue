@@ -24,6 +24,41 @@ const isReadOnly = () => {
 	return userRole !== "ADMIN" && userCategoryMod.indexOf("CLUBURI") === -1;
 };
 
+useHead({
+	title: `Modificare club: ${club.value.clubName} [ID: ${club.value.id}] @ AJJ.RO`,
+	meta: [
+		{
+			name: "description",
+			content: `Modificare informatii pentru clubul ${club.value.clubName} [ID: ${club.value.id}].`,
+		},
+		{
+			name: "keywords",
+			content:
+				"panou de control, administratori, utilizatori, moderatori, antrenori, veterani, asociații, AJJ.RO, AJJ, judoka",
+		},
+		{
+			name: "author",
+			content: "Matei Nicolae - Daniel @ AJJ.RO",
+		},
+		{
+			name: "robots",
+			content: "index, follow",
+		},
+		{
+			name: "googlebot",
+			content: "index, follow",
+		},
+		{
+			name: "google",
+			content: "nositelinkssearchbox",
+		},
+		{
+			name: "google",
+			content: "notranslate",
+		},
+	],
+});
+
 let clubName = ref("");
 let clubCity = ref("");
 let zipCode = ref("");

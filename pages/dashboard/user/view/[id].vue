@@ -60,6 +60,41 @@ const deleteUser = async (id) =>
 			);
 		})
 		.catch((error) => console.error(error));
+
+useHead({
+	title: `Modificare user [ID: ${route.params.id}] @ AJJ.RO`,
+	meta: [
+		{
+			name: "description",
+			content: `Modificare informatii pentru utilizatorul cu ID: ${route.params.id}.`,
+		},
+		{
+			name: "keywords",
+			content:
+				"panou de control, administratori, utilizatori, moderatori, antrenori, veterani, asociații, AJJ.RO, AJJ, judoka",
+		},
+		{
+			name: "author",
+			content: "Matei Nicolae - Daniel @ AJJ.RO",
+		},
+		{
+			name: "robots",
+			content: "index, follow",
+		},
+		{
+			name: "googlebot",
+			content: "index, follow",
+		},
+		{
+			name: "google",
+			content: "nositelinkssearchbox",
+		},
+		{
+			name: "google",
+			content: "notranslate",
+		},
+	],
+});
 </script>
 
 <template>

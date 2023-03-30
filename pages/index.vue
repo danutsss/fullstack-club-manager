@@ -27,3 +27,41 @@
 
 	<LayoutFooter class="mt-8" />
 </template>
+
+<script setup>
+useHead({
+	title: "Prima pagina @ AJJ.RO",
+	meta: [
+		{
+			name: "description",
+			content:
+				"Prima pagina a site-ului Asociatiilor Judetene de Judo din Romania.",
+		},
+		{
+			name: "keywords",
+			content:
+				"asociatii judetene de judo, Romania, AJJ.RO, judo, Romania, veterani judo, antrenori judo, sportivi judo, cluburi judo, judoka",
+		},
+		{
+			name: "author",
+			content: "Matei Nicolae - Daniel @ AJJ.RO",
+		},
+		{
+			name: "robots",
+			content: "index, follow",
+		},
+		{
+			name: "googlebot",
+			content: "index, follow",
+		},
+		{
+			name: "google",
+			content: "nositelinkssearchbox",
+		},
+		{
+			name: "google",
+			content: "notranslate",
+		},
+	],
+});
+</script>

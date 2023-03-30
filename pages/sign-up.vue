@@ -122,6 +122,42 @@ const { auth } = useSupabaseAuthClient();
 const supabase = useSupabaseClient();
 const user = useSupabaseUser();
 
+useHead({
+	title: "Inregistrare cont nou @ AJJ.RO",
+	meta: [
+		{
+			name: "description",
+			content:
+				"Inregistreaza un cont nou pe site-ul Asociatiilor Judetene de Judo din Romania pentru a avea acces la toate facilitatile oferite de platforma.",
+		},
+		{
+			name: "keywords",
+			content:
+				"asociatii judetene de judo, Romania, cont nou, inregistrare, AJJ.RO, judo, veterani judo, antrenori judo, cluburi judo, judoka, sportivi judo",
+		},
+		{
+			name: "author",
+			content: "Matei Nicolae - Daniel @ AJJ.RO",
+		},
+		{
+			name: "robots",
+			content: "index, follow",
+		},
+		{
+			name: "googlebot",
+			content: "index, follow",
+		},
+		{
+			name: "google",
+			content: "nositelinkssearchbox",
+		},
+		{
+			name: "google",
+			content: "notranslate",
+		},
+	],
+});
+
 const signUp = async () => {
 	let { data, error } = await auth.signUp({
 		email: emailAddress.value,
