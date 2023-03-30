@@ -178,7 +178,7 @@ const deleteClub = async (id) =>
 	<div class="container flex flex-col justify-center w-1/2 mb-6">
 		<div id="club__info">
 			<div class="bg-white p-5 shadow-lg rounded-lg font-body">
-				<form @submit.prevent="editClub(club.id)" class="space-y-6">
+				<form @submit.prevent="editClub(club.id)" class="space-y-5">
 					<div class="flex flex-row rounded-md gap-2">
 						<div class="w-full">
 							<label for="clubName" class="font-body text-xs"

@@ -315,7 +315,7 @@
 										class="overflow-y-auto lg:overflow-visible"
 									>
 										<table
-											class="table-auto w-full text-black border-separate space-y-6 text-sm"
+											class="table-auto w-full text-black border-separate space-y-5 text-sm"
 										>
 											<thead
 												class="bg-gray-300 text-black"

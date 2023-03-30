@@ -116,7 +116,7 @@ const deleteUser = async (id) =>
 
 					<form
 						@submit.prevent="updateUser(user[0].id)"
-						class="space-y-6"
+						class="space-y-5"
 					>
 						<div class="flex flex-row rounded-md gap-2">
 							<div class="w-1/2">

@@ -131,7 +131,7 @@ const addCoach = async () => {
 						>
 							<form
 								@submit.prevent="addCoach()"
-								class="space-y-6"
+								class="space-y-5"
 							>
 								<div class="flex flex-row rounded-md gap-2">
 									<div class="w-1/2 shadow-sm">

@@ -55,8 +55,9 @@
 						? 'col-span-2'
 						: ''
 				"
+				class="flex justify-center items-center"
 			>
-				<div id="changepass__form">
+				<div id="changepass__form" class="w-[100%]">
 					<div class="bg-white p-5 shadow-lg rounded-3xl">
 						<h1
 							class="font-display text-center mb-4 uppercase font-bold"
@@ -64,7 +65,46 @@
 							Schimbare parola
 						</h1>
 
-						<form @submit.prevent="changePass()"></form>
+						<form @submit.prevent="changePass()" class="space-y-5">
+							<div class="flex flex-row rounded-md gap-2">
+								<div class="w-full">
+									<label for="newPass" class="sr-only">
+										Parola noua
+									</label>
+									<input
+										id="newPass"
+										v-model="newPass"
+										name="newPass"
+										type="password"
+										class="shadow-sm appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-san-marino-500 focus:border-san-marino-500 focus:z-10 sm:text-sm"
+										placeholder="Parola noua"
+									/>
+								</div>
+
+								<div class="w-full">
+									<label for="confirmNewPass" class="sr-only">
+										Confirmare parola noua
+									</label>
+									<input
+										id="confirmNewPass"
+										v-model="confirmNewPass"
+										name="confirmNewPass"
+										type="password"
+										class="shadow-sm appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-san-marino-500 focus:border-san-marino-500 focus:z-10 sm:text-sm"
+										placeholder="Confirmare parola noua"
+									/>
+								</div>
+							</div>
+
+							<div>
+								<button
+									type="submit"
+									class="w-full flex justify-center py-2 px-4 border border-transparent text-sm rounded-md text-white bg-san-marino-600 hover:bg-san-marino-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-san-marino-500"
+								>
+									Actualizeaza parola
+								</button>
+							</div>
+						</form>
 					</div>
 				</div>
 			</div>
@@ -82,7 +122,7 @@
 						>
 							Adaugare sportiv in Euroregiuni
 						</h1>
-						<form @submit.prevent="addAthlete()" class="space-y-6">
+						<form @submit.prevent="addAthlete()" class="space-y-5">
 							<div class="flex flex-row rounded-md gap-2">
 								<div class="w-1/2">
 									<label for="clubName" class="sr-only"
@@ -440,7 +480,7 @@
 					</Disclosure>
 					<form @submit.prevent="">
 						<table
-							class="table-auto w-full text-black border-separate space-y-6 text-sm"
+							class="table-auto w-full text-black border-separate space-y-5 text-sm"
 						>
 							<thead
 								class="bg-gray-300 text-black font-display sticky top-0"
@@ -628,6 +668,10 @@ const examTypes = [
 	{ id: 5, name: "U-16" },
 ];
 
+let newPass = ref("");
+let confirmNewPass = ref("");
+let newEmail = ref("");
+let confirmNewEmail = ref("");
 let clubName = ref("");
 let athleteName = ref("");
 let athleteBelt = ref("");
@@ -659,6 +703,12 @@ onMounted(() => {
 	coachName = coachName.value;
 	athleteCNP = athleteCNP.value;
 	athleteWeightCat = athleteWeightCat.value;
+
+	newPass = newPass.value;
+	confirmNewPass = confirmNewPass.value;
+
+	newEmail = newEmail.value;
+	confirmNewEmail = confirmNewEmail.value;
 
 	athleteData = athleteData.value = [];
 
@@ -1135,6 +1185,56 @@ const searchByCoach = () => {
 			}
 		}
 	}
+};
+
+const changePass = async () => {
+	if (!newPass || !confirmNewPass) {
+		alert("Nu ai completat toate campurile!");
+		return;
+	}
+
+	if (newPass !== confirmNewPass) {
+		alert("Parolele nu coincid!");
+		return;
+	}
+
+	const { data, error } = await supabase.auth.updateUser({
+		password: newPass,
+	});
+
+	console.log(data);
+
+	if (error) {
+		alert(error.message);
+		return;
+	}
+
+	return;
+};
+
+const changeEmail = async () => {
+	if (!newEmail || !confirmNewEmail) {
+		alert("Nu ai completat toate campurile!");
+		return;
+	}
+
+	if (newEmail !== confirmNewEmail) {
+		alert("Emailurile nu coincid!");
+		return;
+	}
+
+	const { data, error } = await supabase.auth.updateUser({
+		email: newEmail,
+	});
+
+	console.log(data);
+
+	if (error) {
+		alert(error.message);
+		return;
+	}
+
+	return;
 };
 
 watchEffect(() => {

@@ -171,7 +171,7 @@ const addClub = async () => {
 						<DisclosurePanel
 							class="p-4 text-center font-body font-semibold text-sm text-gray-500"
 						>
-							<form @submit.prevent="addClub()" class="space-y-6">
+							<form @submit.prevent="addClub()" class="space-y-5">
 								<div class="flex flex-row rounded-md gap-2">
 									<div class="w-full">
 										<label for="clubName" class="sr-only"

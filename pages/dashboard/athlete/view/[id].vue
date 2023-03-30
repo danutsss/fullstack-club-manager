@@ -85,7 +85,7 @@ const deleteAthlete = async (id) =>
 			<div class="bg-white p-5 shadow-lg rounded-lg font-body">
 				<form
 					@submit.prevent="editAthlete(athlete.id)"
-					class="space-y-6"
+					class="space-y-5"
 				>
 					<div class="flex flex-row rounded-md gap-2">
 						<div class="w-1/2">

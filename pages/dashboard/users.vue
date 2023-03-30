@@ -31,7 +31,7 @@
 					<div class="bg-white p-4 shadow-lg mt-2 rounded-[0.625rem]">
 						<div class="overflow-y-auto overflow-visible">
 							<table
-								class="table-auto w-full text-black border-separate space-y-6 text-sm"
+								class="table-auto w-full text-black border-separate space-y-5 text-sm"
 							>
 								<thead
 									class="bg-gray-300 text-black font-display sticky top-0"
