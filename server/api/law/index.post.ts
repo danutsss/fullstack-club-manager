@@ -41,12 +41,13 @@ export default defineEventHandler(async (event) => {
 			!noParticipatingJuniors
 		) {
 			console.log(
-				"[error occured]: while saving the `/sign-law`. (missing fields)"
+				"[error occured]: while saving the `/sign-law`. (Toate campurile sunt obligatorii!)"
 			);
 
 			return (
 				(event.node.res.statusCode = 400) &&
-				(event.node.res.statusMessage = "Missing fields")
+				(event.node.res.statusMessage =
+					"Toate campurile sunt obligatorii!")
 			);
 		}
 
@@ -68,6 +69,7 @@ export default defineEventHandler(async (event) => {
 			id: newLawData.id,
 			clubName: newLawData.clubName,
 			fullName: newLawData.fullName,
+			message: "Legea 322 a fost semnata cu succes.",
 		};
 	} catch (error) {
 		console.log(
@@ -76,7 +78,7 @@ export default defineEventHandler(async (event) => {
 
 		return (
 			(event.node.res.statusCode = 500) &&
-			(event.node.res.statusMessage = "Something went wrong.")
+			(event.node.res.statusMessage = "Eroare server! (500)")
 		);
 	}
 });

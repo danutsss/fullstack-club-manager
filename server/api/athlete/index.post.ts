@@ -45,12 +45,13 @@ export default defineEventHandler(async (event) => {
 			!weightCat
 		) {
 			console.log(
-				"[error occured]: when inserting athlete in our database (missing fields)."
+				"[error occured]: when inserting athlete in our database (Toate campurile sunt obligatorii!)."
 			);
 
 			return (
 				(event.node.res.statusCode = 400) &&
-				(event.node.res.statusMessage = "Missing fields.")
+				(event.node.res.statusMessage =
+					"Toate campurile sunt obligatorii!.")
 			);
 		}
 
@@ -73,6 +74,7 @@ export default defineEventHandler(async (event) => {
 		return {
 			id: newAthleteData.id,
 			name: newAthleteData.fullName,
+			message: `Atletul ${newAthleteData.fullName} a fost inserat cu succes in baza de date.`,
 		};
 	} catch (error) {
 		console.log(
@@ -81,7 +83,7 @@ export default defineEventHandler(async (event) => {
 
 		return (
 			(event.node.res.statusCode = 500) &&
-			(event.node.res.statusMessage = "Something went wrong.")
+			(event.node.res.statusMessage = "Eroare server! (500).")
 		);
 	}
 });

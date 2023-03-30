@@ -31,7 +31,7 @@ export default defineEventHandler(async (event) => {
 		);
 		return (
 			(event.node.res.statusCode = 500) &&
-			(event.node.res.statusMessage = "Something went wrong.")
+			(event.node.res.statusMessage = "Eroare server! (500).")
 		);
 	}
 });

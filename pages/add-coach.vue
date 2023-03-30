@@ -26,6 +26,12 @@ let coachResults = ref("");
 let coachExtraInfo = ref("");
 let coachClub = ref("");
 
+let hasError = ref(false);
+let errorMessage = ref("");
+
+let hasSuccess = ref(false);
+let successMessage = ref("");
+
 onMounted(() => {
 	firstName = firstName.value;
 	lastName = lastName.value;
@@ -75,18 +81,20 @@ const addCoach = async () => {
 		},
 	})
 		.then((response) => {
-			console.log(response);
 			if (response.code === "[error]") {
-				console.log(response.messasge);
-				return;
+				hasError.value = true;
+				hasSuccess.value = false;
+				return (errorMessage.value = response.message);
 			}
 
-			return console.log(
-				`Coach [${firstName} ${lastName}] has been added successfully into our database.`
-			);
+			hasSuccess.value = true;
+			hasError.value = false;
+			return (successMessage.value = response.message);
 		})
 		.catch((error) => {
-			console.log(`[error occured]: ${error.statusMessage}`);
+			hasError.value = true;
+			hasSuccess.value = false;
+			return (errorMessage.value = error.statusMessage);
 		});
 };
 </script>
@@ -133,6 +141,16 @@ const addCoach = async () => {
 								@submit.prevent="addCoach()"
 								class="space-y-5"
 							>
+								<ErrorMessage
+									v-if="hasError"
+									:errorMessage="errorMessage"
+								/>
+
+								<SuccessMessage
+									v-if="hasSuccess"
+									:successMessage="successMessage"
+								/>
+
 								<div class="flex flex-row rounded-md gap-2">
 									<div class="w-1/2 shadow-sm">
 										<label for="lastName" class="sr-only"

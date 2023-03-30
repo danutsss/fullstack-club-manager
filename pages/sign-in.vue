@@ -28,6 +28,15 @@
 							class="p-4 text-center font-body font-semibold text-sm text-gray-500"
 						>
 							<form @submit.prevent="signIn()" class="space-y-3">
+								<ErrorMessage
+									v-if="hasError"
+									:errorMessage="errorMessage"
+								/>
+
+								<SuccessMessage
+									v-if="hasSuccess"
+									:successMessage="successMessage"
+								/>
 								<div class="flex flex-row rounded-md gap-2">
 									<div class="w-full">
 										<label
@@ -99,6 +108,11 @@ import { LockClosedIcon } from "@heroicons/vue/20/solid";
 
 const emailAddress = ref("");
 const userPassword = ref("");
+let hasError = ref(false);
+let errorMessage = ref("");
+
+let hasSuccess = ref(false);
+let successMessage = ref("");
 
 const { auth } = useSupabaseAuthClient();
 const user = useSupabaseUser();
@@ -109,8 +123,16 @@ const signIn = async () => {
 		password: userPassword.value,
 	});
 
+	if (data) {
+		hasSuccess.value = true;
+		hasError.value = false;
+		return (successMessage.value = "Te-ai autentificat cu succes!");
+	}
+
 	if (error) {
-		return console.log(error);
+		hasError.value = true;
+		hasSuccess.value = false;
+		return (errorMessage.value = error.message);
 	}
 
 	return;

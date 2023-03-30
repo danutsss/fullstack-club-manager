@@ -40,6 +40,12 @@ let dojoThreeTatamiMP = ref("");
 let dojoThreeAgeGroups = ref("");
 let clubExtraInfo = ref("");
 
+let hasSuccess = ref(false);
+let successMessage = ref("");
+
+let hasError = ref(false);
+let errorMessage = ref("");
+
 onMounted(() => {
 	clubName = clubName.value;
 	clubCounty = clubCounty.value;
@@ -116,19 +122,20 @@ const addClub = async () => {
 		},
 	})
 		.then((response) => {
-			console.log(response);
-
 			if (response.code === "[error]") {
-				console.log(response.message);
-				return;
+				hasError.value = true;
+				hasSuccess.value = false;
+				return (errorMessage.value = response.message);
 			}
 
-			return console.log(
-				`${clubName} has been added successfully into our database for verification.`
-			);
+			hasSuccess.value = true;
+			hasError.value = false;
+			return (successMessage.value = response.message);
 		})
 		.catch((error) => {
-			console.log(`[error occured]: ${error.statusMessage}`);
+			hasError.value = true;
+			hasSuccess.value = false;
+			return (errorMessage.value = error.statusMessage);
 		});
 };
 </script>
@@ -172,6 +179,16 @@ const addClub = async () => {
 							class="p-4 text-center font-body font-semibold text-sm text-gray-500"
 						>
 							<form @submit.prevent="addClub()" class="space-y-5">
+								<ErrorMessage
+									v-if="hasError"
+									:errorMessage="errorMessage"
+								/>
+
+								<SuccessMessage
+									v-if="hasSuccess"
+									:successMessage="successMessage"
+								/>
+
 								<div class="flex flex-row rounded-md gap-2">
 									<div class="w-full">
 										<label for="clubName" class="sr-only"
