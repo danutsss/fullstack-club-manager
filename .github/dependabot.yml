@@ -14,7 +14,7 @@ updates:
       # Prefix all commit messages with "[npm]".
       prefix: "[npm]"
       prefix-development: "[npm dev]"
-    labes:
+    labels:
       - "npm"
       - "dependencies"
     pull-request-branch-name:
