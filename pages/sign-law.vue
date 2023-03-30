@@ -11,6 +11,12 @@ let noParticipatingAthletes = ref("");
 let noRegisteredJuniors = ref("");
 let noParticipatingJuniors = ref("");
 
+let hasSuccess = ref(false);
+let successMessage = ref("");
+
+let hasError = ref(false);
+let errorMessage = ref("");
+
 onMounted(() => {
 	clubName = clubName.value;
 	fullName = fullName.value;
@@ -37,19 +43,20 @@ const signLaw = async () => {
 		},
 	})
 		.then((response) => {
-			console.log(response);
-
 			if (response.code === "[error]") {
-				console.log(response.message);
-				return;
+				hasError.value = true;
+				hasSuccess.value = false;
+				return (errorMessage.value = response.message);
 			}
 
-			return console.log(
-				`${fullName} has successfully signed the 322 law for club: ${clubName}`
-			);
+			hasSuccess.value = true;
+			hasError.value = false;
+			return (successMessage.value = response.message);
 		})
 		.catch((error) => {
-			console.log(`[error occured]: ${error.statusMessage}`);
+			hasError.value = true;
+			hasSuccess.value = false;
+			return (errorMessage.value = error.statusMessage);
 		});
 };
 </script>
@@ -79,6 +86,15 @@ const signLaw = async () => {
 							class="p-4 text-center font-body font-semibold text-sm text-gray-500"
 						>
 							<form @submit.prevent="signLaw()" class="space-y-5">
+								<ErrorMessage
+									v-if="hasError"
+									:errorMessage="errorMessage"
+								/>
+
+								<SuccessMessage
+									v-if="hasSuccess"
+									:successMessage="successMessage"
+								/>
 								<div class="flex flex-row rounded-md gap-2">
 									<div class="w-full">
 										<label for="clubName" class="sr-only"

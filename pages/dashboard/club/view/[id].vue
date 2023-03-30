@@ -138,8 +138,6 @@ const editClub = async (id) =>
 		},
 	})
 		.then((response) => {
-			console.log(response);
-
 			if (response.code === "[error]") {
 				console.log(response.message);
 				return;

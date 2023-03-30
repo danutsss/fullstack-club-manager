@@ -66,6 +66,16 @@
 						</h1>
 
 						<form @submit.prevent="changePass()" class="space-y-5">
+							<ErrorMessage
+								v-if="hasError"
+								:errorMessage="errorMessage"
+							/>
+
+							<SuccessMessage
+								v-if="hasSuccess"
+								:successMessage="successMessage"
+							/>
+
 							<div class="flex flex-row rounded-md gap-2">
 								<div class="w-full">
 									<label for="newPass" class="sr-only">
@@ -692,6 +702,12 @@ let athleteSearchByExamType = ref("");
 
 let exportAthleteID = ref([]);
 
+let hasError = ref(false);
+let errorMessage = ref("");
+
+let hasSuccess = ref(false);
+let successMessage = ref("");
+
 onMounted(() => {
 	clubName = clubName.value;
 	athleteName = athleteName.value;
@@ -1054,8 +1070,6 @@ const addAthlete = async () => {
 		},
 	})
 		.then((response) => {
-			console.log(response);
-
 			if (response.code === "[error]") {
 				console.log(response.message);
 				return;
@@ -1189,24 +1203,31 @@ const searchByCoach = () => {
 
 const changePass = async () => {
 	if (!newPass || !confirmNewPass) {
-		alert("Nu ai completat toate campurile!");
-		return;
+		hasError.value = true;
+		hasSuccess.value = false;
+		return (errorMessage.value = "Toate campurile sunt obligatorii!");
 	}
 
 	if (newPass !== confirmNewPass) {
-		alert("Parolele nu coincid!");
-		return;
+		hasError.value = true;
+		hasSuccess.value = false;
+		return (errorMessage.value = "Parolele nu coincid!");
 	}
 
 	const { data, error } = await supabase.auth.updateUser({
 		password: newPass,
 	});
 
-	console.log(data);
+	if (data) {
+		hasError.value = false;
+		hasSuccess.value = true;
+		return (successMessage.value = "Parola a fost schimbata cu succes!");
+	}
 
 	if (error) {
-		alert(error.message);
-		return;
+		hasError.value = true;
+		hasSuccess.value = false;
+		return (errorMessage.value = error.message);
 	}
 
 	return;

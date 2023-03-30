@@ -29,12 +29,13 @@ export default defineEventHandler(async (event) => {
 			!euroRegion
 		) {
 			console.log(
-				"[error occured]: when updating athlete in our database (missing fields)."
+				"[error occured]: when updating athlete in our database (Toate campurile sunt obligatorii!)."
 			);
 
 			return (
 				(event.node.res.statusCode = 400) &&
-				(event.node.res.statusMessage = "Missing fields.")
+				(event.node.res.statusMessage =
+					"Toate campurile sunt obligatorii!.")
 			);
 		}
 
@@ -59,6 +60,7 @@ export default defineEventHandler(async (event) => {
 		return {
 			id: athlete.id,
 			name: athlete.fullName,
+			message: `Atletul ${athlete.fullName} [ID: ${athlete.id}] a fost actualizat cu succes.`,
 		};
 	} catch (error) {
 		console.error(
@@ -67,7 +69,7 @@ export default defineEventHandler(async (event) => {
 
 		return (
 			(event.node.res.statusCode = 500) &&
-			(event.node.res.statusMessage = "Something went wrong.")
+			(event.node.res.statusMessage = "Eroare server! (500).")
 		);
 	}
 });

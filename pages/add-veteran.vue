@@ -12,6 +12,12 @@ let ageCat = ref("");
 let gradation = ref("");
 let emailAddress = ref("");
 
+let hasSuccess = ref(false);
+let successMessage = ref("");
+
+let hasError = ref(false);
+let errorMessage = ref("");
+
 onMounted(() => {
 	firstName = firstName.value;
 	lastName = lastName.value;
@@ -40,19 +46,20 @@ const addVeteran = async () => {
 		},
 	})
 		.then((response) => {
-			console.log(response);
-
 			if (response.code === "[error]") {
-				console.log(response.message);
-				return;
+				hasError.value = true;
+				hasSuccess.value = false;
+				return (errorMessage.value = response.message);
 			}
 
-			return console.log(
-				`Veteran [${firstName} ${lastName}] has been added successfully in our database.`
-			);
+			hasSuccess.value = true;
+			hasError.value = false;
+			return (successMessage.value = response.message);
 		})
 		.catch((error) => {
-			console.log(`[error occured]: ${error.statusMessage}`);
+			hasError.value = true;
+			hasSuccess.value = false;
+			return (errorMessage.value = error.statusMessage);
 		});
 };
 </script>
@@ -99,6 +106,16 @@ const addVeteran = async () => {
 								@submit.prevent="addVeteran()"
 								class="space-y-5"
 							>
+								<ErrorMessage
+									v-if="hasError"
+									:errorMessage="errorMessage"
+								/>
+
+								<SuccessMessage
+									v-if="hasSuccess"
+									:successMessage="successMessage"
+								/>
+
 								<div class="flex flex-row rounded-md gap-2">
 									<div class="w-1/2 shadow-sm">
 										<label for="lastName" class="sr-only"

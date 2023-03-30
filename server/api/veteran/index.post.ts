@@ -41,12 +41,13 @@ export default defineEventHandler(async (event) => {
 			!phoneNo
 		) {
 			console.log(
-				"[error occured]: while inserting veteran into database. (missing fields)"
+				"[error occured]: while inserting veteran into database. (Toate campurile sunt obligatorii!)"
 			);
 
 			return (
 				(event.node.res.statusCode = 400) &&
-				(event.node.res.statusMessage = "Missing fields")
+				(event.node.res.statusMessage =
+					"Toate campurile sunt obligatorii!")
 			);
 		}
 
@@ -69,6 +70,7 @@ export default defineEventHandler(async (event) => {
 		return {
 			id: newVetData.id,
 			name: `${newVetData.firstName} ${newVetData.lastName}`,
+			message: `Veteranul ${newVetData.firstName} ${newVetData.lastName} a fost adaugat cu succes!`,
 		};
 	} catch (error) {
 		console.log(
@@ -77,7 +79,7 @@ export default defineEventHandler(async (event) => {
 
 		return (
 			(event.node.res.statusCode = 500) &&
-			(event.node.res.statusMessage = "Something went wrong.")
+			(event.node.res.statusMessage = "Eroare server! (500)")
 		);
 	}
 });
