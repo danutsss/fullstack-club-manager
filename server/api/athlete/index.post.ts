@@ -55,7 +55,7 @@ export default defineEventHandler(async (event) => {
 			);
 		}
 
-		const newAthleteData: Athlete | null = await prisma.athlete.create({
+		const newAthleteData: Athlete = await prisma.athlete.create({
 			data: {
 				clubName,
 				fullName,
