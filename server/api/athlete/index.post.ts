@@ -51,7 +51,7 @@ export default defineEventHandler(async (event) => {
 			return (
 				(event.node.res.statusCode = 400) &&
 				(event.node.res.statusMessage =
-					"Toate campurile sunt obligatorii!.")
+					"Toate campurile sunt obligatorii!")
 			);
 		}
 
