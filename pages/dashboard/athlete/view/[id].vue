@@ -12,6 +12,9 @@ const {
 	data: { user },
 } = await supabase.auth.getUser();
 
+// Get all clubs from the database.
+const { data: clubs } = await useFetch("/api/club/all");
+
 // Retrieve user's role.
 const role = await getRole(user.id);
 const userRole = role[0].role;
@@ -20,12 +23,58 @@ const userRole = role[0].role;
 const euroRegionNumber = await getEuroregion(user.id);
 const euroRegionMod = euroRegionNumber[0].euroRegionMod;
 
-const clubName = ref("");
-const athleteName = ref("");
-const athleteBelt = ref("");
-const dateOfBirth = ref("");
-const passedExam = ref("");
-const euroRegiune = ref("");
+const clubName = ref(athlete.clubName);
+const athleteName = ref(athlete.fullName);
+const athleteBelt = ref(athlete.belt);
+const dateOfBirth = ref(athlete.dateOfBirth);
+const passedExam = ref(athlete.passedExam);
+const euroRegiune = ref(athlete.euroRegion);
+const athleteCNP = ref(athlete.athleteCNP);
+const athleteGender = ref(athlete.athleteGender);
+const athleteWeightCat = ref(athlete.weightCat);
+
+// Weight categories based on their gender.
+const weightCategories = ref([
+	{ gender: "MASCULIN", category: "-26kg" },
+	{ gender: "MASCULIN", category: "-30kg" },
+	{ gender: "MASCULIN", category: "-34kg" },
+	{ gender: "MASCULIN", category: "-38kg" },
+	{ gender: "MASCULIN", category: "-42kg" },
+	{ gender: "MASCULIN", category: "-46kg" },
+	{ gender: "MASCULIN", category: "-50kg" },
+	{ gender: "MASCULIN", category: "-55kg" },
+	{ gender: "MASCULIN", category: "-60kg" },
+	{ gender: "MASCULIN", category: "+60kg" },
+	{ gender: "MASCULIN", category: "-66kg" },
+	{ gender: "MASCULIN", category: "-73kg" },
+	{ gender: "MASCULIN", category: "-81kg" },
+	{ gender: "MASCULIN", category: "-90kg" },
+	{ gender: "MASCULIN", category: "-100kg" },
+	{ gender: "MASCULIN", category: "+100kg" },
+	{ gender: "FEMININ", category: "-28kg" },
+	{ gender: "FEMININ", category: "-32kg" },
+	{ gender: "FEMININ", category: "-36kg" },
+	{ gender: "FEMININ", category: "-40kg" },
+	{ gender: "FEMININ", category: "-44kg" },
+	{ gender: "FEMININ", category: "-48kg" },
+	{ gender: "FEMININ", category: "-52kg" },
+	{ gender: "FEMININ", category: "-57kg" },
+	{ gender: "FEMININ", category: "+57kg" },
+	{ gender: "FEMININ", category: "-63kg" },
+	{ gender: "FEMININ", category: "-70kg" },
+	{ gender: "FEMININ", category: "-78kg" },
+	{ gender: "FEMININ", category: "+78kg" },
+]);
+
+const updateSelectedGender = () => {
+	return athleteGender.value;
+};
+
+const filteredWeightCategories = computed(() => {
+	return weightCategories.value.filter(
+		(category) => category.gender === athleteGender.value
+	);
+});
 
 const editAthlete = async (id) =>
 	await $fetch(`/api/athlete/edit/${id}`, {
@@ -90,14 +139,22 @@ const deleteAthlete = async (id) =>
 							<label for="clubName" class="sr-only"
 								>Nume club sportiv</label
 							>
-							<input
+							<select
 								id="clubName"
 								v-model="clubName"
 								name="clubName"
-								type="text"
 								class="shadow-sm appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-san-marino-500 focus:border-san-marino-500 focus:z-10 sm:text-sm"
-								:placeholder="athlete.clubName"
-							/>
+							>
+								<option value="" disabled selected>
+									Alege club
+								</option>
+								<option
+									v-for="club in clubs"
+									:value="club.clubName"
+								>
+									{{ club.clubName }}
+								</option>
+							</select>
 						</div>
 
 						<div class="w-1/2">
@@ -146,6 +203,64 @@ const deleteAthlete = async (id) =>
 					</div>
 
 					<div class="flex flex-row rounded-md gap-2">
+						<div class="w-full">
+							<label for="athleteCNP" class="sr-only">CNP</label>
+							<input
+								id="athleteCNP"
+								v-model="athleteCNP"
+								name="athleteCNP"
+								type="text"
+								class="shadow-sm appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-san-marino-500 focus:border-san-marino-500 focus:z-10 sm:text-sm"
+								:placeholder="athlete.athleteCNP"
+							/>
+						</div>
+					</div>
+
+					<div class="flex flex-row rounded-md gap-2">
+						<div class="w-1/2">
+							<label for="athleteGender" class="sr-only"
+								>Gen sportiv</label
+							>
+							<select
+								id="athleteGender"
+								v-model="athleteGender"
+								name="athleteGender"
+								@change="updateSelectedGender()"
+								class="shadow-sm appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-san-marino-500 focus:border-san-marino-500 focus:z-10 sm:text-sm"
+							>
+								<option value="" disabled selected>
+									Alege genul sportivului
+								</option>
+								<option value="MASCULIN">Masculin</option>
+								<option value="FEMININ">Feminin</option>
+							</select>
+						</div>
+
+						<div class="w-1/2">
+							<label for="athleteWeightCat" class="sr-only"
+								>Categoria de greutate</label
+							>
+							<select
+								id="athleteWeightCat"
+								v-model="athleteWeightCat"
+								name="athleteWeightCat"
+								class="shadow-sm appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-san-marino-500 focus:border-san-marino-500 focus:z-10 sm:text-sm"
+							>
+								<option value="" disabled selected>
+									Alege categoria de greutate
+								</option>
+								<option
+									v-for="category in filteredWeightCategories"
+									:value="category.category"
+									:key="category.category"
+								>
+									{{ category.category }}
+								</option>
+							</select>
+						</div>
+					</div>
+
+					<div class="flex flex-row rounded-md gap-2">
 						<div class="w-1/2">
 							<label for="passedExam" class="sr-only"
 								>Admis</label
@@ -171,7 +286,7 @@ const deleteAthlete = async (id) =>
 								class="shadow-sm appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-san-marino-500 focus:border-san-marino-500 focus:z-10 sm:text-sm"
 							>
 								<option value="" disabled selected>
-									Euroregiunea {{ athlete.euroRegion }}
+									Alege euroregiune
 								</option>
 								<option
 									v-if="userRole === 'ADMIN'"

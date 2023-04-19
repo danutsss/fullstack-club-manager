@@ -73,60 +73,40 @@ export default defineEventHandler(async (event) => {
 		clubVerified,
 	} = await readBody<IRequestBody>(event);
 	try {
-		if (
-			!clubName ||
-			!clubAddress ||
-			!clubContactPerson ||
-			!clubEmail ||
-			!clubAfiliatAJJ ||
-			!clubAfiliatFRJ ||
-			!clubCoachOneName ||
-			!clubCounty
-		) {
-			console.log(
-				`[error occured]: when inserting club into database (Toate campurile sunt obligatorii!).`
-			);
-			return (
-				(event.node.res.statusCode = 400) &&
-				(event.node.res.statusMessage =
-					"Toate campurile sunt obligatorii!")
-			);
-		}
-
 		const club: Club = await prisma.club.update({
 			where: {
 				id: Number(clubID),
 			},
 			data: {
-				clubName,
-				clubCounty,
-				clubAddress,
-				clubContactPerson,
-				clubEmail,
-				clubAfiliatFRJ,
-				clubAfiliatAJJ,
-				clubCoachOneName,
-				clubCoachTwoName,
-				clubCoachThreeName,
-				clubWebAddress,
-				clubFbAddress,
-				clubSocialAccounts,
-				dojoOneAddress,
-				dojoOneContactPerson,
-				dojoOneEmailAddress,
-				dojoOneTatamiMP,
-				dojoOneAgeGroups,
-				dojoTwoAddress,
-				dojoTwoContactPerson,
-				dojoTwoEmailAddress,
-				dojoTwoTatamiMP,
-				dojoTwoAgeGroups,
-				dojoThreeAddress,
-				dojoThreeContactPerson,
-				dojoThreeEmailAddress,
-				dojoThreeTatamiMP,
-				dojoThreeAgeGroups,
-				clubExtraInfo,
+				clubName: clubName,
+				clubCounty: clubCounty,
+				clubAddress: clubAddress,
+				clubContactPerson: clubContactPerson,
+				clubEmail: clubEmail,
+				clubAfiliatFRJ: clubAfiliatFRJ,
+				clubAfiliatAJJ: clubAfiliatAJJ,
+				clubCoachOneName: clubCoachOneName,
+				clubCoachTwoName: clubCoachTwoName,
+				clubCoachThreeName: clubCoachThreeName,
+				clubWebAddress: clubWebAddress,
+				clubFbAddress: clubFbAddress,
+				clubSocialAccounts: clubSocialAccounts,
+				dojoOneAddress: dojoOneAddress,
+				dojoOneContactPerson: dojoOneContactPerson,
+				dojoOneEmailAddress: dojoOneEmailAddress,
+				dojoOneTatamiMP: dojoOneTatamiMP,
+				dojoOneAgeGroups: dojoOneAgeGroups,
+				dojoTwoAddress: dojoTwoAddress,
+				dojoTwoContactPerson: dojoTwoContactPerson,
+				dojoTwoEmailAddress: dojoTwoEmailAddress,
+				dojoTwoTatamiMP: dojoTwoTatamiMP,
+				dojoTwoAgeGroups: dojoTwoAgeGroups,
+				dojoThreeAddress: dojoThreeAddress,
+				dojoThreeContactPerson: dojoThreeContactPerson,
+				dojoThreeEmailAddress: dojoThreeEmailAddress,
+				dojoThreeTatamiMP: dojoThreeTatamiMP,
+				dojoThreeAgeGroups: dojoThreeAgeGroups,
+				clubExtraInfo: clubExtraInfo,
 			},
 		});
 
