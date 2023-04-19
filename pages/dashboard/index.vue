@@ -134,7 +134,7 @@
 						</h1>
 						<form @submit.prevent="addAthlete()" class="space-y-5">
 							<div class="flex flex-row rounded-md gap-2">
-								<div class="w-1/2">
+								<div class="w-full">
 									<label for="clubName" class="sr-only"
 										>Nume club sportiv</label
 									>
@@ -156,7 +156,8 @@
 										</option>
 									</select>
 								</div>
-
+							</div>
+							<div class="flex flex-row rounded-md gap-2">
 								<div class="w-1/2">
 									<label for="athleteName" class="sr-only"
 										>Nume sportiv</label
@@ -169,6 +170,27 @@
 										class="shadow-sm appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-san-marino-500 focus:border-san-marino-500 focus:z-10 sm:text-sm"
 										placeholder="Nume sportiv"
 									/>
+								</div>
+
+								<div class="w-1/2">
+									<label for="athleteGender" class="sr-only"
+										>Gen sportiv</label
+									>
+									<select
+										id="athleteGender"
+										v-model="athleteGender"
+										name="athleteGender"
+										@change="updateSelectedGender()"
+										class="shadow-sm appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-san-marino-500 focus:border-san-marino-500 focus:z-10 sm:text-sm"
+									>
+										<option value="" disabled selected>
+											Gen sportiv
+										</option>
+										<option value="MASCULIN">
+											Masculin
+										</option>
+										<option value="FEMININ">Feminin</option>
+									</select>
 								</div>
 							</div>
 
@@ -209,14 +231,23 @@
 										class="sr-only"
 										>Categoria de greutate</label
 									>
-									<input
+									<select
 										id="athleteWeightCat"
 										v-model="athleteWeightCat"
 										name="athleteWeightCat"
-										type="text"
 										class="shadow-sm appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-san-marino-500 focus:border-san-marino-500 focus:z-10 sm:text-sm"
-										placeholder="Categoria de greutate"
-									/>
+									>
+										<option value="" disabled>
+											Categoria de greutate
+										</option>
+										<option
+											v-for="category in filteredWeightCategories"
+											:value="category.category"
+											:key="category.category"
+										>
+											{{ category.category }}
+										</option>
+									</select>
 								</div>
 
 								<div class="w-1/2">
@@ -490,22 +521,23 @@
 					</Disclosure>
 					<form @submit.prevent="">
 						<table
-							class="table-auto w-full text-black border-separate space-y-5 text-sm"
+							class="table-auto w-full text-black border-separate space-y-5 text-xs"
 						>
 							<thead
 								class="bg-gray-300 text-black font-display sticky top-0"
 							>
 								<tr>
-									<th class="p-3">Nume sportiv</th>
-									<th class="p-3">Centura</th>
-									<th class="p-3">Data nasterii</th>
-									<th class="p-3">CNP</th>
-									<th class="p-3">Cat. de greutate</th>
-									<th class="p-3">Admis</th>
-									<th class="p-3">Euroregiune</th>
-									<th class="p-3">Tipul examinarii</th>
-									<th class="p-3">Nume antrenor</th>
-									<th class="p-3">Actiuni</th>
+									<th class="p-2">Nume sportiv</th>
+									<th class="p-2">Gen sportiv</th>
+									<th class="p-2">Centura</th>
+									<th class="p-2">Data nasterii</th>
+									<th class="p-2">CNP</th>
+									<th class="p-2">Cat. de greutate</th>
+									<th class="p-2">Admis</th>
+									<th class="p-2">Euroregiune</th>
+									<th class="p-2">Tipul examinarii</th>
+									<th class="p-2">Nume antrenor</th>
+									<th class="p-2">Actiuni</th>
 								</tr>
 							</thead>
 							<tbody
@@ -519,7 +551,7 @@
 										userRole === 'ADMIN'
 									"
 								>
-									<td class="p-3">
+									<td class="p-2">
 										<div class="flex align-items-center">
 											<input
 												type="checkbox"
@@ -536,39 +568,42 @@
 											</div>
 										</div>
 									</td>
-									<td class="p-3">
+									<td class="p-2">
+										{{ athlete.athleteGender }}
+									</td>
+									<td class="p-2">
 										{{ athlete.belt }}
 									</td>
 
-									<td class="p-3">
+									<td class="p-2">
 										{{ athlete.dateOfBirth }}
 									</td>
 
-									<td class="p-3">
-										{{ athlete.CNP }}
+									<td class="p-2">
+										{{ athlete.athleteCNP }}
 									</td>
 
-									<td class="p-3">
+									<td class="p-2">
 										{{ athlete.weightCat }}
 									</td>
 
-									<td class="p-3">
+									<td class="p-2">
 										{{ athlete.passedExam }}
 									</td>
 
-									<td class="p-3">
+									<td class="p-2">
 										Euroregiunea {{ athlete.euroRegion }}
 									</td>
 
-									<td class="p-3">
+									<td class="p-2">
 										{{ athlete.examinationType }}
 									</td>
 
-									<td class="p-3">
+									<td class="p-2">
 										{{ athlete.coachName }}
 									</td>
 
-									<td class="p-3 flex justify-center gap-2">
+									<td class="p-2 flex justify-center gap-2">
 										<NuxtLink
 											:to="`/dashboard/athlete/view/${athlete.id}`"
 										>
@@ -678,6 +713,39 @@ const examTypes = [
 	{ id: 5, name: "U-16" },
 ];
 
+// Weight categories based on their gender.
+const weightCategories = ref([
+	{ gender: "MASCULIN", category: "-26kg" },
+	{ gender: "MASCULIN", category: "-30kg" },
+	{ gender: "MASCULIN", category: "-34kg" },
+	{ gender: "MASCULIN", category: "-38kg" },
+	{ gender: "MASCULIN", category: "-42kg" },
+	{ gender: "MASCULIN", category: "-46kg" },
+	{ gender: "MASCULIN", category: "-50kg" },
+	{ gender: "MASCULIN", category: "-55kg" },
+	{ gender: "MASCULIN", category: "-60kg" },
+	{ gender: "MASCULIN", category: "+60kg" },
+	{ gender: "MASCULIN", category: "-66kg" },
+	{ gender: "MASCULIN", category: "-73kg" },
+	{ gender: "MASCULIN", category: "-81kg" },
+	{ gender: "MASCULIN", category: "-90kg" },
+	{ gender: "MASCULIN", category: "-100kg" },
+	{ gender: "MASCULIN", category: "+100kg" },
+	{ gender: "FEMININ", category: "-28kg" },
+	{ gender: "FEMININ", category: "-32kg" },
+	{ gender: "FEMININ", category: "-36kg" },
+	{ gender: "FEMININ", category: "-40kg" },
+	{ gender: "FEMININ", category: "-44kg" },
+	{ gender: "FEMININ", category: "-48kg" },
+	{ gender: "FEMININ", category: "-52kg" },
+	{ gender: "FEMININ", category: "-57kg" },
+	{ gender: "FEMININ", category: "+57kg" },
+	{ gender: "FEMININ", category: "-63kg" },
+	{ gender: "FEMININ", category: "-70kg" },
+	{ gender: "FEMININ", category: "-78kg" },
+	{ gender: "FEMININ", category: "+78kg" },
+]);
+
 let newPass = ref("");
 let confirmNewPass = ref("");
 let newEmail = ref("");
@@ -694,6 +762,7 @@ let athleteCNP = ref("");
 let athleteWeightCat = ref("");
 let tableBody = ref("");
 let pdfHeader = ref("");
+let athleteGender = ref("");
 
 let athleteData = ref([]);
 
@@ -735,13 +804,26 @@ onMounted(() => {
 	athleteSearchByExamType = athleteSearchByExamType.value;
 });
 
-const selectAll = () => {
-	console.log(athletes);
-	if (exportAthleteID.value.length === athletes.length) {
-		exportAthleteID.value = [];
+const updateSelectedGender = () => {
+	return athleteGender.value;
+};
+
+const filteredWeightCategories = computed(() => {
+	if (athleteGender.value === "") {
+		return weightCategories.value;
 	} else {
-		exportAthleteID.value = athletes.value.map((athlete) => athlete.id);
+		return weightCategories.value.filter(
+			(category) => category.gender === athleteGender.value
+		);
 	}
+});
+
+const selectAll = () => {
+	if (exportAthleteID.value.length === athletes.value.length) {
+		exportAthleteID.value = [];
+	}
+
+	exportAthleteID.value = athletes.value.map((athlete) => athlete.id);
 };
 
 const exportList = async () => {
@@ -1067,6 +1149,7 @@ const addAthlete = async () => {
 			coachName: coachName,
 			athleteCNP: athleteCNP,
 			weightCat: athleteWeightCat,
+			athleteGender: athleteGender.value,
 		},
 	})
 		.then((response) => {
@@ -1274,21 +1357,17 @@ definePageMeta({
 	border-spacing: 0 5px;
 }
 
-i {
-	font-size: 1rem !important;
-}
-
 .table tr {
 	border-radius: 20px;
 }
 
-tr td:nth-child(n + 10),
-tr th:nth-child(n + 10) {
+tr th:nth-child(n + 10),
+tr td:nth-child(n + 10) {
 	border-radius: 0 0.625rem 0.625rem 0;
 }
 
-tr td:nth-child(1),
-tr th:nth-child(1) {
+tr th:nth-child(1),
+tr td:nth-child(1) {
 	border-radius: 0.625rem 0 0 0.625rem;
 }
 </style>

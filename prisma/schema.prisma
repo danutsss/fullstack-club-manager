@@ -104,6 +104,7 @@ model Athlete {
   euroRegion      Int    @default(0)
   examinationType String @default("") @db.VarChar(18)
   coachName       String @default("") @db.Text
+  athleteGender   String @default("") @db.VarChar(18)
 }
 
 model Euroregion {
