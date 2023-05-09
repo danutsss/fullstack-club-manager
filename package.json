@@ -19,7 +19,7 @@
 		"@sidebase/nuxt-pdf": "^0.1.1",
 		"nuxt": "^3.4.1",
 		"nuxt-headlessui": "^1.1.1",
-		"prisma": "^4.9.0"
+		"prisma": "^4.14.0"
 	},
 	"dependencies": {
 		"@fortawesome/free-brands-svg-icons": "^6.3.0",
