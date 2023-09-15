@@ -123,19 +123,15 @@ const signIn = async () => {
 		password: userPassword.value,
 	});
 
-	if (data) {
-		hasSuccess.value = true;
-		hasError.value = false;
-		return (successMessage.value = "Te-ai autentificat cu succes!");
-	}
-
 	if (error) {
-		hasError.value = true;
 		hasSuccess.value = false;
-		return (errorMessage.value = error.message);
+		hasError.value = true;
+		errorMessage.value = "Eroare la autentificare, datele sunt invalide!";
+	} else {
+		hasError.value = false;
+		hasSuccess.value = true;
+		successMessage.value = "Te-ai autentificat cu succes!";
 	}
-
-	return;
 };
 
 watchEffect(() => {

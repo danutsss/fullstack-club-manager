@@ -105,6 +105,7 @@ CREATE TABLE "Athlete" (
     "euroRegion" INTEGER NOT NULL DEFAULT 0,
     "examinationType" VARCHAR(18) NOT NULL DEFAULT '',
     "coachName" TEXT NOT NULL DEFAULT '',
+    "athleteGender" VARCHAR(18) NOT NULL DEFAULT '',
 
     CONSTRAINT "Athlete_pkey" PRIMARY KEY ("id")
 );

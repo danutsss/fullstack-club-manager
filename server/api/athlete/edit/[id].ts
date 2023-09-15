@@ -20,36 +20,17 @@ export default defineEventHandler(async (event) => {
 		await readBody<IRequestBody>(event);
 
 	try {
-		if (
-			!clubName ||
-			!fullName ||
-			!dateOfBirth ||
-			!passedExam ||
-			!belt ||
-			!euroRegion
-		) {
-			console.log(
-				"[error occured]: when updating athlete in our database (Toate campurile sunt obligatorii!)."
-			);
-
-			return (
-				(event.node.res.statusCode = 400) &&
-				(event.node.res.statusMessage =
-					"Toate campurile sunt obligatorii!.")
-			);
-		}
-
 		const athlete: Athlete = await prisma.athlete.update({
 			where: {
 				id: Number(athleteID),
 			},
 			data: {
-				clubName,
-				fullName,
-				dateOfBirth,
-				passedExam,
-				belt,
-				euroRegion,
+				clubName: clubName,
+				fullName: fullName,
+				dateOfBirth: dateOfBirth,
+				passedExam: passedExam,
+				belt: belt,
+				euroRegion: euroRegion,
 			},
 		});
 

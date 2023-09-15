@@ -13,6 +13,7 @@ interface IRequestBody {
 	coachName: string;
 	athleteCNP: string;
 	weightCat: string;
+	athleteGender: string;
 }
 
 export default defineEventHandler(async (event) => {
@@ -29,6 +30,7 @@ export default defineEventHandler(async (event) => {
 		coachName,
 		athleteCNP,
 		weightCat,
+		athleteGender,
 	} = await readBody<IRequestBody>(event);
 
 	try {
@@ -42,7 +44,8 @@ export default defineEventHandler(async (event) => {
 			!examinationType ||
 			!coachName ||
 			!athleteCNP ||
-			!weightCat
+			!weightCat ||
+			!athleteGender
 		) {
 			console.log(
 				"[error occured]: when inserting athlete in our database (Toate campurile sunt obligatorii!)."
@@ -51,11 +54,11 @@ export default defineEventHandler(async (event) => {
 			return (
 				(event.node.res.statusCode = 400) &&
 				(event.node.res.statusMessage =
-					"Toate campurile sunt obligatorii!.")
+					"Toate campurile sunt obligatorii!")
 			);
 		}
 
-		const newAthleteData: Athlete | null = await prisma.athlete.create({
+		const newAthleteData: Athlete = await prisma.athlete.create({
 			data: {
 				clubName,
 				fullName,
@@ -67,6 +70,7 @@ export default defineEventHandler(async (event) => {
 				coachName,
 				athleteCNP,
 				weightCat,
+				athleteGender,
 			},
 		});
 

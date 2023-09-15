@@ -3,9 +3,9 @@
 	<LayoutHeader>
 		<template v-slot:main-text>Asociatii judetene de judo</template>
 		<template v-slot:secondary-text>
-			<span class="text-nepal-600 font-bold">AJJ.RO</span> este un website
-			dedicat Asociatiilor Judetene de Judo din Romania, oferint
-			informatii despre acestea si cluburi. Suntem un hub pentru
+			<span class="text-nepal-600 font-bold">AJJ.RO</span> este o
+			platforma dedicata Asociatiilor Judetene de Judo din Romania,
+			oferind informatii despre acestea si cluburi. Suntem un hub pentru
 			Asociatiile Judetene de Judo din Romania, lucrand pentru a promova
 			si extinde cooperarea in sportul judo romanesc.
 		</template>

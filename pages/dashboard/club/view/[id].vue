@@ -24,117 +24,77 @@ const isReadOnly = () => {
 	return userRole !== "ADMIN" && userCategoryMod.indexOf("CLUBURI") === -1;
 };
 
-let clubName = ref("");
-let clubCity = ref("");
-let zipCode = ref("");
-let clubCounty = ref("");
-let clubAddress = ref("");
-let clubContactPerson = ref("");
-let clubEmail = ref("");
-let clubAfiliatFRJ = ref("");
-let clubAfiliatAJJ = ref("");
-let clubCoachOneName = ref("");
-let clubCoachTwoName = ref("");
-let clubCoachThreeName = ref("");
-let clubWebAddress = ref("");
-let clubFbAddress = ref("");
-let clubSocialAccounts = ref("");
-let dojoOneAddress = ref("");
-let dojoOneCity = ref("");
-let dojoOneCounty = ref("");
-let dojoOneContactPerson = ref("");
-let dojoOneEmailAddress = ref("");
-let dojoOneTatamiMP = ref("");
-let dojoOneAgeGroups = ref("");
-let dojoTwoAddress = ref("");
-let dojoTwoCity = ref("");
-let dojoTwoCounty = ref("");
-let dojoTwoContactPerson = ref("");
-let dojoTwoEmailAddress = ref("");
-let dojoTwoTatamiMP = ref("");
-let dojoTwoAgeGroups = ref("");
-let dojoThreeAddress = ref("");
-let dojoThreeCity = ref("");
-let dojoThreeCounty = ref("");
-let dojoThreeContactPerson = ref("");
-let dojoThreeEmailAddress = ref("");
-let dojoThreeTatamiMP = ref("");
-let dojoThreeAgeGroups = ref("");
-let clubExtraInfo = ref("");
-
-onMounted(() => {
-	clubName = clubName.value;
-	clubCounty = clubCounty.value;
-	clubCity = clubCity.value;
-	clubAddress = clubAddress.value;
-	zipCode = zipCode.value;
-	clubContactPerson = clubContactPerson.value;
-	clubEmail = clubEmail.value;
-	clubAfiliatFRJ = clubAfiliatFRJ.value;
-	clubAfiliatAJJ = clubAfiliatAJJ.value;
-	clubCoachOneName = clubCoachOneName.value;
-	clubCoachTwoName = clubCoachTwoName.value;
-	clubCoachThreeName = clubCoachThreeName.value;
-	clubWebAddress = clubWebAddress.value;
-	clubFbAddress = clubFbAddress.value;
-	clubSocialAccounts = clubSocialAccounts.value;
-	dojoOneAddress = dojoOneAddress.value;
-	dojoOneCity = dojoOneCity.value;
-	dojoOneCounty = dojoOneCounty.value;
-	dojoOneContactPerson = dojoOneContactPerson.value;
-	dojoOneEmailAddress = dojoOneEmailAddress.value;
-	dojoOneTatamiMP = dojoOneTatamiMP.value;
-	dojoOneAgeGroups = dojoOneAgeGroups.value;
-	dojoTwoAddress = dojoTwoAddress.value;
-	dojoTwoCity = dojoTwoCity.value;
-	dojoTwoCounty = dojoTwoCounty.value;
-	dojoTwoContactPerson = dojoTwoContactPerson.value;
-	dojoTwoEmailAddress = dojoTwoEmailAddress.value;
-	dojoTwoTatamiMP = dojoTwoTatamiMP.value;
-	dojoTwoAgeGroups = dojoTwoAgeGroups.value;
-	dojoThreeAddress = dojoThreeAddress.value;
-	dojoThreeCity = dojoThreeCity.value;
-	dojoThreeCounty = dojoThreeCounty.value;
-	dojoThreeContactPerson = dojoThreeContactPerson.value;
-	dojoThreeEmailAddress = dojoThreeEmailAddress.value;
-	dojoThreeTatamiMP = dojoThreeTatamiMP.value;
-	dojoThreeAgeGroups = dojoThreeAgeGroups.value;
-	clubExtraInfo = clubExtraInfo.value;
-});
+const clubName = ref(club.clubName);
+const clubCity = ref("");
+const zipCode = ref("");
+const clubCounty = ref(club.clubCounty);
+const clubAddress = ref("");
+const clubContactPerson = ref(club.clubContactPerson);
+const clubEmail = ref(club.clubEmail);
+const clubAfiliatFRJ = ref(club.clubAfiliatFRJ);
+const clubAfiliatAJJ = ref(club.clubAfiliatAJJ);
+const clubCoachOneName = ref(club.clubCoachOneName);
+const clubCoachTwoName = ref(club.clubCoachTwoName);
+const clubCoachThreeName = ref(club.clubCoachThreeName);
+const clubWebAddress = ref(club.clubWebAddress);
+const clubFbAddress = ref(club.clubFbAddress);
+const clubSocialAccounts = ref(club.clubSocialAccounts);
+const dojoOneAddress = ref(club.dojoOneAddress ?? "");
+const dojoOneCity = ref("");
+const dojoOneCounty = ref("");
+const dojoOneContactPerson = ref(club.dojoOneContactPerson);
+const dojoOneEmailAddress = ref(club.dojoOneEmailAddress);
+const dojoOneTatamiMP = ref(club.dojoOneTatamiMP);
+const dojoOneAgeGroups = ref(club.dojoOneAgeGroups);
+const dojoTwoAddress = ref(club.dojoTwoAddress ?? "");
+const dojoTwoCity = ref("");
+const dojoTwoCounty = ref("");
+const dojoTwoContactPerson = ref(club.dojoTwoContactPerson);
+const dojoTwoEmailAddress = ref(club.dojoTwoEmailAddress);
+const dojoTwoTatamiMP = ref(club.dojoTwoTatamiMP);
+const dojoTwoAgeGroups = ref(club.dojoTwoAgeGroups);
+const dojoThreeAddress = ref(club.dojoThreeAddress ?? "");
+const dojoThreeCity = ref("");
+const dojoThreeCounty = ref("");
+const dojoThreeContactPerson = ref(club.dojoThreeContactPerson);
+const dojoThreeEmailAddress = ref(club.dojoThreeEmailAddress);
+const dojoThreeTatamiMP = ref(club.dojoThreeTatamiMP);
+const dojoThreeAgeGroups = ref(club.dojoThreeAgeGroups);
+const clubExtraInfo = ref(club.clubExtraInfo);
 
 const editClub = async (id) =>
 	await useFetch(() => `/api/club/edit/${id}`, {
 		method: "PATCH",
 		body: {
-			clubName: clubName,
-			clubCounty: clubCounty,
-			clubAddress: `${clubAddress}, ${clubCity} - ${zipCode}`,
-			clubContactPerson: clubContactPerson,
-			clubEmail: clubEmail,
-			clubAfiliatFRJ: clubAfiliatFRJ,
-			clubAfiliatAJJ: clubAfiliatAJJ,
-			clubCoachOneName: clubCoachOneName,
-			clubCoachTwoName: clubCoachTwoName,
-			clubCoachThreeName: clubCoachThreeName,
-			clubWebAddress: clubWebAddress,
-			clubFbAddress: clubFbAddress,
-			clubSocialAccounts: clubSocialAccounts,
-			dojoOneAddress: `${dojoOneAddress}, ${dojoOneCity}, ${dojoOneCounty}`,
-			dojoOneContactPerson: dojoOneContactPerson,
-			dojoOneEmailAddress: dojoOneEmailAddress,
-			dojoOneTatamiMP: dojoOneTatamiMP,
-			dojoOneAgeGroups: dojoOneAgeGroups,
-			dojoTwoAddress: `${dojoTwoAddress}, ${dojoTwoCity}, ${dojoTwoCounty}`,
-			dojoTwoContactPerson: dojoTwoContactPerson,
-			dojoTwoEmailAddress: dojoTwoEmailAddress,
-			dojoTwoTatamiMP: dojoTwoTatamiMP,
-			dojoTwoAgeGroups: dojoTwoAgeGroups,
-			dojoThreeAddress: `${dojoThreeAddress}, ${dojoThreeCity}, ${dojoThreeCounty}`,
-			dojoThreeContactPerson: dojoThreeContactPerson,
-			dojoThreeEmailAddress: dojoThreeEmailAddress,
-			dojoThreeTatamiMP: dojoThreeTatamiMP,
-			dojoThreeAgeGroups: dojoThreeAgeGroups,
-			clubExtraInfo: clubExtraInfo,
+			clubName: clubName.value,
+			clubCounty: clubCounty.value,
+			clubAddress: `${clubAddress.value}, ${clubCity.value} - ${zipCode.value}`,
+			clubContactPerson: clubContactPerson.value,
+			clubEmail: clubEmail.value,
+			clubAfiliatFRJ: clubAfiliatFRJ.value,
+			clubAfiliatAJJ: clubAfiliatAJJ.value,
+			clubCoachOneName: clubCoachOneName.value,
+			clubCoachTwoName: clubCoachTwoName.value,
+			clubCoachThreeName: clubCoachThreeName.value,
+			clubWebAddress: clubWebAddress.value,
+			clubFbAddress: clubFbAddress.value,
+			clubSocialAccounts: clubSocialAccounts.value,
+			dojoOneAddress: `${dojoOneAddress.value}, ${dojoOneCity.value}, ${dojoOneCounty.value}`,
+			dojoOneContactPerson: dojoOneContactPerson.value,
+			dojoOneEmailAddress: dojoOneEmailAddress.value,
+			dojoOneTatamiMP: dojoOneTatamiMP.value,
+			dojoOneAgeGroups: dojoOneAgeGroups.value,
+			dojoTwoAddress: `${dojoTwoAddress.value}, ${dojoTwoCity.value}, ${dojoTwoCounty.value}`,
+			dojoTwoContactPerson: dojoTwoContactPerson.value,
+			dojoTwoEmailAddress: dojoTwoEmailAddress.value,
+			dojoTwoTatamiMP: dojoTwoTatamiMP.value,
+			dojoTwoAgeGroups: dojoTwoAgeGroups.value,
+			dojoThreeAddress: `${dojoThreeAddress.value}, ${dojoThreeCity.value}, ${dojoThreeCounty.value}`,
+			dojoThreeContactPerson: dojoThreeContactPerson.value,
+			dojoThreeEmailAddress: dojoThreeEmailAddress.value,
+			dojoThreeTatamiMP: dojoThreeTatamiMP.value,
+			dojoThreeAgeGroups: dojoThreeAgeGroups.value,
+			clubExtraInfo: clubExtraInfo.value,
 		},
 	})
 		.then((response) => {
