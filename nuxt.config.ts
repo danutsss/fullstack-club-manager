@@ -2,40 +2,49 @@
 import { defineNuxtConfig } from "nuxt/config";
 
 export default defineNuxtConfig({
-	components: {
-		dirs: ["~/components", "~/components/layout"],
-	},
-	modules: [
-		"@nuxtjs/tailwindcss",
-		"@nuxtjs/google-fonts",
-		"nuxt-headlessui",
-		"@nuxtjs/supabase",
-		"@sidebase/nuxt-pdf",
-	],
+    components: {
+        dirs: ["~/components", "~/components/layout"],
+    },
+    modules: [
+        "@nuxtjs/tailwindcss",
+        "@nuxtjs/google-fonts",
+        "nuxt-headlessui",
+        "@nuxtjs/supabase",
+        "@sidebase/nuxt-pdf",
+    ],
 
-	pdf: {
-		pdf: {
-			format: "A4",
-		},
-		i18n: false,
-		meta: {
-			title: "Export atlet",
-			titleTemplate: "Export - %s",
-			author: "ZERO SAPTE SERVICES",
-			subject: "Export atlet",
-			keywords: ["pdf", "atlet", "export", "judo"],
-		},
-	},
+    vite: {
+        server: {
+            hmr: {
+                protocol: "ws",
+                host: "localhost",
+            },
+        },
+    },
 
-	tailwindcss: {
-		configPath: "~/config/tailwind.config.js",
-	},
-	googleFonts: {
-		families: {
-			Inter: [300, 400, 500, 600, 700, 800, 900],
-			"Open Sans": [300, 400, 600, 700, 800],
-		},
-	},
+    pdf: {
+        pdf: {
+            format: "A4",
+        },
+        i18n: false,
+        meta: {
+            title: "Export atlet",
+            titleTemplate: "Export - %s",
+            author: "ZERO SAPTE SERVICES",
+            subject: "Export atlet",
+            keywords: ["pdf", "atlet", "export", "judo"],
+        },
+    },
 
-	css: ["@fortawesome/fontawesome-svg-core/styles.css"],
+    tailwindcss: {
+        configPath: "~/config/tailwind.config.js",
+    },
+    googleFonts: {
+        families: {
+            Inter: [300, 400, 500, 600, 700, 800, 900],
+            "Open Sans": [300, 400, 600, 700, 800],
+        },
+    },
+
+    css: ["@fortawesome/fontawesome-svg-core/styles.css"],
 });
