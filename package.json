@@ -24,7 +24,7 @@
 	"dependencies": {
 		"@fortawesome/free-brands-svg-icons": "^6.3.0",
 		"@fortawesome/vue-fontawesome": "^3.0.3",
-		"@heroicons/vue": "^2.0.17",
+		"@heroicons/vue": "^2.0.18",
 		"@prisma/client": "^4.13.0",
 		"@svg-maps/romania": "^1.0.0"
 	}
